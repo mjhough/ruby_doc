@@ -27,6 +27,7 @@ end
     
     # SCRAPES :description, :type
     description = dParse(dScrape)
+    type = doc_page.search(".title_prefix span").text
     binding.pry
     
     

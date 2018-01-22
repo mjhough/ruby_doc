@@ -14,8 +14,8 @@ CREATE CLASSES [X]
 
 SUCCESSFULLY SCRAPE ALL CONTENT NEEDED []
 - create scraper [X]
-> scrape for Doc props []
-- target all props []
+> scrape for Doc props [X]
+- target all props [X]
 - prop check [X]
 
 > scrape for Meth props []
