@@ -12,7 +12,7 @@ CREATE CLASSES [X]
 - Doc w/ attrs [X]  
 - Meth w/ attrs [X]
 
-SUCCESSFULLY SCRAPE ALL CONTENT NEEDED []
+SUCCESSFULLY SCRAPE ALL CONTENT NEEDED [X]
 - create scraper [X]
 > scrape for Doc props [X]
 - target all props [X]
@@ -22,20 +22,17 @@ SUCCESSFULLY SCRAPE ALL CONTENT NEEDED []
 - target all props [X]
 - check props [X]
 
+STUB OUT FULL UI (NO CANDY) []
+- greeting + main menu []
+- control flow []
+- errors []
+
 COLLABORATE []
-- 
+- instantiate Doc class with initial scraper []
+- create method to retrieve the rest of the props from docPage scraper and pass to the existing Doc objects [] 
+- test for dups []
 
 DOUBLE CHECK ALL COLLABORATIONS FOR ISSUES (DUPS/INCORRECT DATA/BAD FORMAT) []
--
--
--
--
-STUB OUT FULL UI (NO CANDY) []
--
--
--
--
-MAKE THE CONNECTIONS []
 -
 -
 -

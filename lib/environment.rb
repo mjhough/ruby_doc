@@ -10,12 +10,14 @@ require 'nokogiri'
 #============Patch============
 def x; exit!; end #Quit Exit
 
-#=======================Load Docs==========================
+
+#=================Load Docs====================
 puts "Initial Loading!".cyan
 # LOAD_FILE_HERE
 
-#========================Testing=========================== 
+#==================Testing=====================
 # Preload into environment to quick pry
 
-Scraper.get_methPage("https://apidock.com/ruby/v1_9_3_392/Array/collect")
+# Scraper.get_DocURLs
+# Scraper.get_docPage(docURL)
 # binding.pry

@@ -3,7 +3,7 @@ module RubyDoc
   module CLI
 #==============================================
     def self.start
-      puts "Greenlight".green
+      puts "CLI Greenlight".green
     end
 #==============================================    
   end
