@@ -13,6 +13,14 @@ module RubyDoc::CLI
       puts "mainControl Greenlight".green
       input = gets.strip.to_s.downcase
       puts "input #{input} downcase Greenlight".green
+      
+      if input == "b"
+        browseControl
+      end
+    end
+#==============================================
+    def self.browseControl
+      puts "\nbrowseControl Greenlight".green
     end
 #==============================================    
   end
