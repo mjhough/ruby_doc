@@ -1,22 +1,24 @@
 class Scraper
 ################ Helper ####################
-def self.parse(des)
-  des.gsub(/[\n]/, ' ').gsub('  ',' ')
-end
+  def self.parse(des)
+    des.gsub(/[\n]/, ' ').gsub('  ',' ')
+  end
 ############################################
-#===================DocURLs====================
-  def self.get_DocURLs #Instantiate Doc through here []
+#==================Load Docs===================
+  def self.loadDOCS #Instantiate Doc through here []
     # load
     html = Nokogiri::HTML(open("https://apidock.com/ruby/browse"))
     container = html.search(".hover_list")
     
-    # SCRAPES :titles, :urls (DocCount = 2403)
-    container.search("a").each do |doc|
+    # SCRAPES :titles, :urls
+    container.search("a").map do |doc|
       doc_title = doc.text
       docURL = "https://apidock.com" + doc.attribute("href").value
-      #:titles, :urls [x]
+      
+      #:titles, :urls [x] (DocCount = 2403)
+      Doc.new(doc_title, docURL)
     end
-  end
+  end #returns [2403 Objs]
 #==============================================
   # requires a doc.url
 #==================DocPage=====================
@@ -32,13 +34,12 @@ end
     description = parse(scrape)
     type = doc_page.search(".title_prefix span").text
     
-    container.search("li").each do |meth|
+    container.search("li").map do |meth|
       meth_name = meth.search("a").text
       methURL = "https://apidock.com" + meth.search("a").attribute("href").value
-      binding.pry
     end
+    # binding.pry
   end
-  
 #==============================================
   # requires a meth.url (=> doc.methods[meth :url here!])
 #==================MethPage====================

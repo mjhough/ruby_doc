@@ -17,7 +17,7 @@ puts "Initial Loading!".cyan
 
 #==================Testing=====================
 # Preload into environment to quick pry
-
-# Scraper.get_DocURLs
-# Scraper.get_docPage(docURL)
+binding.pry
+Scraper.loadDOCS
+# Scraper.get_docPage(https://apidock.com/ruby/Array)
 # binding.pry
