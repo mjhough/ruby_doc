@@ -17,3 +17,6 @@ puts "Initial Loading!".cyan
 Scraper.loadDOCS
 #==================Testing=====================
 # Preload into environment to quick pry
+Doc.paginate
+Scraper.loadDOCS
+Doc.paginate
