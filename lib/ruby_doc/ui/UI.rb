@@ -14,6 +14,8 @@ module RubyDoc::CLI
       
       if input == "b"
         browseControl
+      else
+        searchControl(input)
       end
     end
 #==============================================
@@ -29,6 +31,10 @@ module RubyDoc::CLI
       when "2"
         Meth.listALL
       end
+    end
+#==============================================
+    def self.searchControl(input)
+      puts "#{input} searchControl Greenlight".green
     end
 #==============================================    
   end
