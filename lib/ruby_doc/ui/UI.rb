@@ -1,13 +1,11 @@
-module RubyDoc
+module RubyDoc::CLI
 #==============================================
-  module CLI
+  module UI
 #==============================================
-    def self.start
-      puts "CLI Greenlight".green
-      UI.greeting
+    def self.greeting
+      puts "UI Greenlight".green
     end
 #==============================================    
   end
 #==============================================
 end 
-
