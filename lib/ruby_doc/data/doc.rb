@@ -1,4 +1,7 @@
 class Doc
+#==================modules=====================
+  extend DocExtras
+  #paginate 
 #=================properties===================
   attr_accessor :title, :url, :description, :type, :methods
   @@all = []
@@ -9,12 +12,10 @@ class Doc
     self.title = title
     self.url = url
     @@all << self
-  end
-#==============================================
-  # iterate @@all with index  
+  end 
 #==============================================
   def self.listALL
-    puts "Doc listALL Greenlight".green
+    paginate
   end
 #==============================================
   # find meth or doc by title/name

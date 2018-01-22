@@ -14,10 +14,6 @@ def x; exit!; end #Quit Exit
 #=================Load Docs====================
 puts "Initial Loading!".cyan
 # LOAD_FILE_HERE
-
+Scraper.loadDOCS
 #==================Testing=====================
 # Preload into environment to quick pry
-binding.pry
-Scraper.loadDOCS
-# Scraper.get_docPage(https://apidock.com/ruby/Array)
-# binding.pry

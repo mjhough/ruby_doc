@@ -1,22 +1,16 @@
 class Scraper
-################ Helper ####################
-  def self.parse(des)
-    des.gsub(/[\n]/, ' ').gsub('  ',' ')
-  end
-############################################
 #==================Load Docs===================
-  def self.loadDOCS #Instantiate Doc through here []
+  def self.loadDOCS #[X]
     # load
     html = Nokogiri::HTML(open("https://apidock.com/ruby/browse"))
     container = html.search(".hover_list")
     
     # SCRAPES :titles, :urls
-    container.search("a").map do |doc|
+    container.search("a").each do |doc|
       doc_title = doc.text
       docURL = "https://apidock.com" + doc.attribute("href").value
       
-      #:titles, :urls [x] (DocCount = 2403)
-      Doc.new(doc_title, docURL)
+      Doc.new(doc_title, docURL) if uniq(doc_title)
     end
   end #returns [2403 Objs]
 #==============================================
@@ -38,6 +32,8 @@ class Scraper
       meth_name = meth.search("a").text
       methURL = "https://apidock.com" + meth.search("a").attribute("href").value
     end
+    
+    
     # binding.pry
   end
 #==============================================
@@ -55,4 +51,13 @@ class Scraper
     binding.pry
   end
 #==============================================
+################ Helpers ###################
+  def self.parse(des)
+    des.gsub(/[\n]/, ' ').gsub('  ',' ')
+  end
+  
+  def self.uniq(title)
+    Doc.all.none?{|doc| doc.title == title}
+  end
+############################################
 end
