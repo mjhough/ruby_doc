@@ -13,6 +13,7 @@ class Doc
     self.name = name
     self.url = url
     @@all << self
+    self.methods = []
   end
 #==============================================
   def self.find(input)

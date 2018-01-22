@@ -8,6 +8,7 @@ class Scraper
       doc_name = doc.text
       docURL = prefix + doc.attribute("href").value
       
+      # assign
       Doc.new(doc_name, docURL) if docUniq(doc_name)
     end
   end #Doc :names, :urls
@@ -20,6 +21,7 @@ class Scraper
     container = doc_page.search("#related")
     container.search("li").search(".related_header").remove
     #============================================================
+    # assignments
     doc.description = parse(scrape)
     doc.type = doc_page.search(".title_prefix span").text
     
@@ -27,11 +29,12 @@ class Scraper
       meth_name = m.search("a").text
       methURL = prefix + m.search("a").attribute("href").value
       
+      # assignments
       method = Meth.new(meth_name, methURL) if methUniq(meth_name)
-      binding.pry
-      
-    end #Doc :description, :type
-  end #
+      doc.methods << meth_name if methsUniq(doc.methods,meth_name)
+      method.docs << doc.name if docsUniq(method.docs,doc.name)
+    end #Doc :description, :type, :methods
+  end #Meth :name, :url, :docs
 #============================================== 
   # requires a meth.url (=> doc.methods[meth :url here!])
 #==================MethPage====================
@@ -58,6 +61,14 @@ class Scraper
   
   def self.methUniq(name)
     Meth.all.none?{|meth| meth.name == name}
+  end
+  
+  def self.docsUniq(col,name)
+    col.none?{|meth| meth == doc.name}
+  end
+  
+  def self.methsUniq(col,name)
+    col.none?{|meth| meth == meth_name}
   end
   
   def self.prefix
