@@ -11,6 +11,8 @@ module RubyDoc::CLI
 #==============================================
     def self.mainControl
       puts "mainControl Greenlight".green
+      input = gets.strip.to_s.downcase
+      puts "input #{input} downcase Greenlight".green
     end
 #==============================================    
   end
