@@ -24,9 +24,9 @@ SUCCESSFULLY SCRAPE ALL CONTENT NEEDED [X]
 
 STUB OUT FULL UI (NO CANDY) []
 - greeting + main menu [X]
-- main => browse control flow [X]
-- main => search control flow []
-- 
+- main => browse => listALL control flow [X]
+- main => search => find control flow []
+- all points back to main []
 - errors []
 - qc []
 

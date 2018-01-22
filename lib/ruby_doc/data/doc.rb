@@ -4,4 +4,8 @@ class Doc
   @@all = []
   def self.all; @@all; end
 #==============================================
+    def self.listALL
+      puts "\listALL Greenlight".green
+    end
+#==============================================
 end

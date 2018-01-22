@@ -18,10 +18,14 @@ module RubyDoc::CLI
     end
 #==============================================
     def self.browseControl
-      puts "\nbrowseControl Greenlight".green
       puts "\nTo Browse Docs (Enter '1')"
       puts "To Browse Methods (Enter '2')"
       puts "\nBack to Main Menu (Enter 'm')"
+      
+      input = gets.strip.to_s.downcase
+      if input == "1"
+        Doc.listALL
+      end
     end
 #==============================================    
   end
