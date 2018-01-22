@@ -18,8 +18,8 @@ SUCCESSFULLY SCRAPE ALL CONTENT NEEDED []
 - target all props [X]
 - prop check [X]
 
-> scrape for Meth props []
-- target all props []
+> scrape for Meth props [X]
+- target all props [X]
 - check props []
 
 COLLABORATE []

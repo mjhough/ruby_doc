@@ -17,5 +17,5 @@ puts "Initial Loading!".cyan
 #========================Testing=========================== 
 # Preload into environment to quick pry
 
-Scraper.get_docPage("https://apidock.com/ruby/Array")
+Scraper.get_methPage("https://apidock.com/ruby/v1_9_3_392/Array/collect")
 # binding.pry
