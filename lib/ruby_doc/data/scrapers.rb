@@ -1,21 +1,18 @@
 class Scraper
 #==================Load Docs===================
-  def self.loadDOCS #[X] 
-    # load
+  def self.loadDOCS
     html = Nokogiri::HTML(open("https://apidock.com/ruby/browse"))
     container = html.search(".hover_list")
     
-    # SCRAPES :titles, :urls
     container.search("a").each do |doc|
-      doc_title = doc.text
-      docURL = "https://apidock.com" + doc.attribute("href").value
+      doc_name = doc.text
+      docURL = prefix + doc.attribute("href").value
       
-      Doc.new(doc_title, docURL) if uniq(doc_title)
+      Doc.new(doc_name, docURL) if docUniq(doc_name)
     end
-  end #returns [2403 Objs]
+  end #Doc :names, :urls
 #==================DocPage=====================
-  def self.load_doc_page(doc) #Complete[X] for Doc.list_all 
-    # load
+  def self.load_doc_page(doc)
     doc_page = Nokogiri::HTML(open(doc.url))
     #prerequisites
     doc_page.search(".description p")[0..1].search("em").remove 
@@ -23,16 +20,18 @@ class Scraper
     container = doc_page.search("#related")
     container.search("li").search(".related_header").remove
     #============================================================
-    # SCRAPES :description, :type, methods (with names and urls)
     doc.description = parse(scrape)
     doc.type = doc_page.search(".title_prefix span").text
     
-    container.search("li").map do |meth|
-      meth_name = meth.search("a").text
-      methURL = prefix + meth.search("a").attribute("href").value
-      # binding.pry
-    end
-  end
+    container.search("li").map do |m|
+      meth_name = m.search("a").text
+      methURL = prefix + m.search("a").attribute("href").value
+      
+      method = Meth.new(meth_name, methURL) if methUniq(meth_name)
+      binding.pry
+      
+    end #Doc :description, :type
+  end #
 #============================================== 
   # requires a meth.url (=> doc.methods[meth :url here!])
 #==================MethPage====================
@@ -53,8 +52,12 @@ class Scraper
     des.gsub(/[\n]/, ' ').gsub('  ',' ')
   end
   
-  def self.uniq(title)
-    Doc.all.none?{|doc| doc.title == title}
+  def self.docUniq(name)
+    Doc.all.none?{|doc| doc.name == name}
+  end
+  
+  def self.methUniq(name)
+    Meth.all.none?{|meth| meth.name == name}
   end
   
   def self.prefix

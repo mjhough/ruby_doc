@@ -3,14 +3,14 @@ class Doc
   extend DocExtras
   #paginate 
 #=================properties=================== 
-#                  X      X         X          X
-  attr_accessor :title, :url, :description, :type, :methods
+#                 X      X         X          X
+  attr_accessor :name, :url, :description, :type, :methods
   @@all = []
   def self.all; @@all; end
 #==============================================
   #DocCount = 2403
-  def initialize(title, url) 
-    self.title = title
+  def initialize(name, url) 
+    self.name = name
     self.url = url
     @@all << self
   end
@@ -22,7 +22,7 @@ class Doc
   def self.display(doc)
     Scraper.load_doc_page(doc)
     
-    puts "Title: " + doc.title.upcase
+    puts "Title: " + doc.name.upcase
     puts "Type: " + doc.type.upcase
     
     puts "\nDescription:"
