@@ -5,7 +5,7 @@ class Doc
   def self.all; @@all; end
 #==============================================
     def self.listALL
-      puts "\listALL Greenlight".green
+      puts "Doc listALL Greenlight".green
     end
 #==============================================
 end

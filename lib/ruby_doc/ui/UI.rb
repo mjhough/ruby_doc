@@ -23,8 +23,11 @@ module RubyDoc::CLI
       puts "\nBack to Main Menu (Enter 'm')"
       
       input = gets.strip.to_s.downcase
-      if input == "1"
+      case input
+      when "1"
         Doc.listALL
+      when "2"
+        Meth.listALL
       end
     end
 #==============================================    
