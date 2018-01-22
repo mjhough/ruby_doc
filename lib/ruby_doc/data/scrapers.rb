@@ -1,6 +1,6 @@
 class Scraper
 #==================Load Docs===================
-  def self.loadDOCS #[X]
+  def self.loadDOCS #[X] 
     # load
     html = Nokogiri::HTML(open("https://apidock.com/ruby/browse"))
     container = html.search(".hover_list")
@@ -13,33 +13,30 @@ class Scraper
       Doc.new(doc_title, docURL) if uniq(doc_title)
     end
   end #returns [2403 Objs]
-#==============================================
-  # requires a doc.url
 #==================DocPage=====================
-  def self.get_docPage(docURL) #Complete[X] for Doc.list_all
+  def self.load_doc_page(doc) #Complete[X] for Doc.list_all 
     # load
-    doc_page = Nokogiri::HTML(open(docURL))
-    doc_page.search(".description p")[0..1].search("em").remove #description prerequisite
-    scrape = doc_page.search(".description p")[0..1].text #description prerequisite
-    container = doc_page.search("#related") #methods prerequisite
-    container.search("li").search(".related_header").remove #methods prerequisite
-    
+    doc_page = Nokogiri::HTML(open(doc.url))
+    #prerequisites
+    doc_page.search(".description p")[0..1].search("em").remove 
+    scrape = doc_page.search(".description p")[0..1].text
+    container = doc_page.search("#related")
+    container.search("li").search(".related_header").remove
+    #============================================================
     # SCRAPES :description, :type, methods (with names and urls)
-    description = parse(scrape)
-    type = doc_page.search(".title_prefix span").text
+    doc.description = parse(scrape)
+    doc.type = doc_page.search(".title_prefix span").text
+    binding.pry
     
     container.search("li").map do |meth|
       meth_name = meth.search("a").text
-      methURL = "https://apidock.com" + meth.search("a").attribute("href").value
+      methURL = prefix + meth.search("a").attribute("href").value
     end
-    
-    
-    # binding.pry
   end
-#==============================================
+#============================================== 
   # requires a meth.url (=> doc.methods[meth :url here!])
 #==================MethPage====================
-  def self.get_methPage(methURL) #[]
+  def self.get_methPage(methURL) #[] 
     # load
     methURL = Nokogiri::HTML(open(methURL))
     methURL.search(".description p")[0..1].search("em").remove #description prerequisite
@@ -51,13 +48,17 @@ class Scraper
     binding.pry
   end
 #==============================================
-################ Helpers ###################
+################ Helpers ################### 
   def self.parse(des)
     des.gsub(/[\n]/, ' ').gsub('  ',' ')
   end
   
   def self.uniq(title)
     Doc.all.none?{|doc| doc.title == title}
+  end
+  
+  def self.prefix
+    "https://apidock.com"
   end
 ############################################
 end

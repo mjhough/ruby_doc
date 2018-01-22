@@ -28,7 +28,7 @@ module RubyDoc::CLI
       input = gets.strip.to_s.downcase
       case input
       when "1"
-        Doc.listALL
+        Doc.paginateALL
       when "2"
         Meth.listALL
       when "m"
