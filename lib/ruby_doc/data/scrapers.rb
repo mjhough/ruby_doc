@@ -26,11 +26,11 @@ class Scraper
     # SCRAPES :description, :type, methods (with names and urls)
     doc.description = parse(scrape)
     doc.type = doc_page.search(".title_prefix span").text
-    binding.pry
     
     container.search("li").map do |meth|
       meth_name = meth.search("a").text
       methURL = prefix + meth.search("a").attribute("href").value
+      # binding.pry
     end
   end
 #============================================== 

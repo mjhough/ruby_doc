@@ -3,7 +3,7 @@ class Doc
   extend DocExtras
   #paginate 
 #=================properties=================== 
-#                  X      X     
+#                  X      X         X          X
   attr_accessor :title, :url, :description, :type, :methods
   @@all = []
   def self.all; @@all; end
@@ -19,6 +19,15 @@ class Doc
     puts "\nfind Greenlight".green
   end
 #==============================================
-  
+  def self.display(doc)
+    Scraper.load_doc_page(doc)
+    
+    puts "Title: " + doc.title.upcase
+    puts "Type: " + doc.type.upcase
+    
+    puts "\nDescription:"
+    puts doc.description
+    binding.pry
+  end
 #==============================================
 end
