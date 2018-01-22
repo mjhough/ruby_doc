@@ -27,11 +27,15 @@ end
     
     container = doc_page.search("#related") #methods prerequisite
     container.search("li").search(".related_header").remove #methods prerequisite
-    binding.pry
     
     # SCRAPES :description, :type, methods (with urls)
     description = dParse(dScrape)
     type = doc_page.search(".title_prefix span").text
+    
+    container.search("li").each do |meth|
+      name = meth.search("a").text
+      binding.pry
+    end
   end
 #==============================================
 end
