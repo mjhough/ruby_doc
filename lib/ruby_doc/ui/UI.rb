@@ -12,7 +12,8 @@ module RubyDoc::CLI
       input = gets.strip.to_s.downcase
       puts "input #{input} downcase Greenlight".green
       
-      if input == "b"
+      case input
+      when "b"
         browseControl
       else
         searchControl(input)
@@ -30,6 +31,8 @@ module RubyDoc::CLI
         Doc.listALL
       when "2"
         Meth.listALL
+      when "m"
+        RubyDoc::CLI.start
       end
     end
 #==============================================

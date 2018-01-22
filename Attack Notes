@@ -22,20 +22,13 @@ SUCCESSFULLY SCRAPE ALL CONTENT NEEDED [X]
 - target all props [X]
 - check props [X]
 
-STUB OUT FULL UI (NO CANDY) []
+STUB OUT FULL UI (NO CANDY) [X]
 - greeting + main menu [X]
-- main => browse => Doc.listALL control flow [X]
-- main => browse => Meth.listALL control flow [X]
-- main => search => Doc.find control flow [X]
-stub: main => search greenlight [X]
-stub: search => Doc.find greenlight [X]
-
-
-- all points back to main []
+- navigation for every menu option [X]
+- back to main on browse [X]
 - errors []
-- qc []
 
-COLLABORATE []
+STUB REIFICATION + OBJECT COLLABORATIONS []
 - instantiate Doc class with initial scraper []
 - create method to retrieve the rest of the props from docPage scraper and pass to the existing Doc objects [] 
 - test for dups []
@@ -51,7 +44,7 @@ CLEAN AND REFACTOR []
 -
 -
 ADD UI CANDY []
--
+- qc []
 -
 -
 -
