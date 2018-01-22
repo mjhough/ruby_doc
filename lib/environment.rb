@@ -15,4 +15,5 @@ puts "Initial Loading!".cyan
 
 #========================Testing=========================== 
 # Preload into environment to quick pry
+Scraper.place_holder
 # binding.pry
