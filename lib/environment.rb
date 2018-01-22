@@ -18,5 +18,5 @@ Scraper.loadDOCS
 #==================Testing=====================
 # Preload into environment to quick pry
 Doc.paginate
-Scraper.loadDOCS
-Doc.paginate
+# Scraper.loadDOCS
+# Doc.paginate
