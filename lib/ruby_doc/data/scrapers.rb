@@ -19,18 +19,19 @@ end
 #==============================================
   # requires a doc.url
 #==================DocPage=====================
-  def self.get_docPage(doc_url)
+  def self.get_docPage(doc_url) #Complete[X]
     # load
     doc_page = Nokogiri::HTML(open(doc_url))
-    doc_page.search(".description p")[0..1].search("em").remove
-    dScrape = doc_page.search(".description p")[0..1].text
+    doc_page.search(".description p")[0..1].search("em").remove #description prerequisite
+    dScrape = doc_page.search(".description p")[0..1].text #description prerequisite
     
-    # SCRAPES :description, :type
-    description = dParse(dScrape)
-    type = doc_page.search(".title_prefix span").text
+    container = doc_page.search("#related") #methods prerequisite
+    container.search("li").search(".related_header").remove #methods prerequisite
     binding.pry
     
-    
+    # SCRAPES :description, :type, methods (with urls)
+    description = dParse(dScrape)
+    type = doc_page.search(".title_prefix span").text
   end
 #==============================================
 end
