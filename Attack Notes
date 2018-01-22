@@ -1,0 +1,41 @@
+TO DO:
+===============
+GREENLIGHT EXEC []
+
+DECIDE ON DOMAIN MODEL AND WORKUP OBJECT LIST & PROPS []
+# Start Source: https://apidock.com/ruby/browse
+=========================================================
+Doc :title, :url, :description, :type, :methods***
+Meth :name, :url, :description, :type, :docs***
+
+SUCCESSFULLY SCRAPE ALL CONTENT NEEDED []
+-
+-
+-
+-
+DOUBLE CHECK ALL COLLABORATIONS FOR ISSUES (DUPS/INCORRECT DATA/BAD FORMAT) []
+-
+-
+-
+-
+STUB OUT FULL UI (NO CANDY) []
+-
+-
+-
+-
+MAKE THE CONNECTIONS []
+-
+-
+-
+-
+CLEAN AND REFACTOR []
+-
+-
+-
+-
+ADD UI CANDY []
+-
+-
+-
+-
+
