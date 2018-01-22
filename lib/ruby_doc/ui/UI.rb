@@ -8,6 +8,10 @@ module RubyDoc::CLI
       puts "try to find a match in my database for you."
       puts "\nYou can also type 'b' to browse instead. Happy Hunting!"
     end
+#==============================================
+    def self.mainControl
+      puts "mainControl Greenlight".green
+    end
 #==============================================    
   end
 #==============================================

@@ -23,8 +23,10 @@ SUCCESSFULLY SCRAPE ALL CONTENT NEEDED [X]
 - check props [X]
 
 STUB OUT FULL UI (NO CANDY) []
-- greeting + main menu []
-- control flow []
+- greeting + main menu [X]
+- main => browse control flow []
+- main => browse control flow []
+- 
 - errors []
 - qc []
 

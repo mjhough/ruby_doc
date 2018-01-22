@@ -5,6 +5,7 @@ module RubyDoc
     def self.start
       puts "CLI Greenlight".green
       UI.greeting
+      UI.mainControl
     end
 #==============================================    
   end
