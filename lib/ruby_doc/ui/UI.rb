@@ -34,7 +34,7 @@ module RubyDoc::CLI
     end
 #==============================================
     def self.searchControl(input)
-      puts "#{input} searchControl Greenlight".green
+      Doc.find(input)
     end
 #==============================================    
   end

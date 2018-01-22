@@ -26,9 +26,9 @@ STUB OUT FULL UI (NO CANDY) []
 - greeting + main menu [X]
 - main => browse => Doc.listALL control flow [X]
 - main => browse => Meth.listALL control flow [X]
-- main => search => Doc.find control flow []
+- main => search => Doc.find control flow [X]
 stub: main => search greenlight [X]
-stub: search => Doc.search greenlight []
+stub: search => Doc.find greenlight [X]
 
 
 - all points back to main []

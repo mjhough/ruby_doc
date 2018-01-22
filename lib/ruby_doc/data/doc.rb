@@ -8,4 +8,10 @@ class Doc
       puts "Doc listALL Greenlight".green
     end
 #==============================================
+  # find meth or doc by title/name
+#==============================================
+    def self.find(input)
+      puts "\nfind Greenlight".green
+    end
+#==============================================
 end
