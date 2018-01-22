@@ -1,11 +1,12 @@
 #===========Requires==========
 require 'require_all'
 require 'colorize'
-require 'nokogiri'
-require 'open-uri'
 require 'pry'
 require_all 'bin'
 require_all 'lib'
+#===========Scraping==========
+require 'open-uri'
+require 'nokogiri'
 #============Patch============
 def x; exit!; end #Quit Exit
 
@@ -15,5 +16,6 @@ puts "Initial Loading!".cyan
 
 #========================Testing=========================== 
 # Preload into environment to quick pry
-Scraper.place_holder
+
+Scraper.get_docPages
 # binding.pry
