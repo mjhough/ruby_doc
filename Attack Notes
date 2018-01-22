@@ -9,7 +9,7 @@ Doc :title, :url, :description, :type, :methods***
 Meth :name, :url, :description, :type, :docs***
 
 CREATE CLASSES []
-- Doc w/ attrs []  
+- Doc w/ attrs [X]  
 - Meth w/ attrs []
 
 SUCCESSFULLY SCRAPE ALL CONTENT NEEDED []
