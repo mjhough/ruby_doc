@@ -8,15 +8,18 @@ DECIDE ON DOMAIN MODEL AND WORKUP OBJECT LIST & PROPS [X]
 Doc :title, :url, :description, :type, :methods***
 Meth :name, :url, :description, :type, :docs***
 
-CREATE CLASSES []
+CREATE CLASSES [X]
 - Doc w/ attrs [X]  
-- Meth w/ attrs []
+- Meth w/ attrs [X]
 
 SUCCESSFULLY SCRAPE ALL CONTENT NEEDED []
--
--
--
--
+- create scraper [X]
+- scrape for Doc props []
+- scrape for Meth props []
+
+COLLABORATE []
+- 
+
 DOUBLE CHECK ALL COLLABORATIONS FOR ISSUES (DUPS/INCORRECT DATA/BAD FORMAT) []
 -
 -
