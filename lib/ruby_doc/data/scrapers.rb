@@ -13,7 +13,7 @@ end
     # SCRAPES :titles, :urls (DocCount = 2403)
     container.search("a").each do |doc|
       doc_title = doc.text
-      doc_url = "https://apidock.com" + doc.attribute("href").value
+      docURL = "https://apidock.com" + doc.attribute("href").value
     end
   end
 #==============================================
@@ -24,7 +24,6 @@ end
     doc_page = Nokogiri::HTML(open(doc_url))
     doc_page.search(".description p")[0..1].search("em").remove #description prerequisite
     dScrape = doc_page.search(".description p")[0..1].text #description prerequisite
-    
     container = doc_page.search("#related") #methods prerequisite
     container.search("li").search(".related_header").remove #methods prerequisite
     
@@ -33,9 +32,11 @@ end
     type = doc_page.search(".title_prefix span").text
     
     container.search("li").each do |meth|
-      name = meth.search("a").text
+      meth_name = meth.search("a").text
+      methURL = "https://apidock.com" + meth.search("a").attribute("href").value
       binding.pry
     end
+    
   end
 #==============================================
 end
