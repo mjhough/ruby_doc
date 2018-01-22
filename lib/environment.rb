@@ -17,5 +17,5 @@ puts "Initial Loading!".cyan
 #========================Testing=========================== 
 # Preload into environment to quick pry
 
-Scraper.get_docPages
+Scraper.get_docPage("https://apidock.com/ruby/Abbrev")
 # binding.pry
