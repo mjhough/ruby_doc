@@ -1,12 +1,16 @@
 class Scraper
-  # DocCount = 2403
+################ Helper ####################
+def self.dParse(des)
+  des.gsub(/[\n]/, ' ').gsub('  ',' ')
+end
+############################################
 #===================DocURLs====================
   def self.get_DocURLs #Complete[X]
     # load
     html = Nokogiri::HTML(open("https://apidock.com/ruby/browse"))
     container = html.search(".hover_list")
     
-    # SCRAPES :titles, :urls
+    # SCRAPES :titles, :urls (DocCount = 2403)
     container.search("a").each do |doc|
       doc_title = doc.text
       doc_url = "https://apidock.com" + doc.attribute("href").value
@@ -19,11 +23,13 @@ class Scraper
     # load
     doc_page = Nokogiri::HTML(open(doc_url))
     doc_page.search(".description p")[0..1].search("em").remove
-    binding.pry
+    dScrape = doc_page.search(".description p")[0..1].text
     
     # SCRAPES :description, :type
+    description = dParse(dScrape)
+    binding.pry
     
-    # binding.pry
+    
   end
 #==============================================
 end
