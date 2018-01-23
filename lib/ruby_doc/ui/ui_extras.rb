@@ -70,7 +70,7 @@ module UIExtras
   end
   
   def mView
-    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
+    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter ID Number eg.".cyan + "'1'".yellow + ")".cyan
     puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
     print "\n Random Quote ".colorize(color: :white, background: :cyan)
   end
@@ -85,5 +85,13 @@ module UIExtras
     puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
     print "\n Random Quote ".colorize(color: :white, background: :cyan)
   end
+#==================Signature====================
+  def signature
+    puts "\n"+"=".white*28 + "=".cyan*28
+       
+puts %q(               ALPHA™
+               ╦═╗╦ ╦╔╗ ╦ ╦  ╔╦╗╔═╗╔═╗╔═╗
+               ╠╦╝║ ║╠╩╗╚╦╝   ║║║ ║║  ╚═╗
+               ╩╚═╚═╝╚═╝ ╩   ═╩╝╚═╝╚═╝╚═╝).cyan end
 #==============================================
 end

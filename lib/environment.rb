@@ -12,7 +12,7 @@ def x; exit!; end #Quit Exit
 
 
 #==================Load Init Data====================#
-puts "\nALPHACODING™ Thanks For Using Ruby Docs!".cyan
-puts "One Moment Please As I Set Things Up\n".cyan
+puts "\nThanks For Using ALPHA™ Ruby Docs!".cyan
+puts "One Moment Please As We Set Things Up\n".cyan
 Scraper.loadDOCS
 #====================================================#
