@@ -5,7 +5,7 @@ module DataExtras
     RubyDoc::CLI::UI
   end
 #Inherited Methods: sepL, sepR, prompt, alphaGets, output, mNext, mView
-#mViewMeths 
+#mViewMeths, mMain 
 #===============================Paginator============================== 
   def paginateALL
     uie.sepL#
@@ -120,6 +120,46 @@ module DataExtras
     when "m"
       RubyDoc::CLI.start
     end
+  end
+#==============================List Meths==============================
+  def listMeths(doc)
+    uie.sepL#
+    doc.methods.each_with_index do |meth, index|
+      puts "#{index + 1}. ".yellow + meth.cyan
+    end 
+    uie.sepR#
+    
+    uie.mView#
+    uie.prompt#
+    iN = uie.alphaGets#
+      
+    case iN
+    when "m"
+      RubyDoc::CLI.start
+    else
+      displayMeth(doc.methods[iN.to_i-1])
+    end
+  end
+#=============================Display Meth=============================
+  def displayMeth(meth_name)
+    meth = Meth.find(meth_name)
+    
+    Scraper.get_methPage(meth)#Load
+    
+    uie.sepL#
+    puts "Title: ".cyan + meth.name.upcase
+    puts "Type: ".cyan + meth.type.upcase
+    
+    puts "\nDescription:".cyan
+    puts meth.description
+    puts "Source: #{meth.url}".red
+    uie.sepR#
+    
+    uie.mMain
+    
+    uie.prompt#
+    iN = uie.alphaGets#
+    RubyDoc::CLI.start if iN == "m"
   end
 #==============================SUPER SEARCH===========================
   def self.superSEARCH(name)

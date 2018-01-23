@@ -43,5 +43,10 @@ module UIExtras
     puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
     print "\n Random Quote ".colorize(color: :white, background: :cyan)
   end
+  
+  def mMain
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
+    print "\n Random Quote ".colorize(color: :white, background: :cyan)
+  end
 #==============================================
 end
