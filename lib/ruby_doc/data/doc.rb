@@ -16,6 +16,7 @@ class Doc
     self.methods = []
   end
 #==============================================
+  # name downcased already through UI.mainControl
   def self.find(name)
     self.all.find{|doc| doc.name.downcase == name.downcase}
   end #returns Doc OBJECT
