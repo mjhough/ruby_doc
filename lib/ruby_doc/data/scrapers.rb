@@ -1,6 +1,11 @@
 class Scraper
+  extend UIExtras 
+  #loading_message, loading_animation
 #==================Load Docs===================
   def self.loadDOCS
+    @counter = 0 #For Loading anim
+    self.loading_message#
+    
     html = Nokogiri::HTML(open("https://apidock.com/ruby/browse"))
     container = html.search(".hover_list")
     
@@ -10,6 +15,9 @@ class Scraper
       
       # assign
       Doc.new(doc_name, docURL) if docUniq(doc_name)
+      
+      @counter += 1 #For Loading anim
+      self.loading_animation#
     end
   end #Doc :names, :urls
 #==================DocPage=====================
