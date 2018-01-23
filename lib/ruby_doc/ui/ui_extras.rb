@@ -6,7 +6,6 @@ module UIExtras
 #==================Shuttle=====================  
 # replace with second main greeting w/o sig
   def main
-    sepR
     RubyDoc::CLI.start
   end
 #===================Input======================

@@ -1,28 +1,28 @@
 module DataExtras
 #====================
 #UIExtras Shuttle
-  def uiextras
+  def uie
     RubyDoc::CLI::UI
   end
 #Inherited Methods: sepL, sepR, prompt, alphaGets, output, mNext, mView
 #mViewMeths 
 #===============================Paginator============================== 
   def paginateALL
-    uiextras.sepL#
+    uie.sepL#
     Doc.all[0..499].each_with_index do |doc, index|
-      uiextras.output(doc, index)#
+      uie.output(doc, index)#
     end
-    uiextras.sepR#
+    uie.sepR#
     
-    uiextras.mNext#
-    uiextras.prompt#
-    iN = uiextras.alphaGets#
+    uie.mNext#
+    uie.prompt#
+    iN = uie.alphaGets#
       
     case iN
     when "n"
       page2
     when "m"
-      uiextras.main  
+      uie.main  
     else
       # DRY 
       Doc.display(Doc.all[iN.to_i-1])
@@ -30,15 +30,15 @@ module DataExtras
   end
 #=====================================================================
   def page2 
-    uiextras.sepL#
+    uie.sepL#
     Doc.all[500..999].each_with_index do |doc, index|
-      uiextras.output(doc, index)#
+      uie.output(doc, index)#
     end
-    uiextras.sepR#
+    uie.sepR#
     
-    uiextras.mNext#
-    uiextras.prompt#
-    iN = uiextras.alphaGets#
+    uie.mNext#
+    uie.prompt#
+    iN = uie.alphaGets#
       
     case iN
     when "n"
@@ -47,15 +47,15 @@ module DataExtras
   end
 #======================================================================  
   def page3
-    uiextras.sepL#
+    uie.sepL#
     Doc.all[1000..1499].each_with_index do |doc, index|
-      uiextras.output(doc, index)#
+      uie.output(doc, index)#
     end
-    uiextras.sepR#
+    uie.sepR#
     
-    uiextras.mNext#
-    uiextras.prompt#
-    iN = uiextras.alphaGets#
+    uie.mNext#
+    uie.prompt#
+    iN = uie.alphaGets#
       
     case iN
     when "n"
@@ -64,15 +64,15 @@ module DataExtras
   end
 #======================================================================  
   def page4
-    uiextras.sepL#
+    uie.sepL#
     Doc.all[1500..1999].each_with_index do |doc, index|
-      uiextras.output(doc, index)#
+      uie.output(doc, index)#
     end
-    uiextras.sepR#
+    uie.sepR#
     
-    uiextras.mNext#
-    uiextras.prompt#
-    iN = uiextras.alphaGets#
+    uie.mNext#
+    uie.prompt#
+    iN = uie.alphaGets#
       
     case iN
     when "n"
@@ -81,15 +81,15 @@ module DataExtras
   end
 #======================================================================  
   def last
-    uiextras.sepL#
+    uie.sepL#
     Doc.all[2000..self.all.length].each_with_index do |doc, index|
-      uiextras.output(doc, index)#
+      uie.output(doc, index)#
     end
-    uiextras.sepR#
+    uie.sepR#
     
-    uiextras.mView#
-    uiextras.prompt#
-    iN = uiextras.alphaGets#
+    uie.mView#
+    uie.prompt#
+    iN = uie.alphaGets#
       
     case iN
     when "m"
@@ -99,7 +99,7 @@ module DataExtras
 #==============================Display Doc=============================   
   def display(doc)
     Scraper.load_doc_page(doc)#Load
-    uiextras.sepL#
+    uie.sepL#
     puts "Title: ".cyan + doc.name.upcase
     puts "Type: ".cyan + doc.type.upcase
     
@@ -107,12 +107,12 @@ module DataExtras
     puts doc.description
     puts "Methods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
-    uiextras.sepR#
+    uie.sepR#
     
-    uiextras.mViewMeths(doc)#
+    uie.mViewMeths(doc)#
     
-    uiextras.prompt#
-    iN = uiextras.alphaGets#
+    uie.prompt#
+    iN = uie.alphaGets#
     
     case iN
     when "1"
@@ -121,7 +121,32 @@ module DataExtras
       RubyDoc::CLI.start
     end
   end
-#=====================================================================
+#==============================SUPER SEARCH===========================
+  def self.superSEARCH(name)
+    #Shuttle
+    uie = RubyDoc::CLI::UI
+    
+    uie.sepL#
+    matches = Doc.all.find_all{|doc| doc.name.downcase.include?(name)}
+    matches.each_with_index do |doc, index|
+      uie.output(doc, index)#
+    end
+    uie.sepR#
+    
+    uie.mNext#
+    uie.prompt#
+    iN = uie.alphaGets#
+      
+    case iN
+    when "n"
+      page2
+    when "m"
+      uie.main  
+    else
+      Doc.display(matches[iN.to_i-1])
+    end
+  end
+#==============================SUPER SEARCH===========================
 =begin
 # NOTES: For now this only searches all doc objects (iterating Doc.all)
 I would like to improve this to also search through all Meth objects.
@@ -158,24 +183,5 @@ as far as scraping successfully. At the completetion of this CLI I am now
 a lot more confident in my abilities so this will most likely be the way 
 I go. 
 =end
-#==============================SUPER SEARCH===========================
-  def self.superSEARCH(name)
-    matches = Doc.all.find_all{|i| i.name.downcase.include?(name)}
-    #check if somewhere in here causes dup output list
-    matches.each_with_index do |doc, index|
-      uiextras.output(doc, index)#
-    end
-    
-    puts "enter doc id to view"
-    input = gets.strip.to_s.downcase
-    
-    case input #Shuttle
-    when "m"
-      main_menu#
-    else
-      Doc.display(matches[input.to_i-1])#
-    end
-  end
-#==============================SUPER SEARCH===========================
 #=====================================================================
 end
