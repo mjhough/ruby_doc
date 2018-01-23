@@ -1,6 +1,6 @@
 class Doc
 #==================modules===================== 
-  extend DocExtras
+  extend DataExtras
   #paginate 
 #=================properties=================== 
 #                 X      X         X          X      X
@@ -16,9 +16,9 @@ class Doc
     self.methods = []
   end
 #==============================================
-  def self.find(input)
-    puts "\nfind Greenlight".green
-  end
+  def self.find(name)
+    self.all.find{|doc| doc.name.downcase == name.downcase}
+  end #returns Doc OBJECT
 #==============================================
   def self.display(doc)
     Scraper.load_doc_page(doc)

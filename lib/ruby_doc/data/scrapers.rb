@@ -33,7 +33,9 @@ class Scraper
       method = Meth.new(meth_name, methURL) if methUniq(meth_name)
       doc.methods << meth_name if methsUniq(doc.methods,meth_name)
     end #Doc :description, :type, :methods
+    doc
   end #Meth :name, :url, :docs
+  #returns doc OBJECT 
 #============================================== 
   # requires a meth.url (=> doc.methods[meth :url here!])
 #==================MethPage====================

@@ -16,7 +16,7 @@ module RubyDoc::CLI
       when "b"
         browseControl
       else
-        searchControl(input)
+        DataExtras.superSEARCH(input) 
       end
     end
 #==============================================

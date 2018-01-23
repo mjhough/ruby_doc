@@ -1,4 +1,4 @@
-module DocExtras
+module DataExtras
 #=====================================================================
 #===============================PAGINATOR=============================
   def paginateALL 
@@ -67,6 +67,15 @@ module DocExtras
       RubyDoc::CLI.start
     end
   end 
-#===============================PAGINATOR=============================
+#=====================================================================
+#==============================SUPER SEARCH===========================
+  def self.superSEARCH(name) 
+    if Doc.find(name) != nil
+      Doc.display(Doc.find(name))
+    elsif Meth.find(name) != nil
+      Meth.display(Meth.find(name).name)
+    end
+  end
+#==============================SUPER SEARCH===========================
 #=====================================================================
 end

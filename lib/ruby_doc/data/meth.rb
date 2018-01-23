@@ -13,6 +13,10 @@ class Meth
     self.docs = []
   end
 #==============================================
+  def self.find(name)
+    self.all.find{|meth| meth.name.downcase == name.downcase}
+  end #returns Meth OBJECT
+#==============================================
   def self.display(meth_name)
     meth = Meth.find(meth_name)
     # load remaining props to instance 
@@ -31,9 +35,5 @@ class Meth
     RubyDoc::CLI.start if input == "m"
     
   end
-#==============================================
-  def self.find(name)
-    self.all.find{|m| m.name == name}
-  end #returns method OBJECT
 #==============================================
 end
