@@ -24,5 +24,5 @@ Scraper.loadDOCS
 # Scraper.loadDOCS
 # Scraper.load_doc_page(Doc.all[11])
 
-input = "12"
-Doc.display(Doc.all[input.to_i-1])
+# input = "12"
+Meth.listALL
