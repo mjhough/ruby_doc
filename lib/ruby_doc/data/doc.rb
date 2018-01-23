@@ -33,7 +33,14 @@ class Doc
     
     puts "\nTo " + "View Methods " + "For" + " #{doc.name}" + " (Enter " + "'1'" + ")"
     puts "To Return To" + " Main Menu" + " (Enter " + "'m'" + ")"
-    binding.pry
+    
+    input = gets.strip.to_s.downcase
+    case input #Shuttle
+    when "1"
+      Meth.listALL
+    when "m"
+      RubyDoc::CLI.start
+    end
   end
 #==============================================
 end

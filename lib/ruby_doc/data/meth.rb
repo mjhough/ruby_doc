@@ -12,6 +12,12 @@ class Meth
     @@all << self
     self.docs = []
   end
+  
+  def self.listALL
+    Meth.all.each_with_index do |meth, index|
+      puts "#{index + 1}. " + meth.name
+    end 
+  end
 #==============================================
   def self.find(input)
     puts "\nfind Greenlight".green
