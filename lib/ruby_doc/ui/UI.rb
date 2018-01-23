@@ -3,9 +3,16 @@ module RubyDoc::CLI
   module UI
 #==============================================
     def self.greeting
-      puts "\nEnter a word associated with the Ruby Language & I will "
-      puts "try to find a match in my database for you."
-      puts "\nYou can also type 'b' to browse instead. Happy Hunting!"
+      puts "\n                 SIGNATURE GOES HERE".black
+      # separator# 
+     
+      puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
+      puts "try to find a match in my database for you.".cyan
+      # separator2#
+      
+      puts "\You can also type".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
+      
+      puts "\n If You're Searching... Single Word Inputs Only Please ".colorize(color: :white, background: :cyan)
     end
 #==============================================
     def self.mainControl

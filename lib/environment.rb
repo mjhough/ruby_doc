@@ -7,22 +7,12 @@ require_all 'lib'
 #===========Scraping==========
 require 'open-uri'
 require 'nokogiri'
-#============Patch============
+#===========Patches===========
 def x; exit!; end #Quit Exit
 
 
-#=================Load Docs====================
-puts "Initial Loading!".cyan
-# LOAD_FILE_HERE
+#==================Load Init Data====================#
+puts "\nALPHACODING™ Thanks For Using Ruby Docs!".cyan
+puts "One Moment Please As I Set Things Up\n".cyan
 Scraper.loadDOCS
-#==================Testing=====================
-# Preload into environment to quick pry
-# binding.pry
-# Doc.display(Doc.all[11])
-
-# Scraper.load_doc_page(Doc.all[11])
-# Scraper.loadDOCS
-# Scraper.load_doc_page(Doc.all[11])
-
-# input = "12"
-# Meth.listALL
+#====================================================#
