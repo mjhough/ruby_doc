@@ -2,6 +2,7 @@ class Meth
 #=================properties=================== 
 #                  X     X                          X           
   attr_accessor :name, :url, :description, :type, :docs
+  
   @@all = []
   def self.all; @@all; end
 #==============================================
@@ -12,8 +13,8 @@ class Meth
     self.docs = []
   end
 #==============================================
-    def self.listALL 
-      puts "Meth listALL Greenlight".green
-    end
+  def self.find(input)
+    puts "\nfind Greenlight".green
+  end
 #==============================================
 end

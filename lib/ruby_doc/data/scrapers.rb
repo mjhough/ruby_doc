@@ -32,7 +32,6 @@ class Scraper
       # assignments
       method = Meth.new(meth_name, methURL) if methUniq(meth_name)
       doc.methods << meth_name if methsUniq(doc.methods,meth_name)
-      method.docs << doc.name if docsUniq(method.docs,doc.name)
     end #Doc :description, :type, :methods
   end #Meth :name, :url, :docs
 #============================================== 
@@ -63,12 +62,8 @@ class Scraper
     Meth.all.none?{|meth| meth.name == name}
   end
   
-  def self.docsUniq(col,name)
-    col.none?{|meth| meth == doc.name}
-  end
-  
   def self.methsUniq(col,name)
-    col.none?{|meth| meth == meth_name}
+    col.none?{|meth| meth == name}
   end
   
   def self.prefix

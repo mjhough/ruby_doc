@@ -28,6 +28,7 @@ class Doc
     
     puts "\nDescription:"
     puts doc.description
+    puts "Methods: " + "#{doc.methods.count}"
     binding.pry
   end
 #==============================================

@@ -3,7 +3,7 @@ module DocExtras
 #===============================PAGINATOR=============================
   def paginateALL 
     Doc.all[0..499].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.title
+      puts "#{index + 1}. " + doc.name
     end 
     
     puts "\nenter n for next page"
@@ -11,12 +11,14 @@ module DocExtras
     case input # SHUTTLE
     when "n"
       page2
+    else
+      Doc.display(Doc.all[input.to_i-1])
     end
   end
 #=====================================================================
   def page2 
     Doc.all[500..999].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.title
+      puts "#{index + 1}. " + doc.name
     end 
     
     puts "\nenter n for next page"
@@ -29,7 +31,7 @@ module DocExtras
 #=====================================================================  
   def page3 
     Doc.all[1000..1499].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.title
+      puts "#{index + 1}. " + doc.name
     end
     
     puts "\nenter n for next page"
@@ -42,7 +44,7 @@ module DocExtras
 #=====================================================================  
   def page4 
     Doc.all[1500..1999].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.title
+      puts "#{index + 1}. " + doc.name
     end
     
     puts "\nenter n for next page"
@@ -55,7 +57,7 @@ module DocExtras
 #=====================================================================  
   def last 
     Doc.all[2000..self.all.length].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.title
+      puts "#{index + 1}. " + doc.name
     end
     
     puts "\nenter m for main menu"

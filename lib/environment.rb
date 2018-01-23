@@ -18,7 +18,7 @@ Scraper.loadDOCS
 #==================Testing=====================
 # Preload into environment to quick pry
 # binding.pry
-Doc.display(Doc.all[11])
+# Doc.display(Doc.all[11])
 
 # Scraper.load_doc_page(Doc.all[11])
 # Scraper.loadDOCS
