@@ -65,25 +65,25 @@ module UIExtras
   def mNext
     puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
     puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
-    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
-    print "\n Random Quote ".colorize(color: :white, background: :cyan)
+    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
   end
   
   def mView
     puts "To ".cyan + "View An Item ".yellow + "From This List (Enter ID Number eg.".cyan + "'1'".yellow + ")".cyan
-    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
-    print "\n Random Quote ".colorize(color: :white, background: :cyan)
+    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
   end
   
   def mViewMeths(doc)
     puts "\nTo ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
-    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
-    print "\n Random Quote ".colorize(color: :white, background: :cyan)
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
   end
   
   def mMain
-    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
-    print "\n Random Quote ".colorize(color: :white, background: :cyan)
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
   end
 #==================Signature====================
   def signature
@@ -93,5 +93,14 @@ puts %q(               ALPHA™
                ╦═╗╦ ╦╔╗ ╦ ╦  ╔╦╗╔═╗╔═╗╔═╗
                ╠╦╝║ ║╠╩╗╚╦╝   ║║║ ║║  ╚═╗
                ╩╚═╚═╝╚═╝ ╩   ═╩╝╚═╝╚═╝╚═╝).cyan end
+#================Quote Scraper=================
+  def randQ
+    html = Nokogiri::HTML(open("https://fortrabbit.github.io/quotes/"))
+    container = html.search(".row.gutter-l.wrap")
+    
+    quotes = container.search("p").map {|quote| quote.text.gsub(/[\n]\s+/, "")}
+    quote = " "+ quotes[rand(0..180)]+ " "
+    wrapped(quote, 55).colorize(color: :white, background: :cyan)
+  end
 #==============================================
 end
