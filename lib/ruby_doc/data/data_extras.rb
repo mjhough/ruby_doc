@@ -5,7 +5,8 @@ module DataExtras
     RubyDoc::CLI::UI
   end
 #Inherited Methods: sepL, sepR, prompt, alphaGets, output, mNext, mView
-#===============================PAGINATOR============================== 
+#mViewMeths 
+#===============================Paginator============================== 
   def paginateALL
     uiextras.sepL#
     Doc.all[0..499].each_with_index do |doc, index|
@@ -95,6 +96,31 @@ module DataExtras
       RubyDoc::CLI.start
     end
   end 
+#==============================Display Doc=============================   
+  def display(doc)
+    Scraper.load_doc_page(doc)#Load
+    uiextras.sepL#
+    puts "Title: ".cyan + doc.name.upcase
+    puts "Type: ".cyan + doc.type.upcase
+    
+    puts "\nDescription:".cyan
+    puts doc.description
+    puts "Methods: ".cyan + "#{doc.methods.count}".yellow
+    puts "Source: #{doc.url}".red 
+    uiextras.sepR#
+    
+    uiextras.mViewMeths(doc)#
+    
+    uiextras.prompt#
+    iN = uiextras.alphaGets#
+    
+    case iN
+    when "1"
+      Doc.listMeths(doc)
+    when "m"
+      RubyDoc::CLI.start
+    end
+  end
 #=====================================================================
 =begin
 # NOTES: For now this only searches all doc objects (iterating Doc.all)

@@ -38,5 +38,11 @@ module UIExtras
     puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
     print "\n Random Quote ".colorize(color: :white, background: :cyan)
   end
+  
+  def mViewMeths(doc)
+    puts "\nTo ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
+    print "\n Random Quote ".colorize(color: :white, background: :cyan)
+  end
 #==============================================
 end

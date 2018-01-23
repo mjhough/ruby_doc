@@ -6,6 +6,7 @@ module RubyDoc::CLI
     #prompt
 #==============================================
     def self.greeting
+      sepR#
       puts "\n                 SIGNATURE GOES HERE".black
       sepL#
       puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
