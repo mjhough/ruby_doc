@@ -29,6 +29,7 @@ class Doc
     puts "\nDescription:"
     puts doc.description
     puts "Methods: " + "#{doc.methods.count}"
+    puts "Source: " + doc.url
     binding.pry
   end
 #==============================================
