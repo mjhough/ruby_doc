@@ -30,6 +30,9 @@ class Doc
     puts doc.description
     puts "Methods: " + "#{doc.methods.count}"
     puts "Source: " + doc.url
+    
+    puts "\nTo " + "View Methods " + "For" + " #{doc.name}" + " (Enter " + "'1'" + ")"
+    puts "To Return To" + " Main Menu" + " (Enter " + "'m'" + ")"
     binding.pry
   end
 #==============================================
