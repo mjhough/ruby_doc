@@ -4,11 +4,11 @@ module RubyDoc::CLI
 #==============================================
     def self.greeting
       puts "\n                 SIGNATURE GOES HERE".black
-      # separator# 
+      puts "=".cyan*28 + "=".white*28
      
       puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
       puts "try to find a match in my database for you.".cyan
-      # separator2#
+      puts "=".white*28 + "=".cyan*28
       
       puts "\You can also type".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
       
