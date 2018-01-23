@@ -3,7 +3,7 @@ class Doc
   extend DocExtras
   #paginate 
 #=================properties=================== 
-#                 X      X         X          X
+#                 X      X         X          X      X
   attr_accessor :name, :url, :description, :type, :methods
   @@all = []
   def self.all; @@all; end
@@ -37,9 +37,25 @@ class Doc
     input = gets.strip.to_s.downcase
     case input #Shuttle
     when "1"
-      Meth.listALL
+      Doc.listMeths(doc)
     when "m"
       RubyDoc::CLI.start
+    end
+  end
+#==============================================  
+  def self.listMeths(doc)
+    doc.methods.each_with_index do |meth, index|
+      puts "#{index + 1}. " + meth
+    end 
+    
+    puts "\nenter number of item to view"
+    input = gets.strip.to_s.downcase
+    # rotate
+    case input # SHUTTLE
+    when "m"
+      RubyDoc::CLI.start
+    else
+      Meth.display(doc.methods[input.to_i-1])
     end
   end
 #==============================================

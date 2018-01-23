@@ -1,6 +1,6 @@
 class Meth
 #=================properties=================== 
-#                  X     X                          X           
+#                  X     X          X        X      X           
   attr_accessor :name, :url, :description, :type, :docs
   
   @@all = []
@@ -12,28 +12,28 @@ class Meth
     @@all << self
     self.docs = []
   end
-  
-  def self.listALL
-    Meth.all.each_with_index do |meth, index|
-      puts "#{index + 1}. " + meth.name
-    end 
+#==============================================
+  def self.display(meth_name)
+    meth = Meth.find(meth_name)
+    # load remaining props to instance 
+    Scraper.get_methPage(meth)
     
-    puts "\nenter number of item to view"
+    puts "Title: " + meth.name.upcase
+    puts "Type: " + meth.type.upcase
+    
+    puts "\nDescription:"
+    puts meth.description
+    puts "Source: " + meth.url
+    
+    puts "To Return To" + " Main Menu" + " (Enter " + "'m'" + ")"
+    
     input = gets.strip.to_s.downcase
-    case input # SHUTTLE
-    when "m"
-      RubyDoc::CLI.start
-    else
-      Meth.display(Doc.all[input.to_i-1])
-    end
+    RubyDoc::CLI.start if input == "m"
+    
   end
 #==============================================
-  def self.display(input)
-    puts "\nmeth display Greenlight".green
-  end
-#==============================================
-  def self.find(input)
-    puts "\nfind Greenlight".green
-  end
+  def self.find(name)
+    self.all.find{|m| m.name == name}
+  end #returns method OBJECT
 #==============================================
 end

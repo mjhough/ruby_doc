@@ -37,17 +37,16 @@ class Scraper
 #============================================== 
   # requires a meth.url (=> doc.methods[meth :url here!])
 #==================MethPage====================
-  def self.get_methPage(methURL) #[] 
+  def self.get_methPage(meth) #[] 
     # load
-    methURL = Nokogiri::HTML(open(methURL))
+    methURL = Nokogiri::HTML(open(meth.url))
     methURL.search(".description p")[0..1].search("em").remove #description prerequisite
     scrape = methURL.search(".description p")[0..1].text #description prerequisite
     
-    # SCRAPES :description, :type
-    description = parse(scrape)
-    type = methURL.search(".title_prefix span").text
-    binding.pry
-  end
+    # assignments
+    meth.description = parse(scrape)
+    meth.type = methURL.search(".title_prefix span").text
+  end #Meth :description, :type
 #==============================================
 ################ Helpers ################### 
   def self.parse(des)
