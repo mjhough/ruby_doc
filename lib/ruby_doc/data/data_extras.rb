@@ -104,8 +104,10 @@ module DataExtras
     puts "Type: ".cyan + doc.type.upcase
     
     puts "\nDescription:".cyan
-    puts doc.description
-    puts "Methods: ".cyan + "#{doc.methods.count}".yellow
+    description = doc.description
+    puts uie.wrapped(description, 55)
+    
+    puts "\nMethods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
     uie.sepR#
     
@@ -151,8 +153,10 @@ module DataExtras
     puts "Type: ".cyan + meth.type.upcase
     
     puts "\nDescription:".cyan
-    puts meth.description
-    puts "Source: #{meth.url}".red
+    description = meth.description
+    puts uie.wrapped(description, 55)
+    
+    puts "\nSource: #{meth.url}".red
     uie.sepR#
     
     uie.mMain

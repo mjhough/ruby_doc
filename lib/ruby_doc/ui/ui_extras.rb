@@ -22,6 +22,24 @@ module UIExtras
   def output(doc, index)
     puts "#{index + 1}. ".yellow + doc.name.cyan
   end
+  
+  def wrapped(s, width=78)
+	  lines = []
+	  line = ""
+	 
+	  s.split(/\s+/).each do |word|
+	    if line.size + word.size >= width
+	      lines << line
+	      line = word
+	    elsif line.empty?
+	     line = word
+	    else
+	     line << " " << word
+	   end
+	   end
+	   lines << line if line
+	  return lines.join "\n"
+	end
 #==================Shuttle=====================  
 # replace with second main greeting w/o sig
   def main
