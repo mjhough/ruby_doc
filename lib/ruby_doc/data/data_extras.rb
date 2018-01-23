@@ -1,68 +1,96 @@
 module DataExtras
-#=====================================================================
-#===============================PAGINATOR=============================
-  def paginateALL 
+#====================
+#UIExtras Shuttle
+  def uiextras
+    RubyDoc::CLI::UI
+  end
+#Inherited Methods: sepL, sepR, prompt, alphaGets, output, mNext, mView
+#===============================PAGINATOR============================== 
+  def paginateALL
+    uiextras.sepL#
     Doc.all[0..499].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.name
-    end 
+      uiextras.output(doc, index)#
+    end
+    uiextras.sepR#
     
-    puts "\nenter n for next page"
-    input = gets.strip.to_s.downcase
-    case input # SHUTTLE
+    uiextras.mNext#
+    uiextras.prompt#
+    iN = uiextras.alphaGets#
+      
+    case iN
     when "n"
       page2
+    when "m"
+      uiextras.main  
     else
-      Doc.display(Doc.all[input.to_i-1])
+      # DRY 
+      Doc.display(Doc.all[iN.to_i-1])
     end
   end
 #=====================================================================
   def page2 
+    uiextras.sepL#
     Doc.all[500..999].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.name
-    end 
+      uiextras.output(doc, index)#
+    end
+    uiextras.sepR#
     
-    puts "\nenter n for next page"
-    input = gets.strip.to_s.downcase
-    case input # SHUTTLE
+    uiextras.mNext#
+    uiextras.prompt#
+    iN = uiextras.alphaGets#
+      
+    case iN
     when "n"
       page3
     end
   end
-#=====================================================================  
-  def page3 
+#======================================================================  
+  def page3
+    uiextras.sepL#
     Doc.all[1000..1499].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.name
+      uiextras.output(doc, index)#
     end
+    uiextras.sepR#
     
-    puts "\nenter n for next page"
-    input = gets.strip.to_s.downcase
-    case input # SHUTTLE
+    uiextras.mNext#
+    uiextras.prompt#
+    iN = uiextras.alphaGets#
+      
+    case iN
     when "n"
       page4
     end
   end
-#=====================================================================  
-  def page4 
+#======================================================================  
+  def page4
+    uiextras.sepL#
     Doc.all[1500..1999].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.name
+      uiextras.output(doc, index)#
     end
+    uiextras.sepR#
     
-    puts "\nenter n for next page"
-    input = gets.strip.to_s.downcase
-    case input # SHUTTLE
+    uiextras.mNext#
+    uiextras.prompt#
+    iN = uiextras.alphaGets#
+      
+    case iN
     when "n"
       last
     end
   end
-#=====================================================================  
-  def last 
+#======================================================================  
+  def last
+    uiextras.sepL#
     Doc.all[2000..self.all.length].each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.name
+      uiextras.output(doc, index)#
     end
+    uiextras.sepR#
     
-    puts "\nenter m for main menu"
-    input = gets.strip.to_s.downcase
-    case input # SHUTTLE
+    uiextras.mView#
+    uiextras.prompt#
+    iN = uiextras.alphaGets#
+      
+    case iN
     when "m"
       RubyDoc::CLI.start
     end
@@ -71,8 +99,7 @@ module DataExtras
 =begin
 # NOTES: For now this only searches all doc objects (iterating Doc.all)
 I would like to improve this to also search through all Meth objects.
-The issue here is at no point in this program can it possess all methods
-in this site. Explanation below...
+The issue here explained below...
 
 Population of all methods can only be done through scraping each individual
 doc page for all its meth urls. In this site, methods are spread out 
@@ -110,7 +137,7 @@ I go.
     matches = Doc.all.find_all{|i| i.name.downcase.include?(name)}
     #check if somewhere in here causes dup output list
     matches.each_with_index do |doc, index|
-      puts "#{index + 1}. " + doc.name
+      uiextras.output(doc, index)#
     end
     
     puts "enter doc id to view"
