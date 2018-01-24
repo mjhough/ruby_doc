@@ -18,27 +18,54 @@ module UIExtras
     if iN.split.size > 1
       mainError
     else
-      RubyDoc::CLI::UI.shuttle(iN)
+      RubyDoc::CLI::UI.main_Shuttle(iN)
+    end   
+  end
+  
+  def searchControl(matches)
+    case matches
+    when [] 
+      searchError
+    else 
+      matches.each_with_index{|doc, index| output(doc, index)}
+    end  
+  end
+  
+  def choiceControl(matches)
+    prompt
+    iN = alphaGets
+    
+    if iN == "m"
+      RubyDoc::CLI.start
+    elsif !iN.to_i.between?(1,matches.count)
+      choiceError(matches)
+    else
+      RubyDoc::CLI::UI.search_Shuttle(iN, matches)
     end   
   end
 #===================Error====================== 
   def mainError 
     sleep(0.1)
-    print redH("\n Input Must Be 1 Word Try Again ")
+    print redH("\n Input Must Be 1 Word or b Try Again ")
     mainControl
   end
   
-  def searchError
+  def searchError 
     puts "NO MATCH!".red
     puts "If you are searching for a ".black + "Method" + ", enter the ".black + "Class" + " or".black + "\nModule" + " it belongs to instead. This limitation will be ".black + "\naddressed in future update".black
     puts "=".black*56
     
     puts "Example: ".red + "Find".black + " 'reverse'" + " by searching".black + " 'String'"
-    mess = "'Reverse' method will be included in the doc's Methods:#".black
-    puts wrapped(mess, 62).black
+    mess = "'Reverse' method will be included in the doc's Methods:# (Additionally feel free to browse all docs)".black
+    puts wrapped(mess, 70).black
     
     print redH("\n Try A New Word or 'b' To Browse ")
     mainControl
+  end
+  
+  def choiceError(matches)
+    print redH("\n Please enter a number between 1 and #{matches.count} or m for main ")
+    choiceControl(matches)
   end
 #===================Menus====================== 
   def mainMenu 
@@ -47,7 +74,7 @@ module UIExtras
     puts "try to find a match in my database for you.".cyan
     sepL#
     puts "\You can also type".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
-    print hLCyan("\n If You're Searching... Single Word Inputs Only Please ")
+    print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   
   def mNext 
@@ -63,8 +90,8 @@ module UIExtras
     print randQ
   end
 
-  def mViewMeths(doc) 
-    puts "\nTo ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
+  def methodsMenu(doc) 
+    puts "To ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
     puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ
   end
@@ -99,10 +126,10 @@ module UIExtras
 #=============Loading Animation================ 
   # Goes above iterator
   def loading_message 
-    puts hLCyan(" Loading Database ") + " ☠️"
+    puts cyanH(" Loading Database ") + " ☠️"
   end
   # Goes inside iterator - last line
-  def loading_animation
+  def loading_animation 
     loading = ""
     print loading << ". ".cyan if 
     counter == 100 || counter == 200 || counter == 300 || counter == 400 || 
@@ -112,7 +139,7 @@ module UIExtras
     counter == 1700 || counter == 1800 || counter == 1900 || counter == 2000 || 
     counter == 2100 || counter == 2200 || counter == 2300 || counter == 2320 || 
     counter == 2340 || counter == 2360 || counter == 2380 || counter == 2400
-    sleep(0.00001)
+    # sleep(0.00001)
   end
 #=================Separators=================== 
   def sepL 
@@ -123,7 +150,7 @@ module UIExtras
     "=".white*28 + "=".cyan*28
   end
 #==================Strings===================== 
-  def wrapped(s, width=78)
+  def wrapped(s, width=78) 
 	  lines = []
 	  line = ""
 	 
@@ -141,7 +168,7 @@ module UIExtras
 	  return lines.join "\n"
 	end#wrap string
 
-  def hLCyan(str)
+  def cyanH(str)
     str.colorize(color: :white, background: :cyan)
   end#cyan highlight
   

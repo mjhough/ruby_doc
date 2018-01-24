@@ -6,17 +6,25 @@ module RubyDoc::CLI
     #prompt, wError(iN),signature
 #============================================== 
     def self.greeting 
-      signature#
       mainMenu#
       mainControl#
     end
     
-    def self.shuttle(iN)
+    def self.main_Shuttle(iN)
       case iN
       when "b"
         Doc.paginateALL
       else
         DataExtras.superSEARCH(iN) 
+      end
+    end
+    
+    def self.search_Shuttle(iN, matches)
+      case iN
+      when "m"
+        greeting  
+      else
+        Doc.display(matches[iN.to_i-1])
       end
     end
 #============================================== 

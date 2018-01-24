@@ -3,6 +3,7 @@ module RubyDoc
   module CLI
 #============================================== 
     def self.start
+      UI.signature
       UI.greeting
     end
 #============================================== 

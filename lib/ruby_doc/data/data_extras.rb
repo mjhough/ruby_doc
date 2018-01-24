@@ -1,7 +1,7 @@
 module DataExtras
 #====================
 #UIExtras Shuttle 
-  def uie
+  def self.uie
     RubyDoc::CLI::UI
   end
 #Inherited Methods: sepL, sepR, prompt, alphaGets, output, mNext, mView
@@ -98,6 +98,11 @@ module DataExtras
   end 
 #==============================Display Doc============================ 
   def display(doc)
+    #UIExtras Shuttle 
+    def uie
+      RubyDoc::CLI::UI
+    end
+    
     Scraper.load_doc_page(doc)#Load
     uie.sepL#
     puts "Title: ".cyan + doc.name.upcase
@@ -111,7 +116,7 @@ module DataExtras
     puts "Source: #{doc.url}".red 
     puts uie.sepR#
     
-    uie.mViewMeths(doc)#
+    methodsMenu(doc)#
     uie.prompt#
     iN = uie.alphaGets
     
@@ -164,32 +169,17 @@ module DataExtras
     iN = uie.alphaGets#
     RubyDoc::CLI.start if iN == "m"
   end
-#=============================SUPER SEARCH============================
+#=============================SUPER SEARCH============================ 
   def self.superSEARCH(name)
-    uie = RubyDoc::CLI::UI #Shuttle 
-    #sepL, output, sepR, mNext, mSearch, shuttle, main
     uie.sepL#
     matches = Doc.all.find_all{|doc| doc.name.downcase.include?(name)}
     
-    case matches
-    when []
-      uie.searchError#
-    else
-      matches.each_with_index{|doc, index| uie.output(doc, index)}
-    end
+    uie.searchControl(matches)#
     
     puts uie.sepR#
     
     uie.viewMenu#
-    uie.prompt#
-    iN = uie.alphaGets#
-    
-    case iN
-    when "m"
-      uie.main  
-    else
-      Doc.display(matches[iN.to_i-1])
-    end
+    uie.choiceControl(matches)#
   end
 #==============================SUPER SEARCH===========================
 =begin 
