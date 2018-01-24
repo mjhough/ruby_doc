@@ -10,7 +10,6 @@ require 'nokogiri'
 #===========Patches===========
 def x; exit!; end #Quit Exit
 
-
 #==================Load Init Data====================#
 puts "\nThanks For Using ALPHA™ Ruby Docs!".cyan
 puts "One Moment Please As We Set Things Up\n".cyan
