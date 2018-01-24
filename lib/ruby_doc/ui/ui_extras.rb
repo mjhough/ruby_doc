@@ -23,7 +23,7 @@ module UIExtras
     when [] 
       searchError
     else 
-      matches.each_with_index{|doc, index| output(doc, index)}
+      matches.each_with_index{|doc, index| outputD(doc, index)}
     end  
   end
   
@@ -65,6 +65,19 @@ module UIExtras
       methError
     end 
   end
+  
+  def methListControl(doc) 
+    prompt
+    iN = alphaGets
+    
+    if iN == "m" 
+      main
+    elsif !iN.to_i.between?(1,doc.methods.count)
+      methListError(doc)
+    else 
+      RubyDoc::CLI::UI.meth_Shuttle(iN, doc)
+    end
+  end
 #===================Error====================== 
   def mainError 
     sleep(0.1)
@@ -98,6 +111,11 @@ module UIExtras
   def methError
     print redH("\n Please enter 'm' to return to main menu ")
     methControl
+  end
+  
+  def methListError(doc) 
+    print redH("\n Enter a number between 1 and #{doc.methods.count} or m for main ")
+    methListControl(doc)
   end
 #===================Menus====================== 
   def mainMenu 
@@ -141,7 +159,7 @@ module UIExtras
     gets.strip.to_s.downcase
   end
 #==================Display===================== 
-  def output(doc, index)
+  def outputD(doc, index)
     puts "#{index + 1}. ".yellow + doc.name.cyan
   end
 #============================================== 

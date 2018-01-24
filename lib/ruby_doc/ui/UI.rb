@@ -10,7 +10,7 @@ module RubyDoc::CLI
       mainControl#
     end
     
-    def self.main_Shuttle(iN)
+    def self.main_Shuttle(iN) 
       case iN
       when "b"
         Doc.paginateALL
@@ -19,7 +19,7 @@ module RubyDoc::CLI
       end
     end
     
-    def self.search_Shuttle(iN, matches)
+    def self.search_Shuttle(iN, matches) 
       case iN
       when "m"
         greeting  
@@ -27,6 +27,12 @@ module RubyDoc::CLI
         Doc.display(matches[iN.to_i-1])
       end
     end
+    
+    def self.meth_Shuttle(iN, doc) 
+      DataExtras.displayMeth(doc.methods[iN.to_i-1])
+    end
+    
+    
 #============================================== 
   end
 #==============================================

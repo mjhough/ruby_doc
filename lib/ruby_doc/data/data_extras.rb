@@ -124,18 +124,10 @@ module DataExtras
     puts uie.sepR#
     
     uie.viewMenu#
-    uie.prompt#
-    iN = uie.alphaGets#
-      
-    case iN
-    when "m" 
-      RubyDoc::CLI.start
-    else 
-      displayMeth(doc.methods[iN.to_i-1])
-    end
+    uie.methListControl(doc)#
   end
 #=============================Display Meth============================ 
-  def displayMeth(byName)
+  def self.displayMeth(byName)
     meth = Meth.find(byName)
     Scraper.get_methPage(meth)#Load
     
