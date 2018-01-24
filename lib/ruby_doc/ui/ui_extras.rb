@@ -3,15 +3,11 @@ module UIExtras
 #============================================== 
                                     #IMPORTANT!
 #==================Shuttle===================== 
-  def shuttle(iN) 
-    @iN
-  end
-  
   def main 
     RubyDoc::CLI.start
   end
 #==================Control===================== 
-  def mainControl
+  def mainControl 
     prompt
     iN = alphaGets
     
@@ -22,7 +18,7 @@ module UIExtras
     end   
   end
   
-  def searchControl(matches)
+  def searchControl(matches) 
     case matches
     when [] 
       searchError
@@ -31,17 +27,31 @@ module UIExtras
     end  
   end
   
-  def choiceControl(matches)
+  def choiceControl(matches) 
     prompt
     iN = alphaGets
     
-    if iN == "m"
-      RubyDoc::CLI.start
+    if iN == "m" 
+      main
     elsif !iN.to_i.between?(1,matches.count)
       choiceError(matches)
-    else
+    else 
       RubyDoc::CLI::UI.search_Shuttle(iN, matches)
     end   
+  end
+  
+  def docControl(doc) 
+    prompt
+    iN = alphaGets
+    
+    case iN
+    when "1" 
+      Doc.listMeths(doc)
+    when "m" 
+      main
+    else 
+      docError(doc)
+    end 
   end
 #===================Error====================== 
   def mainError 
@@ -63,9 +73,14 @@ module UIExtras
     mainControl
   end
   
-  def choiceError(matches)
-    print redH("\n Please enter a number between 1 and #{matches.count} or m for main ")
+  def choiceError(matches) 
+    print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
     choiceControl(matches)
+  end
+  
+  def docError(doc)
+    print redH("\n Please enter '1' or 'm' ")
+    docControl(doc)
   end
 #===================Menus====================== 
   def mainMenu 
@@ -90,7 +105,7 @@ module UIExtras
     print randQ
   end
 
-  def methodsMenu(doc) 
+  def docMenu(doc) 
     puts "To ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
     puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ

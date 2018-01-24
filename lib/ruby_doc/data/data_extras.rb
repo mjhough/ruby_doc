@@ -4,8 +4,6 @@ module DataExtras
   def self.uie
     RubyDoc::CLI::UI
   end
-#Inherited Methods: sepL, sepR, prompt, alphaGets, output, mNext, mView
-#mViewMeths, mMain 
 #===============================Paginator============================= 
   def paginateALL
     uie.sepL#
@@ -99,38 +97,29 @@ module DataExtras
 #==============================Display Doc============================ 
   def display(doc)
     #UIExtras Shuttle 
-    def uie
+    def uie 
       RubyDoc::CLI::UI
     end
     
     Scraper.load_doc_page(doc)#Load
+    
     uie.sepL#
     puts "Title: ".cyan + doc.name.upcase
     puts "Type: ".cyan + doc.type.upcase
-    
     puts "\nDescription:".cyan
     description = doc.description
     puts uie.wrapped(description, 55)
-    
     puts "\nMethods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
     puts uie.sepR#
     
-    methodsMenu(doc)#
-    uie.prompt#
-    iN = uie.alphaGets
-    
-    case iN
-    when "1"
-      Doc.listMeths(doc)
-    when "m"
-      RubyDoc::CLI.start
-    end
+    uie.docMenu(doc)#
+    uie.docControl(doc)#
   end
 #==============================List Meths============================= 
   def listMeths(doc)
     uie.sepL#
-    doc.methods.each_with_index do |meth, index|
+    doc.methods.each_with_index do |meth, index| 
       puts "#{index + 1}. ".yellow + meth.cyan
     end 
     puts uie.sepR#
@@ -140,9 +129,9 @@ module DataExtras
     iN = uie.alphaGets#
       
     case iN
-    when "m"
+    when "m" 
       RubyDoc::CLI.start
-    else
+    else 
       displayMeth(doc.methods[iN.to_i-1])
     end
   end
@@ -175,7 +164,6 @@ module DataExtras
     matches = Doc.all.find_all{|doc| doc.name.downcase.include?(name)}
     
     uie.searchControl(matches)#
-    
     puts uie.sepR#
     
     uie.viewMenu#
