@@ -53,6 +53,18 @@ module UIExtras
       docError(doc)
     end 
   end
+  
+  def methControl 
+    prompt
+    iN = alphaGets
+    
+    case iN
+    when "m" 
+      main
+    else 
+      methError
+    end 
+  end
 #===================Error====================== 
   def mainError 
     sleep(0.1)
@@ -81,6 +93,11 @@ module UIExtras
   def docError(doc)
     print redH("\n Please enter '1' or 'm' ")
     docControl(doc)
+  end
+  
+  def methError
+    print redH("\n Please enter 'm' to return to main menu ")
+    methControl
   end
 #===================Menus====================== 
   def mainMenu 
@@ -111,7 +128,7 @@ module UIExtras
     print randQ
   end
   
-  def mMain 
+  def methMenu 
     puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ
   end

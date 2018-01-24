@@ -100,7 +100,6 @@ module DataExtras
     def uie 
       RubyDoc::CLI::UI
     end
-    
     Scraper.load_doc_page(doc)#Load
     
     uie.sepL#
@@ -136,26 +135,22 @@ module DataExtras
     end
   end
 #=============================Display Meth============================ 
-  def displayMeth(meth_name)
-    meth = Meth.find(meth_name)
-    
+  def displayMeth(byName)
+    meth = Meth.find(byName)
     Scraper.get_methPage(meth)#Load
     
     uie.sepL#
     puts "Title: ".cyan + meth.name.upcase
     puts "Type: ".cyan + meth.type.upcase
-    
     puts "\nDescription:".cyan
     description = meth.description
     puts uie.wrapped(description, 55)
-    
     puts "\nSource: #{meth.url}".red
     puts uie.sepR#
     
-    uie.mMain
+    uie.methMenu#
+    uie.methControl#
     
-    uie.prompt#
-    iN = uie.alphaGets#
     RubyDoc::CLI.start if iN == "m"
   end
 #=============================SUPER SEARCH============================ 
