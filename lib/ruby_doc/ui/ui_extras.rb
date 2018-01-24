@@ -27,6 +27,19 @@ module UIExtras
     print redH("\n Input Must Be 1 Word Try Again ")
     mainControl
   end
+  
+  def searchError
+    puts "NO MATCH!".red
+    puts "If you are searching for a ".black + "Method" + ", enter the ".black + "Class" + " or".black + "\nModule" + " it belongs to instead. This limitation will be ".black + "\naddressed in future update".black
+    puts "=".black*56
+    
+    puts "Example: ".red + "Find".black + " 'reverse'" + " by searching".black + " 'String'"
+    mess = "'Reverse' method will be included in the doc's Methods:#".black
+    puts wrapped(mess, 62).black
+    
+    print redH("\n Try A New Word or 'b' To Browse ")
+    mainControl
+  end
 #===================Menus====================== 
   def mainMenu 
     puts sepR#

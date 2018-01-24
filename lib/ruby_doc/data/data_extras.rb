@@ -173,7 +173,7 @@ module DataExtras
     
     case matches
     when []
-      uie.sError#
+      uie.searchError#
     else
       matches.each_with_index{|doc, index| uie.output(doc, index)}
     end
