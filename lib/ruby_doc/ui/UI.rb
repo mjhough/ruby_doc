@@ -2,6 +2,10 @@ module RubyDoc::CLI
 #==================modules===================== 
   class UI 
     extend UIExtras#
+    #inheriting: mainMenu, mainControl
+    extend DataExtras
+    #inheriting: paginateALL, superSEARCH(),
+    #displayMeth(), display()
 #============================================== 
     def self.greeting 
       mainMenu#
@@ -9,15 +13,15 @@ module RubyDoc::CLI
     end
     
     def self.main_Shuttle(iN) 
-      iN == "b" ? DataExtras.paginateALL : DataExtras.superSEARCH(iN)
+      iN == "b" ? paginateALL : superSEARCH(iN)
     end
     
     def self.search_Shuttle(iN, matches)
-      iN == "m" ? greeting : Doc.display(matches[iN.to_i-1])
+      iN == "m" ? greeting : display(matches[iN.to_i-1])
     end
     
     def self.meth_Shuttle(iN, doc) 
-      DataExtras.displayMeth(doc.methods[iN.to_i-1])
+      displayMeth(doc.methods[iN.to_i-1])
     end
 #============================================== 
   end

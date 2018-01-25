@@ -20,7 +20,7 @@ module DataExtras
     end
   end
 #================================Page 1=============================== 
-  def self.paginateALL 
+  def paginateALL 
     #UIExtras Shuttle 
     def uie 
       RubyDoc::CLI::UI
@@ -132,7 +132,12 @@ module DataExtras
     uie.methListControl(doc)#
   end
 #=============================Display Meth============================ 
-  def self.displayMeth(byName)
+  def displayMeth(byName)
+    #UIExtras Shuttle 
+    def uie 
+      RubyDoc::CLI::UI
+    end
+    
     meth = Meth.find(byName)
     Scraper.get_methPage(meth)#Load
     
@@ -151,7 +156,12 @@ module DataExtras
     RubyDoc::CLI.start if iN == "m"
   end
 #=============================SUPER SEARCH============================ 
-  def self.superSEARCH(name)
+  def superSEARCH(name)
+    #UIExtras Shuttle 
+    def uie 
+      RubyDoc::CLI::UI
+    end
+    
     uie.sepL#
     matches = Doc.all.find_all{|doc| doc.name.downcase.include?(name)}
     
