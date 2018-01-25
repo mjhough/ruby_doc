@@ -139,7 +139,7 @@ module DataExtras
     end
     
     meth = Meth.find(byName)
-    Scraper.get_methPage(meth)#Load
+    Scraper.loadMethPage(meth)#Load
     
     uie.sepL#
     puts "Title: ".cyan + meth.name.upcase

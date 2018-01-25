@@ -23,19 +23,18 @@ class Scraper
     end
   end 
 #===================DocPage==================== 
-  def self.loadDocPage(doc)
+  def self.loadDocPage(doc) 
     #Scrape1 
     doc_page = Nokogiri::HTML(open(doc.url))
     #prerequisites
     doc_page.search(".description p")[0..1].search("em").remove
     container = doc_page.search("#related")
     container.search("li").search(".related_header").remove
-    #============================================================
     
     # assigns - Doc :description, :type
     doc.description = parse(doc_page.search(".description p")[0..1].text)
     doc.type = doc_page.search(".title_prefix span").text
-    
+    #========================================== 
     #Scrape2
     container.search("li").map do |m|
       name = m.search("a").text
@@ -45,19 +44,17 @@ class Scraper
       method = Meth.new(name, url) if methUniq(name)
       doc.methods << name if methsUniq(doc.methods, name)
     end
-    doc
+    doc #doc instance
   end
 #==================MethPage==================== 
-  def self.get_methPage(meth) #[] 
-    # load
-    methURL = Nokogiri::HTML(open(meth.url))
-    methURL.search(".description p")[0..1].search("em").remove #description prerequisite
-    scrape = methURL.search(".description p")[0..1].text #description prerequisite
+  def self.loadMethPage(meth)
+    url = Nokogiri::HTML(open(meth.url))
+    url.search(".description p")[0..1].search("em").remove
     
-    # assignments
-    meth.description = parse(scrape)
-    meth.type = methURL.search(".title_prefix span").text
-  end #Meth :description, :type
+    # assigns - Meth :description, :type
+    meth.description = parse(url.search(".description p")[0..1].text)
+    meth.type = url.search(".title_prefix span").text
+  end
 #==============================================
                                        #HELPERS
 #============================================== 
