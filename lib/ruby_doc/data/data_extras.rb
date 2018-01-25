@@ -5,36 +5,52 @@ module DataExtras
     RubyDoc::CLI::UI
   end
 #===============================Paginator============================= 
-  def paginateALL
-    uie.sepL#
-    Doc.all[0..499].each_with_index do |doc, index|
-      uie.output(doc, index)#
-    end
-    puts uie.sepR#
-    
-    uie.mNext#
-    uie.prompt#
-    iN = uie.alphaGets#
-      
-    case iN
-    when "n"
+  def self.nextPage(currentPg)
+    case currentPg
+    when "Page1"
       page2
-    when "m"
-      uie.main  
-    else
-      # DRY 
-      Doc.display(Doc.all[iN.to_i-1])
     end
   end
-#===================================================================== 
-  def page2 
+#================================Page 1=============================== 
+  def paginateALL
+    #UIExtras Shuttle 
+    def uie 
+      RubyDoc::CLI::UI
+    end
+    
     uie.sepL#
-    Doc.all[500..999].each_with_index do |doc, index|
-      uie.output(doc, index)#
+    Doc.all[0..499].each_with_index do |doc, index|
+      uie.outputD(doc, index)#
     end
     puts uie.sepR#
     
-    uie.mNext#
+    uie.browseMenu#
+    uie.browseControl("Page1", Doc.all[0..499])#
+    
+    # case iN 
+    # when "n"
+    #   page2
+    # when "m"
+    #   uie.main  
+    # end
+      # DRY 
+      # Doc.display(Doc.all[iN.to_i-1])
+    # end
+  end
+#===================================================================== 
+  def self.page2
+    #UIExtras Shuttle 
+    def uie 
+      RubyDoc::CLI::UI
+    end
+    
+    uie.sepL#
+    Doc.all[500..999].each_with_index do |doc, index|
+      uie.outputD(doc, index)#
+    end
+    puts uie.sepR#
+    
+    uie.browseMenu#
     uie.prompt#
     iN = uie.alphaGets#
       
@@ -47,7 +63,7 @@ module DataExtras
   def page3
     uie.sepL#
     Doc.all[1000..1499].each_with_index do |doc, index|
-      uie.output(doc, index)#
+      uie.outputD(doc, index)#
     end
     puts uie.sepR#
     
@@ -64,7 +80,7 @@ module DataExtras
   def page4
     uie.sepL#
     Doc.all[1500..1999].each_with_index do |doc, index|
-      uie.output(doc, index)#
+      uie.outputD(doc, index)#
     end
     puts uie.sepR#
     
@@ -81,7 +97,7 @@ module DataExtras
   def last
     uie.sepL#
     Doc.all[2000..self.all.length].each_with_index do |doc, index|
-      uie.output(doc, index)#
+      uie.outputD(doc, index)#
     end
     puts uie.sepR#
     
@@ -156,7 +172,7 @@ module DataExtras
     uie.viewMenu#
     uie.choiceControl(matches)#
   end
-#==============================SUPER SEARCH===========================
+#=============================SUPER SEARCH============================
 =begin 
   # NOTES: For now this only searches all doc objects (iterating Doc.all)
   I would like to improve this to also search through all Meth objects.

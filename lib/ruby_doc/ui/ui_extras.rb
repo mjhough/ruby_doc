@@ -18,6 +18,24 @@ module UIExtras
     end   
   end
   
+  def browseControl(currentPg, docRange)
+    prompt
+    iN = alphaGets
+    
+    case iN
+    when "n"
+      DataExtras.nextPage(currentPg)
+    when "m"
+      main 
+    else 
+      if !iN.to_i.between?(1,docRange.count)
+        browseError(iN, currentPg, docRange)
+      else 
+        Doc.display(Doc.all[iN.to_i-1])
+      end
+    end
+  end
+  
   def searchControl(matches) 
     case matches
     when [] 
@@ -85,6 +103,11 @@ module UIExtras
     mainControl
   end
   
+  def browseError(iN, currentPg, docRange)
+    print redH("\n Enter a number between 1 and #{docRange.count} or m for main ")
+    browseControl(currentPg, docRange)
+  end
+  
   def searchError 
     puts "NO MATCH!".red
     puts "If you are searching for a ".black + "Method" + ", enter the ".black + "Class" + " or".black + "\nModule" + " it belongs to instead. This limitation will be ".black + "\naddressed in future update".black
@@ -99,7 +122,7 @@ module UIExtras
   end
   
   def choiceError(matches) 
-    print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
+    print redH("\n Enter a number between 1 and #{matches.count} n for next or m for main ")
     choiceControl(matches)
   end
   
@@ -127,7 +150,7 @@ module UIExtras
     print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   
-  def mNext 
+  def browseMenu 
     puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
     puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
     puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan

@@ -31,8 +31,6 @@ module RubyDoc::CLI
     def self.meth_Shuttle(iN, doc) 
       DataExtras.displayMeth(doc.methods[iN.to_i-1])
     end
-    
-    
 #============================================== 
   end
 #==============================================
