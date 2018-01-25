@@ -76,10 +76,7 @@ module UIExtras
     
     if iN == "m" 
       main
-    elsif !iN.to_i.between?(1,doc.methods.count)
-      methListError(doc)
-    else 
-      RubyDoc::CLI::UI.meth_Shuttle(iN, doc)
+    elsif !iN.to_i.between?(1,doc.methods.count) ? methListError(doc) : RubyDoc::CLI::UI.meth_Shuttle(iN, doc)
     end
   end
 #===================Error====================== 
