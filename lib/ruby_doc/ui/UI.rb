@@ -2,8 +2,6 @@ module RubyDoc::CLI
 #==================modules===================== 
   class UI 
     extend UIExtras#
-    #Inherited Methods: separators, alphaGets,
-    #prompt, wError(iN),signature
 #============================================== 
     def self.greeting 
       mainMenu#
@@ -11,21 +9,11 @@ module RubyDoc::CLI
     end
     
     def self.main_Shuttle(iN) 
-      case iN
-      when "b"
-        DataExtras.paginateALL
-      else
-        DataExtras.superSEARCH(iN) 
-      end
+      iN == "b" ? DataExtras.paginateALL : DataExtras.superSEARCH(iN)
     end
     
-    def self.search_Shuttle(iN, matches) 
-      case iN
-      when "m"
-        greeting  
-      else
-        Doc.display(matches[iN.to_i-1])
-      end
+    def self.search_Shuttle(iN, matches)
+      iN == "m" ? greeting : Doc.display(matches[iN.to_i-1])
     end
     
     def self.meth_Shuttle(iN, doc) 
@@ -33,5 +21,4 @@ module RubyDoc::CLI
     end
 #============================================== 
   end
-#==============================================
 end 
