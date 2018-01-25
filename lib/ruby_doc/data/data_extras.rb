@@ -35,9 +35,7 @@ module DataExtras
 #================================Page 1=============================== 
   def paginateALL 
     uie.sepL#
-    Doc.all[0..499].each_with_index do |doc, index|
-      uie.outputD(doc, index)#
-    end
+    Doc.all[0..499].each_with_index{|doc, index| uie.outputD(doc, index)}
     puts uie.sepR#
     
     uie.browseMenu#
@@ -46,9 +44,7 @@ module DataExtras
 #================================Page 2=============================== 
   def self.page2
     uie.sepL#
-    Doc.all[500..999].each_with_index do |doc, index|
-      uie.outputD(doc, index)#
-    end
+    Doc.all[500..999].each_with_index{|doc, index| uie.outputD(doc, index)}
     puts uie.sepR#
     
     uie.browseMenu#
@@ -57,9 +53,7 @@ module DataExtras
 #================================Page 3=============================== 
   def self.page3
     uie.sepL#
-    Doc.all[1000..1499].each_with_index do |doc, index|
-      uie.outputD(doc, index)#
-    end
+    Doc.all[1000..1499].each_with_index{|doc, index| uie.outputD(doc, index)}
     puts uie.sepR#
     
     uie.browseMenu#
@@ -68,9 +62,7 @@ module DataExtras
 #================================Page 4=============================== 
   def self.page4
     uie.sepL#
-    Doc.all[1500..1999].each_with_index do |doc, index|
-      uie.outputD(doc, index)#
-    end
+    Doc.all[1500..1999].each_with_index{|doc, index| uie.outputD(doc, index)}
     puts uie.sepR#
     
     uie.browseMenu#
@@ -79,9 +71,7 @@ module DataExtras
 #===============================Page Last============================= 
   def self.last
     uie.sepL#
-    Doc.all[2000..Doc.all.length].each_with_index do |doc, index|
-      uie.outputD(doc, index)#
-    end
+    Doc.all[2000..Doc.all.length].each_with_index{|doc, index| uie.outputD(doc, index)}
     puts uie.sepR#
     
     uie.viewMenu#
