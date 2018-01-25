@@ -4,7 +4,7 @@ class Scraper
   
   #See "HELPERS"(line62) for additional methods
 #==================Load Docs=================== 
-  def self.loadDOCS
+  def self.loadDOCS 
     @counter = 0 #For Loading anim
     loading_message#
     
@@ -23,16 +23,16 @@ class Scraper
     end
   end 
 #===================DocPage==================== 
-  def self.load_doc_page(doc)
+  def self.loadDocPage(doc)
     doc_page = Nokogiri::HTML(open(doc.url))
     #prerequisites
     doc_page.search(".description p")[0..1].search("em").remove 
-    scrape = doc_page.search(".description p")[0..1].text
     container = doc_page.search("#related")
     container.search("li").search(".related_header").remove
     #============================================================
+    
     # assignments
-    doc.description = parse(scrape)
+    doc.description = parse(doc_page.search(".description p")[0..1].text)
     doc.type = doc_page.search(".title_prefix span").text
     
     container.search("li").map do |m|

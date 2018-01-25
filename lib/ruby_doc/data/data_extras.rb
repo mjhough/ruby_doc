@@ -105,7 +105,7 @@ module DataExtras
     def uie 
       RubyDoc::CLI::UI
     end
-    Scraper.load_doc_page(doc)#Load
+    Scraper.loadDocPage(doc)#Load
     
     uie.sepL#
     puts "Title: ".cyan + doc.name.upcase
