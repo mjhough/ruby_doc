@@ -22,13 +22,9 @@ module UIExtras
       DataExtras.nextPage(currentPg) 
     when "m"
       main 
-    else 
-      if !iN.to_i.between?(1,docRange.count)
-        browseError(iN, currentPg, docRange)
-      else 
-        Doc.display(docRange[iN.to_i-1])
-      end
     end
+    # else
+    !iN.to_i.between?(1,docRange.count) ? browseError(iN, currentPg, docRange) : Doc.display(docRange[iN.to_i-1])
   end
   
   def searchControl(matches) 
