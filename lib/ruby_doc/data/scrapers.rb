@@ -77,4 +77,5 @@ class Scraper
   def self.prefix 
     "https://apidock.com"
   end
+#============================================== 
 end

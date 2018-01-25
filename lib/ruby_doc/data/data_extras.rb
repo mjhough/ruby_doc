@@ -1,5 +1,14 @@
 module DataExtras
-#====================
+#==================important===================
+#All get/set patch
+  def self.extended(base)
+    base.class_variable_set(:@@all, [])
+  end
+  
+  def all
+    self.class_variable_get(:@@all)
+  end
+  
 #UIExtras Shuttle 
   def self.uie 
     RubyDoc::CLI::UI

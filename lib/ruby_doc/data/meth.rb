@@ -1,9 +1,8 @@
 class Meth
+#========================modules=========================== 
+  extend DataExtras #sets/gets @@all
 #=================properties===================           
   attr_accessor :name, :url, :description, :type, :docs
-  
-  @@all = []
-  def self.all; @@all; end
 #==============================================
   def initialize(name, url) 
     self.name = name
