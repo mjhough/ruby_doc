@@ -1,18 +1,26 @@
 module DataExtras
 #====================
 #UIExtras Shuttle 
-  def self.uie
+  def self.uie 
     RubyDoc::CLI::UI
   end
-#===============================Paginator============================= 
+#=====================================================================
+                                                            #PAGINATOR
+#===================================================================== 
   def self.nextPage(currentPg)
     case currentPg
-    when "Page1"
+    when "Page1" 
       page2
+    when "Page2" 
+      page3
+    when "Page3" 
+      page4
+    when "Page4" 
+      last
     end
   end
 #================================Page 1=============================== 
-  def paginateALL
+  def self.paginateALL 
     #UIExtras Shuttle 
     def uie 
       RubyDoc::CLI::UI
@@ -26,19 +34,9 @@ module DataExtras
     
     uie.browseMenu#
     uie.browseControl("Page1", Doc.all[0..499])#
-    
-    # case iN 
-    # when "n"
-    #   page2
-    # when "m"
-    #   uie.main  
-    # end
-      # DRY 
-      # Doc.display(Doc.all[iN.to_i-1])
-    # end
   end
-#===================================================================== 
-  def self.page2
+#================================Page 2=============================== 
+  def self.page2 
     #UIExtras Shuttle 
     def uie 
       RubyDoc::CLI::UI
@@ -51,64 +49,55 @@ module DataExtras
     puts uie.sepR#
     
     uie.browseMenu#
-    uie.prompt#
-    iN = uie.alphaGets#
-      
-    case iN
-    when "n"
-      page3
-    end
+    uie.browseControl("Page2", Doc.all[500..999])#
   end
-#===================================================================== 
-  def page3
+#================================Page 3=============================== 
+  def self.page3 
+    #UIExtras Shuttle 
+    def uie 
+      RubyDoc::CLI::UI
+    end
+    
     uie.sepL#
     Doc.all[1000..1499].each_with_index do |doc, index|
       uie.outputD(doc, index)#
     end
     puts uie.sepR#
     
-    uie.mNext#
-    uie.prompt#
-    iN = uie.alphaGets#
-      
-    case iN
-    when "n"
-      page4
-    end
+    uie.browseMenu#
+    uie.browseControl("Page3", Doc.all[1000..1499])#
   end
-#===================================================================== 
-  def page4
+#================================Page 4=============================== 
+  def self.page4 
+    #UIExtras Shuttle 
+    def uie 
+      RubyDoc::CLI::UI
+    end
+    
     uie.sepL#
     Doc.all[1500..1999].each_with_index do |doc, index|
       uie.outputD(doc, index)#
     end
     puts uie.sepR#
     
-    uie.mNext#
-    uie.prompt#
-    iN = uie.alphaGets#
-      
-    case iN
-    when "n"
-      last
-    end
+    uie.browseMenu#
+    uie.browseControl("Page4", Doc.all[1500..1999])#
   end
-#===================================================================== 
-  def last
+#===============================Page Last============================= 
+  def self.last 
+    #UIExtras Shuttle 
+    def uie 
+      RubyDoc::CLI::UI
+    end
+    
     uie.sepL#
-    Doc.all[2000..self.all.length].each_with_index do |doc, index|
+    Doc.all[2000..Doc.all.length].each_with_index do |doc, index|
       uie.outputD(doc, index)#
     end
     puts uie.sepR#
     
     uie.viewMenu#
-    uie.prompt#
-    iN = uie.alphaGets#
-      
-    case iN
-    when "m"
-      RubyDoc::CLI.start
-    end
+    uie.browseControl("Last", Doc.all[2000..Doc.all.length])#
   end 
 #==============================Display Doc============================ 
   def display(doc)
@@ -172,7 +161,6 @@ module DataExtras
     uie.viewMenu#
     uie.choiceControl(matches)#
   end
-#=============================SUPER SEARCH============================
 =begin 
   # NOTES: For now this only searches all doc objects (iterating Doc.all)
   I would like to improve this to also search through all Meth objects.

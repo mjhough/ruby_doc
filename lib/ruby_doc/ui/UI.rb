@@ -13,7 +13,7 @@ module RubyDoc::CLI
     def self.main_Shuttle(iN) 
       case iN
       when "b"
-        Doc.paginateALL
+        DataExtras.paginateALL
       else
         DataExtras.superSEARCH(iN) 
       end

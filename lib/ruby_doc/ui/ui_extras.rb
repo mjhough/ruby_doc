@@ -24,14 +24,14 @@ module UIExtras
     
     case iN
     when "n"
-      DataExtras.nextPage(currentPg)
+      DataExtras.nextPage(currentPg) 
     when "m"
       main 
     else 
       if !iN.to_i.between?(1,docRange.count)
         browseError(iN, currentPg, docRange)
       else 
-        Doc.display(Doc.all[iN.to_i-1])
+        Doc.display(docRange[iN.to_i-1])
       end
     end
   end
@@ -104,8 +104,13 @@ module UIExtras
   end
   
   def browseError(iN, currentPg, docRange)
-    print redH("\n Enter a number between 1 and #{docRange.count} or m for main ")
-    browseControl(currentPg, docRange)
+    if currentPg == "Last"
+      choiceError(docRange)
+      browseControl(currentPg, docRange)
+    else
+      print redH("\n Enter a number between 1 and #{docRange.count} n for next or m for main ")
+      browseControl(currentPg, docRange)
+    end
   end
   
   def searchError 
@@ -122,7 +127,7 @@ module UIExtras
   end
   
   def choiceError(matches) 
-    print redH("\n Enter a number between 1 and #{matches.count} n for next or m for main ")
+    print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
     choiceControl(matches)
   end
   
@@ -212,7 +217,7 @@ module UIExtras
     counter == 1700 || counter == 1800 || counter == 1900 || counter == 2000 || 
     counter == 2100 || counter == 2200 || counter == 2300 || counter == 2320 || 
     counter == 2340 || counter == 2360 || counter == 2380 || counter == 2400
-    # sleep(0.00001)
+    sleep(0.00001)
   end
 #=================Separators=================== 
   def sepL 
@@ -257,3 +262,4 @@ puts %q(               ALPHA™
                ╩╚═╚═╝╚═╝ ╩   ═╩╝╚═╝╚═╝╚═╝).cyan end
 #==============================================
 end
+

@@ -1,7 +1,7 @@
-class Scraper
+class Scraper 
   extend UIExtras 
   #loading_message, loading_animation
-#==================Load Docs===================
+#==================Scraper1==================== 
   def self.loadDOCS
     @counter = 0 #For Loading anim
     self.loading_message#
@@ -20,7 +20,7 @@ class Scraper
       self.loading_animation#
     end
   end #Doc :names, :urls
-#==================DocPage=====================
+#==================Scraper2==================== 
   def self.load_doc_page(doc)
     doc_page = Nokogiri::HTML(open(doc.url))
     #prerequisites
@@ -44,9 +44,7 @@ class Scraper
     doc
   end #Meth :name, :url, :docs
   #returns doc OBJECT 
-#============================================== 
-  # requires a meth.url (=> doc.methods[meth :url here!])
-#==================MethPage====================
+#==================Scraper3==================== 
   def self.get_methPage(meth) #[] 
     # load
     methURL = Nokogiri::HTML(open(meth.url))
@@ -58,25 +56,25 @@ class Scraper
     meth.type = methURL.search(".title_prefix span").text
   end #Meth :description, :type
 #==============================================
-################ Helpers ################### 
-  def self.parse(des)
+                               #SCRAPER PATCHES
+#============================================== 
+  def self.parse(des) 
     des.gsub(/[\n]/, ' ').gsub('  ',' ')
   end
   
-  def self.docUniq(name)
+  def self.docUniq(name) 
     Doc.all.none?{|doc| doc.name == name}
   end
   
-  def self.methUniq(name)
+  def self.methUniq(name) 
     Meth.all.none?{|meth| meth.name == name}
   end
   
-  def self.methsUniq(col,name)
+  def self.methsUniq(col,name) 
     col.none?{|meth| meth == name}
   end
   
-  def self.prefix
+  def self.prefix 
     "https://apidock.com"
   end
-############################################
 end

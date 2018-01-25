@@ -7,7 +7,7 @@ require_all 'lib'
 #===========Scraping==========
 require 'open-uri'
 require 'nokogiri'
-#===========Patches===========
+#======Monkey Patch===========
 def x; exit!; end #Quit Exit
 
 #==================Load Init Data====================#
