@@ -10,12 +10,7 @@ module UIExtras
   def mainControl 
     prompt
     iN = alphaGets
-    
-    if iN.split.size > 1
-      mainError
-    else
-      RubyDoc::CLI::UI.main_Shuttle(iN)
-    end   
+    iN.split.size > 1 ? mainError : RubyDoc::CLI::UI.main_Shuttle(iN)  
   end
   
   def browseControl(currentPg, docRange)
