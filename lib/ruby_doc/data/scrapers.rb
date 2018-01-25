@@ -24,28 +24,29 @@ class Scraper
   end 
 #===================DocPage==================== 
   def self.loadDocPage(doc)
+    #Scrape1 
     doc_page = Nokogiri::HTML(open(doc.url))
     #prerequisites
-    doc_page.search(".description p")[0..1].search("em").remove 
+    doc_page.search(".description p")[0..1].search("em").remove
     container = doc_page.search("#related")
     container.search("li").search(".related_header").remove
     #============================================================
     
-    # assignments
+    # assigns - Doc :description, :type
     doc.description = parse(doc_page.search(".description p")[0..1].text)
     doc.type = doc_page.search(".title_prefix span").text
     
+    #Scrape2
     container.search("li").map do |m|
-      meth_name = m.search("a").text
-      methURL = prefix + m.search("a").attribute("href").value
+      name = m.search("a").text
+      url = prefix + m.search("a").attribute("href").value
       
-      # assignments
-      method = Meth.new(meth_name, methURL) if methUniq(meth_name)
-      doc.methods << meth_name if methsUniq(doc.methods,meth_name)
-    end #Doc :description, :type, :methods
+      # assigns - Meth :name, :url >> Doc :methods
+      method = Meth.new(name, url) if methUniq(name)
+      doc.methods << name if methsUniq(doc.methods, name)
+    end
     doc
-  end #Meth :name, :url, :docs
-  #returns doc OBJECT 
+  end
 #==================MethPage==================== 
   def self.get_methPage(meth) #[] 
     # load
