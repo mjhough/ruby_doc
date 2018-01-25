@@ -13,7 +13,7 @@ module UIExtras
     iN.split.size > 1 ? mainError : RubyDoc::CLI::UI.main_Shuttle(iN)  
   end
   
-  def browseControl(currentPg, docRange)
+  def browseControl(currentPg, docRange) 
     prompt
     iN = alphaGets
     
@@ -28,12 +28,7 @@ module UIExtras
   end
   
   def searchControl(matches) 
-    case matches
-    when [] 
-      searchError
-    else 
-      matches.each_with_index{|doc, index| outputD(doc, index)}
-    end  
+    matches == [] ? searchError : matches.each_with_index{|doc, index| outputD(doc, index)}
   end
   
   def choiceControl(matches) 
