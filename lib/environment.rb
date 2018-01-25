@@ -9,5 +9,3 @@ require 'open-uri'
 require 'nokogiri'
 #===========Patches===========
 def x; exit!; end #Quit Exit
-
-
