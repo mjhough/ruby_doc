@@ -1,6 +1,6 @@
 module DataExtras
-#==================important===================
-#All get/set patch
+#==================important=================== 
+  #@all set/get maker 
   def self.extended(base)
     base.class_variable_set(:@@all, [])
   end
@@ -9,8 +9,12 @@ module DataExtras
     self.class_variable_get(:@@all)
   end
   
-#UIExtras Shuttle 
+  #UIExtras Shuttles 
   def self.uie 
+    RubyDoc::CLI::UI
+  end
+  
+  def uie 
     RubyDoc::CLI::UI
   end
 #=====================================================================
@@ -30,11 +34,6 @@ module DataExtras
   end
 #================================Page 1=============================== 
   def paginateALL 
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
-    
     uie.sepL#
     Doc.all[0..499].each_with_index do |doc, index|
       uie.outputD(doc, index)#
@@ -45,12 +44,7 @@ module DataExtras
     uie.browseControl("Page1", Doc.all[0..499])#
   end
 #================================Page 2=============================== 
-  def self.page2 
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
-    
+  def self.page2
     uie.sepL#
     Doc.all[500..999].each_with_index do |doc, index|
       uie.outputD(doc, index)#
@@ -61,12 +55,7 @@ module DataExtras
     uie.browseControl("Page2", Doc.all[500..999])#
   end
 #================================Page 3=============================== 
-  def self.page3 
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
-    
+  def self.page3
     uie.sepL#
     Doc.all[1000..1499].each_with_index do |doc, index|
       uie.outputD(doc, index)#
@@ -77,12 +66,7 @@ module DataExtras
     uie.browseControl("Page3", Doc.all[1000..1499])#
   end
 #================================Page 4=============================== 
-  def self.page4 
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
-    
+  def self.page4
     uie.sepL#
     Doc.all[1500..1999].each_with_index do |doc, index|
       uie.outputD(doc, index)#
@@ -93,12 +77,7 @@ module DataExtras
     uie.browseControl("Page4", Doc.all[1500..1999])#
   end
 #===============================Page Last============================= 
-  def self.last 
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
-    
+  def self.last
     uie.sepL#
     Doc.all[2000..Doc.all.length].each_with_index do |doc, index|
       uie.outputD(doc, index)#
