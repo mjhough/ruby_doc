@@ -26,7 +26,7 @@ module DataExtras
   def self.list(page) 
     page.each_with_index{|doc, index| uie.outputD(doc, index)}
   end
-#=====================================================================
+#===================================================================== 
                                                             #PAGINATOR
 #===================================================================== 
   def self.nextPage(currentPg)
@@ -88,10 +88,6 @@ module DataExtras
   end 
 #==============================Display Doc============================ 
   def display(doc)
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
     Scraper.loadDocPage(doc)#Load
     
     uie.sepL#
@@ -110,7 +106,7 @@ module DataExtras
 #==============================List Meths============================= 
   def listMeths(doc)
     uie.sepL#
-    doc.methods.each_with_index do |meth, index| 
+    doc.methods.each_with_index do |meth, index|  
       puts "#{index + 1}. ".yellow + meth.cyan
     end 
     puts uie.sepR#
@@ -120,11 +116,6 @@ module DataExtras
   end
 #=============================Display Meth============================ 
   def displayMeth(byName)
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
-    
     meth = Meth.find(byName)
     Scraper.loadMethPage(meth)#Load
     
@@ -144,11 +135,6 @@ module DataExtras
   end
 #=============================SUPER SEARCH============================ 
   def superSEARCH(name)
-    #UIExtras Shuttle 
-    def uie 
-      RubyDoc::CLI::UI
-    end
-    
     uie.sepL#
     matches = Doc.all.find_all{|doc| doc.name.downcase.include?(name)}
     
