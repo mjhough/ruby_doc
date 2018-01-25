@@ -217,7 +217,6 @@ module UIExtras
     counter == 1700 || counter == 1800 || counter == 1900 || counter == 2000 || 
     counter == 2100 || counter == 2200 || counter == 2300 || counter == 2320 || 
     counter == 2340 || counter == 2360 || counter == 2380 || counter == 2400
-    sleep(0.00001)
   end
 #=================Separators=================== 
   def sepL 
