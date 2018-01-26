@@ -55,7 +55,7 @@ class Scraper
     meth.description = parse(url.search(".description p")[0..1].text)
     meth.type = url.search(".title_prefix span").text
   end
-#==============================================
+#============================================== 
                                        #HELPERS
 #============================================== 
   def self.parse(des) 

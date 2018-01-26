@@ -1,18 +1,88 @@
-# Alpha Ref Doc
-[![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
-[![forthebadge](http://forthebadge.com/images/badges/pretty-risque.svg)](http://forthebadge.com)
+# ALPHA RUBY DOC
 
-## Installation
+![](http://forthebadge.com/images/badges/made-with-ruby.svg)
+![](http://forthebadge.com/images/badges/powered-by-electricity.svg)
+![](http://forthebadge.com/images/badges/pretty-risque.svg)
 
-<!--![image](https://i.imgur.com/AeHWQj8.gif) -->
-<img src="https://i.imgur.com/AeHWQj8.gif" alt="image" width="790" height="170">
+![](https://img.shields.io/badge/Init--Release-Jan--2018-orange.svg)
+[![Gem Version](https://badge.fury.io/rb/ruby_doc.svg)](https://badge.fury.io/rb/ruby_doc)
+[![Gem](https://img.shields.io/gem/dt/ruby_doc.svg)](https://rubygems.org/gems/ruby_doc)
+![](https://img.shields.io/badge/gem--series-alpha--docs-blue.svg)
+[![GitHub last commit](https://img.shields.io/github/last-commit/AlphaDaniel/alpha-ruby_doc.svg)](https://github.com/AlphaDaniel/alpha-ruby_doc/commits/master)
+[![](https://img.shields.io/badge/A-C-red.svg)](http://a1phacoding.com/)
 
-```
-01010000 01101111 01101001 01101110 01110100 01110011 00100000 01100110 01101111 01110010 00100000 01100100 01101001 01101100 01101001 01100111 01100101 01101110 01100011 01100101 00100000 01101101 01111001 00100000 01100110 01110010 01101001 01100101 01101110 01100100 00100001 0001010 01000001 01110011 00100000 01100001 00100000 01110010 01100101 01110111 01100001 01110010 01100100 00100000 01101000 01100101 01110010 01100101 00100111 01110011 00100000 01101101 01111001 00100000 01000111 01100101 01101101 00100000 01000100 01100101 01110011 01100011 01110010 01101001 01110000 01110100 01101001 01101111 01101110 00101110 0001010 0001010 01010100 01101000 01101001 01110011 00100000 01110111 01101001 01101100 01101100 00100000 01100010 01100101 00100000 01100001 00100000 01000011 01001100 01001001 00100000 01000111 01100101 01101101 00100000 01110100 01101000 01100001 01110100 00100000 01110011 01100011 01110010 01100001 01110000 01100101 01110011 00100000 01010010 01110101 01100010 01111001 00100000 01100100 01101111 01100011 01110101 01101101 01100101 01101110 01110100 01100001 01110100 01101001 01101111 01101110 00100000 01100001 01101110 01100100 00100000 01100001 01101100 01101100 01101111 01110111 01110011 00100000 01110101 01110011 01100101 01110010 01110011 00100000 01110100 01101111 00100000 01110001 01110101 01101001 01100011 01101011 01101100 01111001 00100000 01110010 01100101 01100110 01100101 01110010 01100101 01101110 01100011 01100101 00100000 01010010 01110101 01100010 01111001 00100000 01001100 01100001 01101110 01100111 01110101 01100001 01100111 01100101 00100000 01101101 01100101 01110100 01101000 01101111 01100100 01110011 00100000 01100001 01101110 01100100 00100000 01100001 01100100 01100100 01101001 01110100 01101001 01101111 01101110 01100001 01101100 00100000 01101001 01101110 01100110 01101111 01110010 01101101 01100001 01110100 01101001 01101111 01101110 00101110 00100000 01010100 01101000 01101001 01110011 00100000 01110111 01101001 01101100 01101100 00100000 01100010 01100101 00100000 01110100 01101000 01100101 00100000 01100110 01101001 01110010 01110011 01110100 00100000 01101001 01101110 00100000 01100001 00100000 01110011 01100101 01110010 01101001 01100101 01110011 00100000 01101111 01100110 00100000 01000111 01100101 01101101 01110011 00100000 01110100 01101000 01100001 01110100 00100000 01100001 01100011 01100011 01101111 01101101 01110000 01101100 01101001 01110011 01101000 00100000 01110100 01101000 01100101 00100000 01110011 01100001 01101101 01100101 00100000 01100110 01101111 01110010 00100000 01101111 01110100 01101000 01100101 01110010 00100000 01101100 01100001 01101110 01100111 01110101 01100001 01100111 01100101 01110011 00101110 0001010 0001010 01000011 01101000 01100101 01100011 01101011 00100000 01000010 01100001 01100011 01101011 00100000 01010011 01101111 01101111 01101110 00101100 0001010 00101101 01000001 01101100 01110000 01101000 01100001 01000100 01100001 01101110 01101001 01100101 01101100
-```
-
-## But Seriously .... Check Back Soon
+---
+## A CLI Gem That Scrapes Ruby Documentation
 
 ![image](https://images.huffingtonpost.com/2013-08-23-tumblr_m08celcrnT1r3isxuo1_500.gif)
+
+Ever get tired of leaving your editor / environment to google a method, or more in depth info on a class or module? This gem aims to make Ruby referencing quick and more importantly, **LOCAL!**
+
+**Alpha Ruby Doc** scrapes Ruby documentation and allows users to quickly reference Ruby methods and additional information all on your terminal. Have a query? **Run, Hunt, and Done**. Never lose momentum, keep all things in your line of sight, and get right back to coding!
+
+---
+## A Look Inside
+[![forthebadge](http://forthebadge.com/images/badges/thats-how-they-get-you.svg)](http://forthebadge.com)
+
+![image](https://i.imgur.com/NmincSX.gif)
+### Features:
+* Search by Doc title
+* View related methods
+* Browse all Docs (Paginated Output To Terminal)
+* Source Links
+* Easy Navigation (Back To Main On Every Menu)
+* Random Dev Quotes (Ok This One Is Just For Fun Lol)
+
+### Coming Soon:
+* Search by method name ([See Notes](https://github.com/AlphaDaniel/alpha-ruby_doc/blob/master/Notes.md))
+* Multiple Doc sources
+* Display Syntax
+
+---
+## INSTALLATION
+
+<img src="https://i.imgur.com/AeHWQj8.gif" alt="image" width="790" height="170" align="middle">
+
+#### JUST KIDDING
+[![forthebadge](http://forthebadge.com/images/badges/check-it-out.svg)](http://forthebadge.com)
+
+---
+#### For Your Application:
+
+Add this line to your application's Gemfile
+
+```ruby
+gem 'ruby_doc'
+```
+
+And then execute
+
+    $ bundle
+
+#### For Yourself:
+
+    $ gem install ruby_doc
+
+
+---
+## USAGE
+
+Once installed execute
+
+    $ ruby_doc
+    
+---
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/AlphaDaniel/alpha-ruby_doc. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+
+Everyone interacting in the AlphaRefRuby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/ruby_doc/blob/master/CODE_OF_CONDUCT.md).
+
 
 

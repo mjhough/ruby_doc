@@ -1,3 +1,6 @@
+require_relative './ui_extras'
+require_relative '../data/data_extras.rb'
+#===============requires above================= 
 module RubyDoc::CLI
 #==================modules===================== 
   class UI 
