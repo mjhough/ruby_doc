@@ -11,7 +11,7 @@ class Meth
     self.docs = []
   end
 #==============================================
-  def self.find(name)
+  def self.find(name) 
     self.all.find{|meth| meth.name.downcase == name.downcase}
   end
 #==============================================

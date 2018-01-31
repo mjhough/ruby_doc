@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["daniel.nunez.nyc@gmail.com"]
 
   spec.summary       = %q{A CLI Gem that scrapes Ruby documentation.}
-  spec.description   = %q{Ever get tired of leaving your editor/environment to google a method, or more in depth info on a class or module? This gem aims to make Ruby referencing quick and more importantly, LOCAL! Ruby Doc scrapes Ruby documentation and allows users to quickly reference Ruby Language methods and additional information all your terminal. Have a query? run, hunt, and done. Never lose momentum, keep all things in your line of sight and get right back to coding. Enjoy.}
+  spec.description   = %q{Ever get tired of leaving your editor/environment to google a method, or more in depth info on a class or module? This gem aims to make Ruby referencing quick and more importantly, LOCAL. Ruby Doc scrapes Ruby documentation and allows users to quickly reference Ruby Language methods and additional information all on your terminal. Have a query? run, hunt, and done. Never lose momentum, keep all things in your line of sight and get right back to coding. Enjoy.}
   spec.homepage      = "https://github.com/AlphaDaniel/Alpha-Ruby_Doc"
   spec.license       = "MIT"
 

@@ -1,8 +1,8 @@
-module DataExtras
+module DataExtras # = foreign method
 #===================================================================== 
-                                                           #DRYHELPERS
+                                                              #HELPERS
 #===================================================================== 
-  #@all set/get maker 
+  #@all set/get maker for Doc & Meth 
   def self.extended(base) 
     base.class_variable_set(:@@all, [])
   end
@@ -19,7 +19,9 @@ module DataExtras
   def uie 
     RubyDoc::CLI::UI
   end
-  
+#===================================================================== 
+                                                            #PAGINATOR
+#===================================================================== 
   #PageLister
   def list(page) 
     page.each_with_index{|doc, index| uie.outputD(doc, index)}
@@ -28,10 +30,9 @@ module DataExtras
   def self.list(page) 
     page.each_with_index{|doc, index| uie.outputD(doc, index)}
   end
-#===================================================================== 
-                                                            #PAGINATOR
-#===================================================================== 
-  def self.nextPage(currentPg)
+  
+  #PageShuttle
+  def self.nextPage(currentPg) 
     case currentPg
     when "Page1" 
       page2
@@ -43,10 +44,10 @@ module DataExtras
       last
     end
   end
-#================================Page 1=============================== 
+#==============================PaginateAll============================ 
   def paginateALL 
     uie.sepL#
-    list(Doc.all[0..499])
+    list(Doc.all[0..499])#
     puts uie.sepR#
     
     uie.browseMenu#
@@ -55,7 +56,7 @@ module DataExtras
 #================================Page 2=============================== 
   def self.page2
     uie.sepL#
-    list(Doc.all[500..999])
+    list(Doc.all[500..999])#
     puts uie.sepR#
     
     uie.browseMenu#
@@ -64,7 +65,7 @@ module DataExtras
 #================================Page 3=============================== 
   def self.page3
     uie.sepL#
-    list(Doc.all[1000..1499])
+    list(Doc.all[1000..1499])#
     puts uie.sepR#
     
     uie.browseMenu#
@@ -73,7 +74,7 @@ module DataExtras
 #================================Page 4=============================== 
   def self.page4
     uie.sepL#
-    list(Doc.all[1500..1999])
+    list(Doc.all[1500..1999])#
     puts uie.sepR#
     
     uie.browseMenu#
@@ -82,7 +83,7 @@ module DataExtras
 #===============================Page Last============================= 
   def self.last
     uie.sepL#
-    list(Doc.all[2000..Doc.all.length])
+    list(Doc.all[2000..Doc.all.length])#
     puts uie.sepR#
     
     uie.viewMenu#

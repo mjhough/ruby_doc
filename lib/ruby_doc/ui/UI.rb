@@ -1,25 +1,26 @@
+#==================requires==================== 
 require_relative './ui_extras'
 require_relative '../data/data_extras.rb'
-#===============requires above================= 
+#============================================== 
 module RubyDoc::CLI
 #==================modules===================== 
   class UI 
     extend UIExtras#
-    #inheriting: mainMenu, mainControl
+    #inheriting: mainMenu, mainControl, signature
     extend DataExtras
     #inheriting: paginateALL, superSEARCH(),
     #displayMeth(), display()
 #============================================== 
     def self.greeting 
       mainMenu#
-      mainControl#
+      mainControl# =>
     end
     
     def self.main_Shuttle(iN) 
       iN == "b" ? paginateALL : superSEARCH(iN)
     end
     
-    def self.search_Shuttle(iN, matches)
+    def self.search_Shuttle(iN, matches) 
       iN == "m" ? greeting : display(matches[iN.to_i-1])
     end
     

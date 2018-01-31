@@ -13,8 +13,4 @@ class Doc
     self.methods = []
   end
 #==========================================================
-  def self.find(name)
-    self.all.find{|doc| doc.name.downcase == name.downcase}
-  end
-#==========================================================
 end
