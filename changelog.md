@@ -7,3 +7,5 @@ Unreleased Changes
 
 *-On Browse Menus (All Pages)*
 
+*-On Doc Display Menu*
+

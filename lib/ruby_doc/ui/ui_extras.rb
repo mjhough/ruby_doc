@@ -55,6 +55,8 @@ module UIExtras
       Doc.listMeths(doc)
     when "m" 
       main
+    when "exit!"
+        exit!
     else 
       docError(doc)
     end 
