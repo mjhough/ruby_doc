@@ -17,7 +17,14 @@ module RubyDoc::CLI
     end
     
     def self.main_Shuttle(iN) 
-      iN == "b" ? paginateALL : superSEARCH(iN)
+      case iN 
+      when "b" 
+        paginateALL 
+      when "exit!"
+        exit!
+      else
+        superSEARCH(iN)
+      end
     end
     
     def self.search_Shuttle(iN, matches) 
