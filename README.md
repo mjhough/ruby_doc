@@ -30,7 +30,7 @@ Ever get tired of leaving your editor / environment to google a method, or more 
 * View related methods
 * Browse all Docs (Paginated Output To Terminal)
 * Source Links
-* Easy Navigation (Back To Main On Every Menu)
+* Easy Navigation
 * Random Dev Quotes (Ok This One Is Just For Fun Lol)
 
 ### Coming Soon:
@@ -70,6 +70,10 @@ And then execute
 Once installed execute
 
     $ ruby_doc
+    
+To exit 
+
+    $ exit!
     
 ---
 ## Contributing

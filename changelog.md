@@ -1,17 +1,5 @@
 Unreleased Changes
 ------------------
 
-* Feature - Exit
-
-*-On Main Menu*
-
-*-On Browse Menus (All Pages)*
-
-*-On Doc Display Menu*
-
-*-On Search List Menu*
-
-*-On Method List Menu*
-
-*-On Meth Display Menu*
+* Navigation Improved - Exit with (Exit!)
 
