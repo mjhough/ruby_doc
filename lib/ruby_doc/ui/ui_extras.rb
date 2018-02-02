@@ -22,6 +22,8 @@ module UIExtras
       DataExtras.nextPage(currentPg) 
     when "m"
       main 
+    when "exit!"
+      exit!
     end
     # else
     !iN.to_i.between?(1,docRange.count) ? browseError(iN, currentPg, docRange) : Doc.display(docRange[iN.to_i-1])
