@@ -4,10 +4,9 @@
 ![](http://forthebadge.com/images/badges/powered-by-electricity.svg)
 ![](http://forthebadge.com/images/badges/pretty-risque.svg)
 
-![](https://img.shields.io/badge/Init--Release-Jan--2018-orange.svg)
 [![Gem Version](https://badge.fury.io/rb/ruby_doc.svg)](https://badge.fury.io/rb/ruby_doc)
 [![Gem](https://img.shields.io/gem/dt/ruby_doc.svg)](https://rubygems.org/gems/ruby_doc)
-![](https://img.shields.io/badge/gem--series-alpha--docs-blue.svg)
+[![Changelog](https://img.shields.io/badge/change-log-blue.svg)](https://github.com/AlphaDaniel/alpha-ruby_doc/blob/master/changelog.md)
 [![GitHub last commit](https://img.shields.io/github/last-commit/AlphaDaniel/alpha-ruby_doc.svg)](https://github.com/AlphaDaniel/alpha-ruby_doc/commits/master)
 [![](https://img.shields.io/badge/A-C-red.svg)](http://a1phacoding.com/)
 
