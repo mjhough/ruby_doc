@@ -9,3 +9,5 @@ Unreleased Changes
 
 *-On Doc Display Menu*
 
+*-On Search List Menu*
+

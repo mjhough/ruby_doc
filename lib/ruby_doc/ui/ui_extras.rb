@@ -39,6 +39,8 @@ module UIExtras
     
     if iN == "m" 
       main
+    elsif iN == "exit!"
+      exit!
     elsif !iN.to_i.between?(1,matches.count)
       choiceError(matches)
     else 
