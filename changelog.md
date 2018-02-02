@@ -11,3 +11,7 @@ Unreleased Changes
 
 *-On Search List Menu*
 
+*-On Method List Menu*
+
+*-On Meth Display Menu*
+
