@@ -71,6 +71,8 @@ module UIExtras
     case iN
     when "m" 
       main
+    when "exit!"
+      exit!
     else 
       methError
     end 
