@@ -8,18 +8,18 @@ class Scraper
     @counter = 0 #For Loading anim
     loading_message#
     
-    html = Nokogiri::HTML(open("https://apidock.com/ruby/browse"))
-    container = html.search(".hover_list")
+    html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.5.0/"))
+    container = html.search("#class-index div.entries")
     
-    container.search("a").each do |doc|
+    container.search("a").each do |doc| 
       name = doc.text
       url = prefix + doc.attribute("href").value
       
       # assigns - Doc :names, :urls
-      Doc.new(name, url) if docUniq(name)
+      Doc.new(name, url) if docUniq(name) ;binding.pry
       
       @counter += 1 #For Loading anim
-      loading_animation#
+      loading_animation# 
     end
   end 
 #===================DocPage==================== 
