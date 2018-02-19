@@ -10,7 +10,7 @@ require_relative '../lib/ruby_doc/data/scrapers'
 require_relative '../lib/ruby_doc/data/meth'
 require_relative '../lib/ruby_doc/data/doc'
 #====================Testing====================
-
+Scraper.load_classes
 #===============================================
 
 

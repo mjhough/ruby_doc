@@ -3,8 +3,8 @@ class Scraper
   #inheriting: loading_message, loading_animation
   
   #See "HELPERS"(line62) for additional methods
-#==================Load Docs=================== 
-  def self.loadDOCS 
+#================Load Classes================== 
+  def self.load_classes
     @counter = 0 #For Loading anim
     loading_message#
     
@@ -15,12 +15,12 @@ class Scraper
       name = doc.text
       url = prefix + doc.attribute("href").value
       
-      # assigns - Doc :names, :urls
-      Doc.new(name, url) if docUniq(name) ;binding.pry
+      # assigns - Klass :names, :urls
+      Klass.new(name, url) if class_uniq(name)
       
       @counter += 1 #For Loading anim
-      loading_animation# 
-    end
+      loading_animation#
+    end  ;binding.pry
   end 
 #===================DocPage==================== 
   def self.loadDocPage(doc) 
@@ -62,8 +62,8 @@ class Scraper
     des.gsub(/[\n]/, ' ').gsub('  ',' ')
   end
   
-  def self.docUniq(name) 
-    Doc.all.none?{|doc| doc.name == name}
+  def self.class_uniq(name) 
+    Klass.all.none?{|klass| klass.name == name}
   end
   
   def self.methUniq(name) 
@@ -75,7 +75,7 @@ class Scraper
   end
   
   def self.prefix 
-    "https://apidock.com"
+    "https://ruby-doc.org/core-2.5.0/"
   end
 #============================================== 
 end
