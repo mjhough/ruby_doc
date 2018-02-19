@@ -12,7 +12,7 @@ require_relative '../lib/ruby_doc/data/klass'
 #====================Testing====================
 Scraper.load_classes
 Scraper.load_methods
-Scraper.load_class_doc(Klass.all[4]) 
+Scraper.load_class_doc(Klass.all[2]) 
 #===============================================
 
 

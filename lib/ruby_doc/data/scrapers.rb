@@ -45,14 +45,28 @@ class Scraper
 #==========================Load Class Doc============================ 
   def self.load_class_doc(klass) 
     html = Nokogiri::HTML(open(klass.url))
+#----------------------------------------------------------------------    
+    # documentation
+    doc = html.search("#description")
     
-    # description
-    description = html.search("#description")
+    short = doc.search("p")[0].text + expand
     
-    short = description.search("p")[0].text + expand #assign ready
+    full = "" #assign ready
+    doc.search("p, pre, h2").each {|p| full << p.text + "\n\n"} 
     
-    full = ""
-    description.search("p, pre, h2").each {|p| full << p.text + "\n\n"} 
+    # assign 
+    klass.short = short
+    klass.full = full
+#----------------------------------------------------------------------    
+    # methods
+    methods = html.search("ul.link-list a")
+    
+    methods.each do |m| 
+      url = klass.url + m["href"] #will be used later for multi-source
+      method = Meth.all.find{|m| m.url == url}
+      
+      klass.methods << method if class_method_uniq(klass, method)
+    end
   end
 #=============================MethPage=============================== 
   def self.loadMethPage(meth)
@@ -66,6 +80,10 @@ class Scraper
 #==================================================================== 
                                                              #HELPERS
 #==================================================================== 
+  def self.prefix 
+    "https://ruby-doc.org/core-2.5.0/"
+  end
+  
   def self.class_uniq(name) 
     Klass.all.none?{|klass| klass.name == name}
   end
@@ -77,6 +95,10 @@ class Scraper
   def self.expand
   "\nTo View Full Documentation Enter 'expand'".yellow
   end
+  
+  def self.class_method_uniq(klass, method)
+    klass.methods.none?{|m| m == method }
+  end
 #==================================================================== 
   def self.parse(des) 
     des.gsub(/[\n]/, ' ').gsub('  ',' ')
@@ -84,10 +106,6 @@ class Scraper
   
   def self.methUniq(col,name) 
     col.none?{|meth| meth == name}
-  end
-  
-  def self.prefix 
-    "https://ruby-doc.org/core-2.5.0/"
   end
 #==================================================================== 
 end
