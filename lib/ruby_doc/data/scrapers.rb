@@ -45,37 +45,59 @@ class Scraper
 #==========================Load Class Doc============================ 
   def self.load_class_doc(klass) 
     html = Nokogiri::HTML(open(klass.url))
-#----------------------------------------------------------------------    
+#-------------------------------------------------------------------- 
     # documentation
     doc = html.search("#description")
     
     short = doc.search("p")[0].text + expand
     
-    full = "" #assign ready
+    full = "" 
     doc.search("p, pre, h2").each {|p| full << p.text + "\n\n"} 
     
     # assign 
     klass.short = short
     klass.full = full
-#----------------------------------------------------------------------    
+#-------------------------------------------------------------------- 
     # methods
     methods = html.search("ul.link-list a")
     
     methods.each do |m| 
-      url = klass.url + m["href"] #will be used later for multi-source
+      url = klass.url + m["href"] 
       method = Meth.find_by(url)
       
       klass.methods << method if class_method_uniq(klass, method)
     end
   end
-#=============================MethPage=============================== 
-  def self.loadMethPage(meth)
-    url = Nokogiri::HTML(open(meth.url))
-    url.search(".description p")[0..1].search("em").remove
+#==========================Load Method Doc=========================== 
+  def self.load_method_doc(method) 
+    html = Nokogiri::HTML(open(method.url))
+#-------------------------------------------------------------------- 
+    # documentation
+    selector = "#"+method.url.gsub(/.+#method.{3}/, "")+"-method"
+    container = html.search(selector)[0]
     
-    # assigns - Meth :description, :type
-    meth.description = parse(url.search(".description p")[0..1].text)
-    meth.type = url.search(".title_prefix span").text
+    full = "" 
+    container.search("p, pre, h2").each {|p| full << p.text + "\n\n" } 
+     ;binding.pry
+#--------------------------------------------------------------------     
+    short = doc.search("p")[0].text + expand
+    
+    full = "" #assign ready
+    html.search("#5B-5D-method p, pre").each {|p| full << p.text + "\n\n"} 
+    
+    # assign 
+    klass.short = short
+    klass.full = full
+#-------------------------------------------------------------------- 
+    # methods
+    methods = html.search("ul.link-list a")
+    
+    methods.each do |m| 
+      url = klass.url + m["href"] 
+      method = Meth.find_by(url)
+      
+      klass.methods << method if class_method_uniq(klass, method)
+    end
   end
 #==================================================================== 
                                                              #HELPERS

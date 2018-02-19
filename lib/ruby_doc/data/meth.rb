@@ -3,6 +3,7 @@ class Meth
   extend DataExtras #sets/gets @@all
 #============================================================           
   attr_accessor :name, :url, :description, :classes
+  # complete     [X]    [X] 
 #============================================================
   # count 1839
   def initialize(name, url) 
