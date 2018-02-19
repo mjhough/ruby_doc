@@ -2,7 +2,7 @@ class Meth
 #=========================modules============================ 
   extend DataExtras #sets/gets @@all
 #============================================================           
-  attr_accessor :name, :url, :description, :classes
+  attr_accessor :name, :url, :doc, :classes
   # complete     [X]    [X] 
 #============================================================
   # count 1839

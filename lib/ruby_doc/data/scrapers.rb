@@ -76,29 +76,23 @@ class Scraper
     selector = "#"+method.url.gsub(/.+#method.{3}/, "")+"-method"
     container = html.search(selector)[0]
     
-    full = "" 
-    container.search("p, pre, h2").each {|p| full << p.text + "\n\n" } 
-     ;binding.pry
-#--------------------------------------------------------------------     
-    short = doc.search("p")[0].text + expand
-    
-    full = "" #assign ready
-    html.search("#5B-5D-method p, pre").each {|p| full << p.text + "\n\n"} 
+    doc = "" 
+    container.search("p, pre, h2").each {|p| doc << p.text + "\n\n" } 
     
     # assign 
-    klass.short = short
-    klass.full = full
-#-------------------------------------------------------------------- 
-    # methods
-    methods = html.search("ul.link-list a")
-    
-    methods.each do |m| 
-      url = klass.url + m["href"] 
-      method = Meth.find_by(url)
-      
-      klass.methods << method if class_method_uniq(klass, method)
-    end
+    method.doc = doc ;binding.pry
   end
+#-------------------------------------------------------------------- 
+  #   # methods
+  #   methods = html.search("ul.link-list a")
+    
+  #   methods.each do |m| 
+  #     url = klass.url + m["href"] 
+  #     method = Meth.find_by(url)
+      
+  #     klass.methods << method if class_method_uniq(klass, method)
+  #   end
+  # end
 #==================================================================== 
                                                              #HELPERS
 #==================================================================== 
