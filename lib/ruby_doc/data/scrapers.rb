@@ -3,7 +3,8 @@ class Scraper
   #inheriting: loading_message, loading_animation
   
   #See "HELPERS"(line62) for additional methods
-#================Load Classes================== 
+                      # CONNECT BOTH SCRAPERS
+#===========================Load Classes============================= 
   def self.load_classes
     @counter = 0 #For Loading anim
     loading_message#
@@ -20,9 +21,28 @@ class Scraper
       
       @counter += 1 #For Loading anim
       loading_animation#
-    end  ;binding.pry
+    end
   end 
-#===================DocPage==================== 
+#===========================Load Methods============================= 
+  def self.load_methods
+    @counter = 0 #For Loading anim
+    loading_message#
+    
+    html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.5.0/"))
+    container = html.search("#method-index div.entries")
+    
+    container.search("a").each do |doc| 
+      name = doc.text
+      url = prefix + doc.attribute("href").value
+      
+      # assigns - Method :names, :urls
+      Meth.new(name, url) if method_uniq(name)
+      
+      @counter += 1 #For Loading anim
+      loading_animation#
+    end
+  end 
+#==============================DocPage=============================== 
   def self.loadDocPage(doc) 
     #Scrape1 
     doc_page = Nokogiri::HTML(open(doc.url))
@@ -46,7 +66,7 @@ class Scraper
     end
     doc #doc instance
   end
-#==================MethPage==================== 
+#=============================MethPage=============================== 
   def self.loadMethPage(meth)
     url = Nokogiri::HTML(open(meth.url))
     url.search(".description p")[0..1].search("em").remove
@@ -55,27 +75,27 @@ class Scraper
     meth.description = parse(url.search(".description p")[0..1].text)
     meth.type = url.search(".title_prefix span").text
   end
-#============================================== 
-                                       #HELPERS
-#============================================== 
-  def self.parse(des) 
-    des.gsub(/[\n]/, ' ').gsub('  ',' ')
-  end
-  
+#==================================================================== 
+                                                             #HELPERS
+#==================================================================== 
   def self.class_uniq(name) 
     Klass.all.none?{|klass| klass.name == name}
   end
   
-  def self.methUniq(name) 
-    Meth.all.none?{|meth| meth.name == name}
+  def self.method_uniq(name) 
+    Meth.all.none?{|method| method.name == name}
+  end
+#==================================================================== 
+  def self.parse(des) 
+    des.gsub(/[\n]/, ' ').gsub('  ',' ')
   end
   
-  def self.methsUniq(col,name) 
+  def self.methUniq(col,name) 
     col.none?{|meth| meth == name}
   end
   
   def self.prefix 
     "https://ruby-doc.org/core-2.5.0/"
   end
-#============================================== 
+#==================================================================== 
 end
