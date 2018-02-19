@@ -47,16 +47,16 @@ class Scraper
     html = Nokogiri::HTML(open(klass.url))
 #-------------------------------------------------------------------- 
     # documentation
-    doc = html.search("#description")
+    container = html.search("#description")
     
-    short = doc.search("p")[0].text + expand
+    short = container.search("p")[0].text + expand
     
-    full = "" 
-    doc.search("p, pre, h2").each {|p| full << p.text + "\n\n"} 
+    doc = "" 
+    container.search("p, pre, h2").each {|p| doc << p.text + "\n\n"} 
     
     # assign 
     klass.short = short
-    klass.full = full
+    klass.doc = doc
 #-------------------------------------------------------------------- 
     # methods
     methods = html.search("ul.link-list a")
@@ -80,7 +80,7 @@ class Scraper
     container.search("p, pre, h2").each {|p| doc << p.text + "\n\n" } 
     
     # assign 
-    method.doc = doc ;binding.pry
+    method.doc = doc
   end
 #-------------------------------------------------------------------- 
   #   # methods

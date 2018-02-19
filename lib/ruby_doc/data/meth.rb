@@ -2,15 +2,14 @@ class Meth
 #=========================modules============================ 
   extend DataExtras #sets/gets @@all
 #============================================================           
-  attr_accessor :name, :url, :doc, :classes
-  # complete     [X]    [X] 
+  attr_accessor :name, :url, :doc
+  # complete     [X]    [X]   [X] 
 #============================================================
   # count 1839
   def initialize(name, url) 
     self.name = name
     self.url = url
     @@all << self
-    self.classes = []
   end
 #============================================================
   def self.find_by(url) 
