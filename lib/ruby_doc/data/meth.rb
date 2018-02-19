@@ -12,8 +12,8 @@ class Meth
     self.classes = []
   end
 #============================================================
-  def self.find(name) 
-    self.all.find{|meth| meth.name.downcase == name.downcase}
+  def self.find_by(url) 
+    Meth.all.find{|m| m.url == url}
   end
 #============================================================
 end

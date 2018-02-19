@@ -63,7 +63,7 @@ class Scraper
     
     methods.each do |m| 
       url = klass.url + m["href"] #will be used later for multi-source
-      method = Meth.all.find{|m| m.url == url}
+      method = Meth.find_by(url)
       
       klass.methods << method if class_method_uniq(klass, method)
     end
