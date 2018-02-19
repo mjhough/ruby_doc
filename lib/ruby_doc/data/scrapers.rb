@@ -42,29 +42,17 @@ class Scraper
       loading_animation#
     end
   end 
-#==============================DocPage=============================== 
-  def self.loadDocPage(doc) 
-    #Scrape1 
-    doc_page = Nokogiri::HTML(open(doc.url))
-    #prerequisites
-    doc_page.search(".description p")[0..1].search("em").remove
-    container = doc_page.search("#related")
-    container.search("li").search(".related_header").remove
+#==========================Load Class Doc============================ 
+  def self.load_class_doc(klass) 
+    html = Nokogiri::HTML(open(klass.url))
     
-    # assigns - Doc :description, :type
-    doc.description = parse(doc_page.search(".description p")[0..1].text)
-    doc.type = doc_page.search(".title_prefix span").text
-    #========================================== 
-    #Scrape2
-    container.search("li").map do |m|
-      name = m.search("a").text
-      url = prefix + m.search("a").attribute("href").value
-      
-      # assigns - Meth :name, :url >> Doc :methods
-      method = Meth.new(name, url) if methUniq(name)
-      doc.methods << name if methsUniq(doc.methods, name)
-    end
-    doc #doc instance
+    # description
+    description = html.search("#description")
+    
+    short = description.search("p")[0].text + expand #assign ready
+    
+    full = ""
+    description.search("p, pre, h2").each {|p| full << p.text + "\n\n"} 
   end
 #=============================MethPage=============================== 
   def self.loadMethPage(meth)
@@ -84,6 +72,10 @@ class Scraper
   
   def self.method_uniq(name) 
     Meth.all.none?{|method| method.name == name}
+  end
+  
+  def self.expand
+  "\nTo View Full Documentation Enter 'expand'".yellow
   end
 #==================================================================== 
   def self.parse(des) 

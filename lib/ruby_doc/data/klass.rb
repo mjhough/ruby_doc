@@ -3,9 +3,9 @@ class Klass
   extend DataExtras #sets/gets @@all
   #inheriting: paginate, display(doc), listMeths(doc)
 #=======================properties========================= 
-  attr_accessor :name, :url, :description, :type, :methods
+  attr_accessor :name, :url, :description, :methods
 #==========================================================
-  #KlassCount = 125
+  # count = 125
   def initialize(name, url) 
     self.name = name
     self.url = url
