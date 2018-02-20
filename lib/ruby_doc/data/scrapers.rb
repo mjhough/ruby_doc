@@ -5,7 +5,7 @@ class Scraper
   #See "HELPERS"(line62) for additional methods
                       # CONNECT BOTH SCRAPERS
 #===========================Load Classes============================= 
-  def self.load_classes
+  def self.load_classes 
     @counter = 0 #For Loading anim
     loading_message#
     
@@ -18,16 +18,10 @@ class Scraper
       
       # assigns - Klass :names, :urls
       Klass.new(name, url) if class_uniq(name)
-      
-      @counter += 1 #For Loading anim
-      loading_animation#
     end
   end 
 #===========================Load Methods============================= 
-  def self.load_methods
-    @counter = 0 #For Loading anim
-    loading_message#
-    
+  def self.load_methods 
     html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.5.0/"))
     container = html.search("#method-index div.entries")
     
@@ -36,7 +30,7 @@ class Scraper
       url = prefix + doc.attribute("href").value
       
       # assigns - Method :names, :urls
-      Meth.new(name, url) if method_uniq(name)
+      Meth.new(name, url) if method_uniq(name) 
       
       @counter += 1 #For Loading anim
       loading_animation#
@@ -56,7 +50,7 @@ class Scraper
     
     # assign 
     klass.short = short
-    klass.doc = doc
+    klass.doc = doc ;binding.pry
 #-------------------------------------------------------------------- 
     # methods
     methods = html.search("ul.link-list a")
@@ -68,7 +62,7 @@ class Scraper
       klass.methods << method if class_method_uniq(klass, method)
     end
   end
-#==========================Load Method Doc=========================== 
+#=========================Load Method Doc============================ 
   def self.load_method_doc(method) 
     html = Nokogiri::HTML(open(method.url))
 #-------------------------------------------------------------------- 
