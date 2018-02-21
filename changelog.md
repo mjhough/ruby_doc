@@ -1,3 +1,12 @@
+v2.0.0 (2018-02-21)
+------------------
+
+* Improved Data Source - Now Scraping From ruby-doc.org
+
+* Feature - Search Methods and Classes
+
+* Feature - Focus Highlight on Classes in Search Matches
+
 v1.1.5 (2018-02-01)
 ------------------
 

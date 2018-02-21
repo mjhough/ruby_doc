@@ -179,9 +179,12 @@ module UIExtras
   def alphaGets 
     gets.strip.to_s.downcase
   end
-#==================Display===================== 
-  def outputD(doc, index)
-    puts "#{index + 1}. ".yellow + doc.name.cyan
+#===========Display Search Matches============= 
+  def outputD(doc, index) 
+    li = ["#{index + 1}.".yellow, doc.name.light_cyan] if doc.type == "Class"
+    li = ["#{index + 1}.".yellow, doc.name.cyan] if doc.type == "Method"
+    
+    puts li.join(" ")
   end
 #============================================== 
                                         #CANDY
@@ -254,4 +257,3 @@ puts %q(               ALPHA™
                ╩╚═╚═╝╚═╝ ╩   ═╩╝╚═╝╚═╝╚═╝).cyan end
 #==============================================
 end
-
