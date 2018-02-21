@@ -10,11 +10,5 @@ require_relative '../lib/ruby_doc/data/scrapers'
 require_relative '../lib/ruby_doc/data/meth'
 require_relative '../lib/ruby_doc/data/klass'
 #====================Testing====================
-Scraper.load_classes
-Scraper.load_methods
-# Scraper.load_class_doc(Klass.all[2]) 
-# Scraper.load_method_doc(Meth.all[2])
 
 #===============================================
-
-
