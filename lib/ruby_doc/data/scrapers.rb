@@ -32,7 +32,9 @@ class Scraper
       url = prefix + doc.attribute("href").value
       
       # assigns - Method :names, :urls
-      Meth.new(name, url) if method_uniq(name) 
+      doc = Meth.new(name, url) if method_uniq(name) 
+      # keeps copy in DocDB
+      $DocDB << doc if doc_uniq(name)
       
       @counter += 1 #For Loading anim
       loading_animation#
