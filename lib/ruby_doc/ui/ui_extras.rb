@@ -179,12 +179,41 @@ module UIExtras
   def alphaGets 
     gets.strip.to_s.downcase
   end
-#===========Display Search Matches============= 
+#==================Display===================== 
   def outputD(doc, index) 
     li = ["#{index + 1}.".yellow, doc.name.light_cyan] if doc.type == "Class"
     li = ["#{index + 1}.".yellow, doc.name.cyan] if doc.type == "Method"
     
     puts li.join(" ")
+  end
+  
+  def display_class(doc) 
+    puts "Title: ".cyan + doc.name.upcase 
+    puts "Type: ".cyan + doc.type.upcase
+    puts "\nDescription:".cyan 
+    puts doc.doc
+    puts "Methods: ".cyan + "#{doc.methods.count}".yellow
+    puts "Source: #{doc.url}".red 
+    puts uie.sepR#
+    
+    #-----------future fix------------#
+    # description = doc.doc
+    # puts uie.wrapped(description, 55)
+    #-----------future fix------------#
+  end
+  
+  def display_method(doc) 
+    puts "Title: ".cyan + doc.name.upcase 
+    puts "Type: ".cyan + doc.type.upcase
+    puts "\nDescription:".cyan 
+    puts doc.doc
+    puts "Source: #{doc.url}".red 
+    puts uie.sepR#
+    
+    #-----------future fix------------#
+    # description = doc.doc
+    # puts uie.wrapped(description, 55)
+    #-----------future fix------------#
   end
 #============================================== 
                                         #CANDY

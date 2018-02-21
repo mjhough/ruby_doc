@@ -80,17 +80,6 @@ class Scraper
     # assign 
     method.doc = doc
   end
-#-------------------------------------------------------------------- 
-  #   # methods
-  #   methods = html.search("ul.link-list a")
-    
-  #   methods.each do |m| 
-  #     url = klass.url + m["href"] 
-  #     method = Meth.find_by(url)
-      
-  #     klass.methods << method if class_method_uniq(klass, method)
-  #   end
-  # end
 #==================================================================== 
                                                              #HELPERS
 #==================================================================== 

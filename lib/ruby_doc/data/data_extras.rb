@@ -92,21 +92,11 @@ module DataExtras # = foreign method
 #==============================Display Doc============================ 
   def display(doc)
     Scraper.load_class_doc(doc) if doc.type == "Class"
+    Scraper.load_method_doc(doc) if doc.type == "Method"
     
     uie.sepL#
-    puts "Title: ".cyan + doc.name.upcase
-    puts "Type: ".cyan + doc.type.upcase
-    puts "\nDescription:".cyan 
-    puts doc.doc
-    
-    #-----------future fix------------#
-    # description = doc.doc
-    # puts uie.wrapped(description, 55)
-    #-----------future fix------------#
-    
-    puts "\nMethods: ".cyan + "#{doc.methods.count}".yellow
-    puts "Source: #{doc.url}".red 
-    puts uie.sepR#
+    uie.display_class(doc) if doc.type == "Class"
+    uie.display_method(doc) if doc.type == "Method"
     
     uie.docMenu(doc)#
     uie.docControl(doc)#
