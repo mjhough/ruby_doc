@@ -32,7 +32,7 @@ class Scraper
       url = prefix + doc.attribute("href").value
       
       # assigns - Method :names, :urls
-      doc = Meth.new(name, url) if method_uniq(name) 
+      doc = Meth.new("Method", name, url) if method_uniq(name) 
       # keeps copy in DocDB
       $DocDB << doc if doc_uniq(name)
       
