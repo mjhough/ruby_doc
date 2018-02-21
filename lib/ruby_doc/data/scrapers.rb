@@ -17,7 +17,7 @@ class Scraper
       url = prefix + doc.attribute("href").value
       
       # assigns - Klass :names, :urls
-      doc = Klass.new(name, url) if class_uniq(name)
+      doc = Klass.new("Class", name, url) if class_uniq(name)
       # keeps copy in DocDB
       $DocDB << doc if doc_uniq(name)
     end

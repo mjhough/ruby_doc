@@ -12,6 +12,6 @@ require_relative '../lib/ruby_doc/data/klass'
 #====================DataBase===================
 $DocDB = []
 #====================Testing====================
-Scraper.load_classes
-Scraper.load_methods
+# Scraper.load_classes
+# Scraper.load_methods
 #===============================================
