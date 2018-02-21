@@ -137,9 +137,9 @@ module DataExtras # = foreign method
     RubyDoc::CLI.start if iN == "m"
   end
 #=============================SUPER SEARCH============================ 
-  def superSEARCH(name)
+  def super_search(name)
     uie.sepL#
-    matches = Doc.all.find_all{|doc| doc.name.downcase.include?(name)}
+    matches = Klass.all.find_all{|doc| doc.name.downcase.include?(name)}
     
     uie.searchControl(matches)#
     puts uie.sepR#

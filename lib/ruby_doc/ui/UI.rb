@@ -23,7 +23,7 @@ module RubyDoc::CLI
       when "exit!"
         exit!
       else
-        superSEARCH(iN)
+        super_search(iN)
       end
     end
     
