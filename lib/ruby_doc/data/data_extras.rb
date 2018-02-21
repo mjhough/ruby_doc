@@ -98,31 +98,6 @@ module DataExtras # = foreign method
     uie.display_class(doc) if doc.type == "Class"
     uie.display_method(doc) if doc.type == "Method"
   end
-#==============================List Meths============================= 
-  def listMeths(doc)
-    uie.sepL#
-    doc.methods.each_with_index do |meth, index|  
-      puts "#{index + 1}. ".yellow + meth.cyan
-    end 
-    puts uie.sepR#
-    
-    uie.viewMenu#
-    uie.methListControl(doc)#
-  end
-#=============================Display Meth============================ 
-  def displayMeth(byName)
-    meth = Meth.find(byName)
-    Scraper.loadMethPage(meth)#Load
-    
-    uie.sepL#
-    puts "Title: ".cyan + meth.name.upcase
-    puts "Type: ".cyan + meth.type.upcase
-    puts "\nDescription:".cyan
-    description = meth.description
-    puts uie.wrapped(description, 55)
-    puts "\nSource: #{meth.url}".red
-    puts uie.sepR#
-  end
 #=============================SUPER SEARCH============================ 
   def super_search(name)
     uie.sepL#

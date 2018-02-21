@@ -1,6 +1,4 @@
-class Scraper 
-  extend UIExtras 
-  #inheriting: loading_message, loading_animation
+class Scraper < UI
   
   #See "HELPERS"(line62) for additional methods
                       # CONNECT BOTH SCRAPERS

@@ -4,11 +4,13 @@ require 'open-uri'
 require 'nokogiri'
 require_relative './patches'
 require_relative '../lib/ruby_doc/version'
-require_relative '../lib/ruby_doc/ui/CLI'
-require_relative '../lib/ruby_doc/ui/UI'
-require_relative '../lib/ruby_doc/data/scrapers'
-require_relative '../lib/ruby_doc/data/meth'
-require_relative '../lib/ruby_doc/data/klass'
+#======================Cli======================
+require_relative '../lib/ruby_doc/cli/cli'
+require_relative '../lib/ruby_doc/cli/ui'
+#=====================Data======================
+require_relative '../lib/ruby_doc/data/class'
+require_relative '../lib/ruby_doc/data/method'
+require_relative '../lib/ruby_doc/data/scraper'
 #====================DataBase===================
 $DocDB = []
 #====================Testing====================

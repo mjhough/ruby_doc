@@ -1,4 +1,4 @@
-module UIExtras 
+class UI 
     attr_reader :counter #For Loading Anim
 #============================================== 
                                     #IMPORTANT!
@@ -7,7 +7,7 @@ module UIExtras
     RubyDoc::CLI.start
   end
 #==================Control===================== 
-  def mainControl 
+  def self.mainControl 
     prompt
     iN = alphaGets
     iN.split.size > 1 ? mainError : RubyDoc::CLI::UI.main_Shuttle(iN)  
@@ -30,7 +30,7 @@ module UIExtras
   end
   
   def searchControl(matches) 
-    matches == [] ? searchError : matches.each_with_index{|doc, index| outputD(doc, index)}
+    matches == [] ? searchError : matches.each_with_index{|doc, index| display_list(doc, index)}
   end
   
   def choiceControl(matches) 
@@ -48,22 +48,6 @@ module UIExtras
     end   
   end
   
-  def docControl(doc) 
-    prompt
-    iN = alphaGets
-    
-    case iN
-    when "1" 
-      Doc.listMeths(doc)
-    when "m" 
-      main
-    when "exit!"
-        exit!
-    else 
-      docError(doc)
-    end 
-  end
-  
   def methControl 
     prompt
     iN = alphaGets
@@ -75,6 +59,30 @@ module UIExtras
       exit!
     else 
       methError
+    end 
+  end
+  
+  def docControl(doc) 
+    prompt
+    iN = alphaGets
+    
+    case iN
+    when "1" 
+      puts sepR
+      doc.methods.each_with_index do |doc, index| 
+        display_list(doc, index) unless doc.nil?
+      end
+      puts sepR
+      
+      viewMenu
+      choiceControl(doc.methods)
+      
+    when "m" 
+      main
+    when "exit!" 
+        exit!
+    else 
+      docError(doc)
     end 
   end
   
@@ -139,7 +147,7 @@ module UIExtras
     methListControl(doc)
   end
 #===================Menus====================== 
-  def mainMenu 
+  def self.mainMenu 
     puts sepR#
     puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
     puts "try to find a match in my database for you.".cyan
@@ -172,15 +180,15 @@ module UIExtras
     print randQ
   end
 #===================Input====================== 
-  def prompt 
+  def self.prompt 
     print " >> ".cyan
   end
   
-  def alphaGets 
+  def self.alphaGets 
     gets.strip.to_s.downcase
   end
 #==================Display===================== 
-  def outputD(doc, index) 
+  def display_list(doc, index)
     li = ["#{index + 1}.".yellow, doc.name.light_cyan] if doc.type == "Class"
     li = ["#{index + 1}.".yellow, doc.name.cyan] if doc.type == "Method"
     
@@ -237,57 +245,57 @@ module UIExtras
   end
 #=============Loading Animation================ 
   # Goes above iterator
-  def loading_message 
+  def self.loading_message 
     puts cyanH(" Loading Database ") + " ☠️"
   end
   # Goes inside iterator - last line
-  def loading_animation 
+  def self.loading_animation 
     loading = ""
     print loading << ". ".cyan if 
-    counter == 100 || counter == 200 || counter == 300 || counter == 400 || 
-    counter == 500 || counter == 600 || counter == 700 || counter == 800 || 
-    counter == 900 || counter == 1000 || counter == 1100 || counter == 1200 || 
-    counter == 1300 || counter == 1400 || counter == 1500 || counter == 1600 || 
-    counter == 1700 || counter == 1800 || counter == 1900 || counter == 2000 || 
-    counter == 2100 || counter == 2200 || counter == 2300 || counter == 2320 || 
-    counter == 2340 || counter == 2360 || counter == 2380 || counter == 2400
+    @counter == 100 || @counter == 200 || @counter == 300 || @counter == 400 || 
+    @counter == 500 || @counter == 600 || @counter == 700 || @counter == 800 || 
+    @counter == 900 || @counter == 1000 || @counter == 1100 || @counter == 1200 || 
+    @counter == 1300 || @counter == 1400 || @counter == 1500 || @counter == 1600 || 
+    @counter == 1700 || @counter == 1800 || @counter == 1900 || @counter == 2000 || 
+    @counter == 2100 || @counter == 2200 || @counter == 2300 || @counter == 2320 || 
+    @counter == 2340 || @counter == 2360 || @counter == 2380 || @counter == 2400
   end
 #=================Separators=================== 
-  def sepL 
+  def self.sepL 
     puts "=".cyan*28 + "=".white*28
   end
     
-  def sepR 
+  def self.sepR 
     "=".white*28 + "=".cyan*28
   end
 #==================Strings===================== 
-  def wrapped(s, width=78) 
-	  lines = []
-	  line = ""
-	 
-	  s.split(/\s+/).each do |word|
-	    if line.size + word.size >= width
-	      lines << line
-	      line = word
-	    elsif line.empty?
-	     line = word
-	    else
-	     line << " " << word
-	   end
-	   end
-	   lines << line if line
-	  return lines.join "\n"
-	end#wrap string
-
-  def cyanH(str)
+  def self.cyanH(str)
     str.colorize(color: :white, background: :cyan)
   end#cyan highlight
   
-  def redH(str)
+  def self.redH(str)
     str.colorize(color: :white, background: :red)
   end#red highlight
+#----------------Future Fix-------------------- 
+  #   def wrapped(s, width=78) 
+  # 	  lines = []
+  # 	  line = ""
+  	 
+  # 	  s.split(/\s+/).each do |word|
+  # 	    if line.size + word.size >= width
+  # 	      lines << line
+  # 	      line = word
+  # 	    elsif line.empty?
+  # 	     line = word
+  # 	    else
+  # 	     line << " " << word
+  # 	   end
+  # 	   end
+  # 	   lines << line if line
+  # 	  return lines.join "\n"
+  # 	end#wrap string
 #=================Signature==================== 
-  def signature 
+  def self.signature 
     puts "\n"+"=".white*28 + "=".cyan*28 
 puts %q(               ALPHA™ 
                ╦═╗╦ ╦╔╗ ╦ ╦  ╔╦╗╔═╗╔═╗╔═╗

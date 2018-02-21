@@ -1,22 +1,19 @@
 #==================requires==================== 
-require_relative './ui_extras'
+# require_relative './ui_extras'
 require_relative '../data/data_extras.rb'
 #============================================== 
 module RubyDoc::CLI
-#==================modules===================== 
-  class UI 
-    extend UIExtras#
-    #inheriting: mainMenu, mainControl, signature
-    extend DataExtras
-    #inheriting: paginateALL, superSEARCH(),
-    #displayMeth(), display()
-#============================================== 
-    def self.greeting 
-      mainMenu#
-      mainControl# =>
-    end
-    
-    def self.main_Shuttle(iN) 
+#===================Start======================
+  def self.start 
+    puts "\nThanks For Using ALPHA™ Ruby Docs!".cyan
+    puts "One Moment Please As We Set Things Up\n".cyan
+    Scraper.load_classes and Scraper.load_methods
+    UI.signature
+    UI.mainMenu
+    UI.mainControl
+  end
+  
+  def self.main_Shuttle(iN) 
       case iN 
       when "b" 
         paginateALL 
@@ -33,7 +30,6 @@ module RubyDoc::CLI
     
     def self.meth_Shuttle(iN, doc) 
       displayMeth(doc.methods[iN.to_i-1])
-    end
+    end   
 #============================================== 
-  end
 end 
