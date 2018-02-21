@@ -54,7 +54,7 @@ class Scraper
     
     # assign 
     klass.short = short
-    klass.doc = doc ;binding.pry
+    klass.doc = doc 
 #-------------------------------------------------------------------- 
     # methods
     methods = html.search("ul.link-list a")
