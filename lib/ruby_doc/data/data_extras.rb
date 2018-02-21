@@ -139,7 +139,7 @@ module DataExtras # = foreign method
 #=============================SUPER SEARCH============================ 
   def super_search(name)
     uie.sepL#
-    matches = Klass.all.find_all{|doc| doc.name.downcase.include?(name)}
+    matches = $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
     
     uie.searchControl(matches)#
     puts uie.sepR#
