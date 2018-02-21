@@ -17,9 +17,9 @@ class Scraper
       url = prefix + doc.attribute("href").value
       
       # assigns - Klass :names, :urls
-      doc = Klass.new(name, url) if class_uniq(name) ;binding.pry
+      doc = Klass.new(name, url) if class_uniq(name)
       # keeps copy in DocDB
-      $DocDB << doc
+      $DocDB << doc if doc_uniq(name)
     end
   end 
 #===========================Load Methods============================= 
@@ -94,6 +94,10 @@ class Scraper
 #==================================================================== 
   def self.prefix 
     "https://ruby-doc.org/core-2.5.0/"
+  end
+  
+  def self.doc_uniq(name) 
+    $DocDB.none?{|doc| doc.name == name}
   end
   
   def self.class_uniq(name) 
