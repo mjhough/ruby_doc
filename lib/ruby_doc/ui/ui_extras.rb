@@ -188,18 +188,21 @@ module UIExtras
   end
   
   def display_class(doc) 
-    puts "Title: ".cyan + doc.name.upcase 
-    puts "Type: ".cyan + doc.type.upcase
-    puts "\nDescription:".cyan 
+    puts "TITLE: ".cyan + doc.name.upcase 
+    puts "TYPE: ".cyan + doc.type.upcase
+    puts "\NDESCRIPTION:".cyan 
     puts doc.doc
     puts "Methods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
-    puts uie.sepR#
+    puts sepR
     
     #-----------future fix------------#
     # description = doc.doc
     # puts uie.wrapped(description, 55)
     #-----------future fix------------#
+    
+    docMenu(doc)
+    docControl(doc)
   end
   
   def display_method(doc) 
@@ -207,13 +210,19 @@ module UIExtras
     puts "Type: ".cyan + doc.type.upcase
     puts "\nDescription:".cyan 
     puts doc.doc
+    puts "\nMethods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
-    puts uie.sepR#
+    puts sepR
     
     #-----------future fix------------#
     # description = doc.doc
     # puts uie.wrapped(description, 55)
     #-----------future fix------------#
+    
+    methMenu
+    methControl
+    
+    RubyDoc::CLI.start if iN == "m"
   end
 #============================================== 
                                         #CANDY

@@ -97,9 +97,6 @@ module DataExtras # = foreign method
     uie.sepL#
     uie.display_class(doc) if doc.type == "Class"
     uie.display_method(doc) if doc.type == "Method"
-    
-    uie.docMenu(doc)#
-    uie.docControl(doc)#
   end
 #==============================List Meths============================= 
   def listMeths(doc)
@@ -125,11 +122,6 @@ module DataExtras # = foreign method
     puts uie.wrapped(description, 55)
     puts "\nSource: #{meth.url}".red
     puts uie.sepR#
-    
-    uie.methMenu#
-    uie.methControl#
-    
-    RubyDoc::CLI.start if iN == "m"
   end
 #=============================SUPER SEARCH============================ 
   def super_search(name)
