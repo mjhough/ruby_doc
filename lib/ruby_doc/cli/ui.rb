@@ -1,23 +1,43 @@
 class UI 
-    attr_reader :counter #For Loading Anim
 #============================================== 
-                                    #IMPORTANT!
-#==================Shuttle===================== 
-  def main 
+                                    #IMPORTANT
+#=================properties=================== 
+  attr_reader :counter #For Loading Anim
+#=================Shuttles===================== 
+  def self.main 
     RubyDoc::CLI.start
   end
-#==================Control===================== 
-  def self.mainControl 
-    prompt
-    iN = alphaGets
-    iN.split.size > 1 ? mainError : RubyDoc::CLI::UI.main_Shuttle(iN)  
+  
+  def self.main_shuttle(input) 
+    case input 
+    when "b" 
+      DataProcessor.paginate 
+    when "exit!"
+      exit!
+    else
+      DataProcessor.super_search(input)
+    end
+  end
+    
+  def self.search_shuttle(input, matches) 
+    input == "m" ? greeting : DataProcessor.doc_data(matches[input.to_i-1])
   end
   
-  def browseControl(currentPg, docRange) 
+  def self.meth_shuttle(input, doc)  ;binding.pry
+    displayMeth(doc.methods[input.to_i-1])
+  end  
+#==================control===================== 
+  def self.main_control 
     prompt
-    iN = alphaGets
+    input = my_gets
+    input.split.size > 1 ? main_error : main_shuttle(input)  
+  end
+  
+  def self.browse_control(currentPg, docRange) 
+    prompt
+    input = my_gets
     
-    case iN
+    case input
     when "n"
       DataExtras.nextPage(currentPg) 
     when "m"
@@ -26,33 +46,34 @@ class UI
       exit!
     end
     # else
-    !iN.to_i.between?(1,docRange.count) ? browseError(iN, currentPg, docRange) : Doc.display(docRange[iN.to_i-1])
+    !input.to_i.between?(1,docRange.count) ? browse_error(input, currentPg, docRange) : Doc.display(docRange[input.to_i-1])
   end
   
-  def searchControl(matches) 
-    matches == [] ? searchError : matches.each_with_index{|doc, index| display_list(doc, index)}
+  def self.search_control(matches) 
+    search_error if matches.empty?
+    matches.each_with_index{|doc, index| display_list(doc, index)}
   end
   
-  def choiceControl(matches) 
+  def self.choice_control(matches) 
     prompt
-    iN = alphaGets
+    input = my_gets
     
-    if iN == "m" 
+    if input == "m" 
       main
-    elsif iN == "exit!"
+    elsif input == "exit!"
       exit!
-    elsif !iN.to_i.between?(1,matches.count)
-      choiceError(matches)
+    elsif !input.to_i.between?(1,matches.count)
+      choice_error(matches)
     else 
-      RubyDoc::CLI::UI.search_Shuttle(iN, matches)
+      search_shuttle(input, matches)
     end   
   end
   
-  def methControl 
+  def self.meth_control 
     prompt
-    iN = alphaGets
+    input = my_gets
     
-    case iN
+    case input
     when "m" 
       main
     when "exit!"
@@ -62,11 +83,11 @@ class UI
     end 
   end
   
-  def docControl(doc) 
+  def self.doc_control(doc) 
     prompt
-    iN = alphaGets
+    input = my_gets
     
-    case iN
+    case input
     when "1" 
       puts sepR
       doc.methods.each_with_index do |doc, index| 
@@ -74,80 +95,76 @@ class UI
       end
       puts sepR
       
-      viewMenu
-      choiceControl(doc.methods)
+      view_menu
+      choice_control(doc.methods)
       
     when "m" 
       main
     when "exit!" 
         exit!
     else 
-      docError(doc)
+      doc_error(doc)
     end 
   end
   
-  def methListControl(doc) 
+  def self.list_control(doc) 
     prompt
-    iN = alphaGets
+    input = my_gets
     
-    if iN == "m" 
+    if input == "m" 
       main
-    elsif iN == "exit!" 
+    elsif input == "exit!" 
       exit!
-    elsif !iN.to_i.between?(1,doc.methods.count) ? methListError(doc) : RubyDoc::CLI::UI.meth_Shuttle(iN, doc)
+    elsif !input.to_i.between?(1,doc.methods.count) ? list_error(doc) : RubyDoc::CLI::UI.meth_shuttle(input, doc)
     end
   end
 #===================Error====================== 
-  def mainError 
+  def self.main_error 
     sleep(0.1)
     print redH("\n Input Must Be 1 Word or b Try Again ")
-    mainControl
+    main_control
   end
   
-  def browseError(iN, currentPg, docRange)
+  def self.browse_error(input, currentPg, docRange) 
     if currentPg == "Last"
-      choiceError(docRange)
-      browseControl(currentPg, docRange)
+      choice_error(docRange)
+      browse_control(currentPg, docRange)
     else
       print redH("\n Enter a number between 1 and #{docRange.count} n for next or m for main ")
-      browseControl(currentPg, docRange)
+      browse_control(currentPg, docRange)
     end
   end
   
-  def searchError 
-    puts "NO MATCH!".red
-    puts "If you are searching for a ".black + "Method" + ", enter the ".black + "Class" + " or".black + "\nModule" + " it belongs to instead. This limitation will be ".black + "\naddressed in future update".black
+  def self.search_error 
+    puts "NO CIGAR!".red
+    puts "How about trying a Ruby ".black + "Method" + ", ".black + "Class" + " or ".black + "Module" + " name.".black
     puts "=".black*56
     
-    puts "Example: ".red + "Find".black + " 'reverse'" + " by searching".black + " 'String'"
-    mess = "'Reverse' method will be included in the doc's Methods:# (Additionally feel free to browse all docs)".black
-    puts wrapped(mess, 70).black
-    
     print redH("\n Try A New Word or 'b' To Browse ")
-    mainControl
+    main_control
   end
   
-  def choiceError(matches) 
-    print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
-    choiceControl(matches)
-  end
+  # def self.choice_error(matches) 
+  #   print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
+  #   choice_control(matches)
+  # end
   
-  def docError(doc)
+  def self.doc_error(doc) 
     print redH("\n Please enter '1' or 'm' ")
-    docControl(doc)
+    doc_control(doc)
   end
   
-  def methError
+  def self.meth_error 
     print redH("\n Please enter 'm' to return to main menu ")
-    methControl
+    meth_control
   end
   
-  def methListError(doc) 
-    print redH("\n Enter a number between 1 and #{doc.methods.count} or m for main ")
-    methListControl(doc)
+  def self.list_error(colection) 
+    print redH("\n Enter a number between 1 and #{collection.count} or m for main ")
+    list_control(doc)
   end
 #===================Menus====================== 
-  def self.mainMenu 
+  def self.main_menu 
     puts sepR#
     puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
     puts "try to find a match in my database for you.".cyan
@@ -156,26 +173,26 @@ class UI
     print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   
-  def browseMenu 
+  def self.browse_menu 
     puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
     puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
     puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ
   end
   
-  def viewMenu 
+  def self.view_menu 
     puts "To ".cyan + "View An Item ".yellow + "From This List (Enter ID Number eg.".cyan + "'1'".yellow + ")".cyan
     puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ
   end
 
-  def docMenu(doc) 
+  def self.doc_menu(doc) 
     puts "To ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
     puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ
   end
   
-  def methMenu 
+  def self.meth_menu 
     puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ
   end
@@ -184,41 +201,35 @@ class UI
     print " >> ".cyan
   end
   
-  def self.alphaGets 
+  def self.my_gets 
     gets.strip.to_s.downcase
   end
 #==================Display===================== 
-  def display_list(doc, index)
+  def self.display_list(doc, index)
     li = ["#{index + 1}.".yellow, doc.name.light_cyan] if doc.type == "Class"
     li = ["#{index + 1}.".yellow, doc.name.cyan] if doc.type == "Method"
     
     puts li.join(" ")
   end
   
-  def display_class(doc) 
+  def self.display_class(doc) 
     puts "TITLE: ".cyan + doc.name.upcase 
     puts "TYPE: ".cyan + doc.type.upcase
-    puts "\NDESCRIPTION:".cyan 
+    puts "\nDESCRIPTION:".cyan 
     puts doc.doc
     puts "Methods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
     puts sepR
     
-    #-----------future fix------------#
-    # description = doc.doc
-    # puts uie.wrapped(description, 55)
-    #-----------future fix------------#
-    
-    docMenu(doc)
-    docControl(doc)
+    doc_menu(doc)
+    doc_control(doc)
   end
   
-  def display_method(doc) 
+  def self.display_method(doc) 
     puts "Title: ".cyan + doc.name.upcase 
     puts "Type: ".cyan + doc.type.upcase
     puts "\nDescription:".cyan 
     puts doc.doc
-    puts "\nMethods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
     puts sepR
     
@@ -227,15 +238,15 @@ class UI
     # puts uie.wrapped(description, 55)
     #-----------future fix------------#
     
-    methMenu
-    methControl
+    meth_menu
+    meth_control
     
-    RubyDoc::CLI.start if iN == "m"
+    RubyDoc::CLI.start if input == "m"
   end
 #============================================== 
                                         #CANDY
 #===============Quote Scraper================== 
-  def randQ
+  def self.randQ
     html = Nokogiri::HTML(open("https://fortrabbit.github.io/quotes/"))
     container = html.search(".row.gutter-l.wrap")
     
@@ -276,24 +287,24 @@ class UI
   def self.redH(str)
     str.colorize(color: :white, background: :red)
   end#red highlight
-#----------------Future Fix-------------------- 
-  #   def wrapped(s, width=78) 
-  # 	  lines = []
-  # 	  line = ""
-  	 
-  # 	  s.split(/\s+/).each do |word|
-  # 	    if line.size + word.size >= width
-  # 	      lines << line
-  # 	      line = word
-  # 	    elsif line.empty?
-  # 	     line = word
-  # 	    else
-  # 	     line << " " << word
-  # 	   end
-  # 	   end
-  # 	   lines << line if line
-  # 	  return lines.join "\n"
-  # 	end#wrap string
+
+  def self.wrapped(s, width=78) 
+	  lines = []
+	  line = ""
+	 
+	  s.split(/\s+/).each do |word|
+	    if line.size + word.size >= width
+	      lines << line
+	      line = word
+	    elsif line.empty?
+	     line = word
+	    else
+	     line << " " << word
+	   end
+	   end
+	   lines << line if line
+	  return lines.join "\n"
+	end #wrap string
 #=================Signature==================== 
   def self.signature 
     puts "\n"+"=".white*28 + "=".cyan*28 

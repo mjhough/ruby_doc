@@ -1,24 +1,8 @@
-module DataExtras # = foreign method
+class DataProcessor
 #===================================================================== 
                                                               #HELPERS
 #===================================================================== 
-  #@all set/get maker for Doc & Meth 
-  def self.extended(base) 
-    base.class_variable_set(:@@all, [])
-  end
   
-  def all 
-    self.class_variable_get(:@@all)
-  end
-  
-  #UIExtras Shuttles 
-  def self.uie 
-    RubyDoc::CLI::UI
-  end
-  
-  def uie 
-    RubyDoc::CLI::UI
-  end
 #===================================================================== 
                                                             #PAGINATOR
 #===================================================================== 
@@ -45,13 +29,13 @@ module DataExtras # = foreign method
     end
   end
 #==============================PaginateAll============================ 
-  def paginateALL 
-    uie.sepL#
+  def self.paginate
+    UI.sepL
     list(Doc.all[0..499])#
-    puts uie.sepR#
+    puts UI.sepR
     
-    uie.browseMenu#
-    uie.browseControl("Page1", Doc.all[0..499])#
+    UI.browseMenu
+    UI.browseControl("Page1", Doc.all[0..499])
   end
 #================================Page 2=============================== 
   def self.page2
@@ -90,24 +74,24 @@ module DataExtras # = foreign method
     uie.browseControl("Last", Doc.all[2000..Doc.all.length])#
   end 
 #==============================Display Doc============================ 
-  def display(doc)
+  def self.doc_data(doc) 
     Scraper.load_class_doc(doc) if doc.type == "Class"
     Scraper.load_method_doc(doc) if doc.type == "Method"
     
-    uie.sepL#
-    uie.display_class(doc) if doc.type == "Class"
-    uie.display_method(doc) if doc.type == "Method"
+    UI.sepL
+    UI.display_class(doc) if doc.type == "Class"
+    UI.display_method(doc) if doc.type == "Method"
   end
 #=============================SUPER SEARCH============================ 
-  def super_search(name)
-    uie.sepL#
+  def self.super_search(name)
+    UI.sepL
     matches = $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
     
-    uie.searchControl(matches)#
-    puts uie.sepR#
+    UI.search_control(matches)
+    puts UI.sepR
     
-    uie.viewMenu#
-    uie.choiceControl(matches)#
+    UI.view_menu
+    UI.choice_control(matches)
   end
 #=====================================================================
 end

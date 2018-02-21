@@ -11,9 +11,10 @@ require_relative '../lib/ruby_doc/cli/ui'
 require_relative '../lib/ruby_doc/data/class'
 require_relative '../lib/ruby_doc/data/method'
 require_relative '../lib/ruby_doc/data/scraper'
+require_relative '../lib/ruby_doc/data/data_processor'
 #====================DataBase===================
 $DocDB = []
 #====================Testing====================
-# Scraper.load_classes
+Scraper.load_classes
 # Scraper.load_methods
 #===============================================
