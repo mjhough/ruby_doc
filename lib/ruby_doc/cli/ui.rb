@@ -15,7 +15,7 @@ class UI
     if input.split.size > 1 
       main_error
     elsif input == "b"
-      paginate 
+      paginate("start") 
     elsif input == "exit!"
       exit!
     else
@@ -71,20 +71,33 @@ class UI
     end 
   end
   
-  # def self.browse_control(currentPg, docRange) 
-  #   prompt
-  #   input = my_gets
+  def self.browse_control(identifier, page)
+    prompt
+    input = my_gets
     
-  #   case input
-  #   when "n"
-  #     DataExtras.nextPage(currentPg) 
-  #   when "m"
-  # RubyDoc::CLI.start 
-  #   when "exit!"
-  #     exit!
+    case input
+    when "n"
+      paginate(identifier) 
+    when "m"
+      RubyDoc::CLI.start 
+    when "exit!"
+      exit!
+    end
+    # else
+    !input.to_i.between?(1,page.count) ? browse_error(input, identifier, page) : Doc.display(page[input.to_i-1])
+  end
+  
+  # def self.next_page(currentPg) 
+  #   case currentPg
+  #   when "Page1" 
+  #     page2
+  #   when "Page2" 
+  #     page3
+  #   when "Page3" 
+  #     page4
+  #   when "Page4" 
+  #     last
   #   end
-  #   # else
-  #   !input.to_i.between?(1,docRange.count) ? browse_error(input, currentPg, docRange) : Doc.display(docRange[input.to_i-1])
   # end
   
   # def self.list_control(doc) 
@@ -165,12 +178,25 @@ class UI
     display_method_control
   end
   
-  def self.paginate 
-    puts sepL
-    Processor.page1
+  def self.paginate(identifier) 
+    
+    case identifier
+    when "start"
+      Processor.page1
+    when "Page1" 
+      Processor.page2
+    when "Page2" 
+      Processor.page3
+    when "Page3" 
+      Processor.last
+    end
+    
   end
   
-  def self.browse_list(page) 
+  def self.browse_list(page, identifier)
+    # last_page_menu if identifier == "Last"
+    
+    puts sepL
     page.each_with_index do |doc, index|  
       
       if doc.type == "Class" || doc.type == "Module"
@@ -183,8 +209,8 @@ class UI
     end
     puts sepR 
     
-    browseMenu 
-    browseControl("Page1", Doc.all[0..499])
+    browse_menu 
+    browse_control(identifier, page)
   end
 #===================Menus====================== 
   def self.main_menu 

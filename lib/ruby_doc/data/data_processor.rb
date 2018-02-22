@@ -1,72 +1,56 @@
 class Processor  
-#===================================================================== 
-                                                             #PAGINATE
-#===================================================================== 
-  
-  
-  # #PageLister 
-  # def list(page) 
-  #   page.each_with_index{|doc, index| uie.outputD(doc, index)}
-  # end
-  
-  # def self.list(page) 
-  #   page.each_with_index{|doc, index| uie.outputD(doc, index)}
-  # end
-  
-  # #PageShuttle
-  # def self.nextPage(currentPg) 
-  #   case currentPg
-  #   when "Page1" 
-  #     page2
-  #   when "Page2" 
-  #     page3
-  #   when "Page3" 
-  #     page4
-  #   when "Page4" 
-  #     last
-  #   end
-  # end
-#==============================PaginateAll============================ 
-  
+#=============================Browse Pages============================ 
   def self.page1 
-    UI.browse_list($DocDB[0..499])
+    UI.browse_list($DocDB[0..499], "Page1")
   end
-#================================Page 2=============================== 
-  def self.page2
-    uie.sepL#
-    list(Doc.all[500..999])#
-    puts uie.sepR#
-    
-    uie.browseMenu#
-    uie.browseControl("Page2", Doc.all[500..999])#
+  
+  def self.page2 
+    UI.browse_list($DocDB[500..999], "Page2")
   end
-#================================Page 3=============================== 
-  def self.page3
-    uie.sepL#
-    list(Doc.all[1000..1499])#
-    puts uie.sepR#
-    
-    uie.browseMenu#
-    uie.browseControl("Page3", Doc.all[1000..1499])#
+  
+  def self.page3 
+    UI.browse_list($DocDB[1000..1499], "Page3")
   end
-#================================Page 4=============================== 
-  def self.page4
-    uie.sepL#
-    list(Doc.all[1500..1999])#
-    puts uie.sepR#
-    
-    uie.browseMenu#
-    uie.browseControl("Page4", Doc.all[1500..1999])#
+  
+  def self.last 
+    UI.browse_list($DocDB[1500..$DocDB.count], "Last")
   end
-#===============================Page Last============================= 
-  def self.last
-    uie.sepL#
-    list(Doc.all[2000..Doc.all.length])#
-    puts uie.sepR#
+# #================================Page 2=============================== 
+#   def self.page2
+#     uie.sepL#
+#     list(Doc.all[500..999])#
+#     puts uie.sepR#
     
-    uie.viewMenu#
-    uie.browseControl("Last", Doc.all[2000..Doc.all.length])#
-  end 
+#     uie.browseMenu#
+#     uie.browseControl("Page2", Doc.all[500..999])#
+#   end
+# #================================Page 3=============================== 
+#   def self.page3
+#     uie.sepL#
+#     list(Doc.all[1000..1499])#
+#     puts uie.sepR#
+    
+#     uie.browseMenu#
+#     uie.browseControl("Page3", Doc.all[1000..1499])#
+#   end
+# #================================Page 4=============================== 
+#   def self.page4
+#     uie.sepL#
+#     list(Doc.all[1500..1999])#
+#     puts uie.sepR#
+    
+#     uie.browseMenu#
+#     uie.browseControl("Page4", Doc.all[1500..1999])#
+#   end
+# #===============================Page Last============================= 
+#   def self.last
+#     uie.sepL#
+#     list(Doc.all[2000..Doc.all.length])#
+#     puts uie.sepR#
+    
+#     uie.viewMenu#
+#     uie.browseControl("Last", Doc.all[2000..Doc.all.length])#
+#   end 
 #===============================Load Doc============================== 
   def self.load_doc(doc) 
     Scraper.load_class_doc(doc) if doc.type == "Class" || doc.type == "Module"
