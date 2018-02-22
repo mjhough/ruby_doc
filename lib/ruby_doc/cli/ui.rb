@@ -35,7 +35,7 @@ class UI
     
   end
   
-  def self.search_control(matches) 
+  def self.list_control(matches) 
     prompt
     input = my_gets
     
@@ -44,7 +44,7 @@ class UI
     elsif input == "exit!"
       exit!
     elsif !input.to_i.between?(1,matches.count)
-      search_list_error(matches)
+      list_error(matches)
     else 
       Processor.load_doc(matches[input.to_i-1])
     end   
@@ -56,7 +56,7 @@ class UI
     
     case input
     when "1" 
-      method_list
+      method_list(doc)
     when "m" 
       RubyDoc::CLI.start
     when "exit!" 
@@ -109,6 +109,7 @@ class UI
   # end
 #==================Display===================== 
   def self.search_list(matches) 
+    UI.sepL
     matches.each_with_index do |doc, index| 
       
       if doc.type == "Class" || doc.type == "Module"
@@ -121,11 +122,12 @@ class UI
     end
     puts sepR
     
-    search_menu
-    search_control(matches)
+    list_menu
+    list_control(matches)
   end
   
   def self.display_class(doc) 
+    UI.sepL
     puts "TITLE: ".cyan + doc.name.upcase 
     puts "TYPE: ".cyan + doc.type.upcase
     puts "\nDESCRIPTION:".cyan 
@@ -138,7 +140,30 @@ class UI
     display_class_control(doc)
   end
   
+  def self.method_list(doc) 
+    puts sepR
+    doc.methods.each_with_index do |method, index| 
+      
+      if !method.nil?
+        
+        li = ["#{index + 1}.".yellow, method.name.cyan]
+        puts li.join(" ")
+        
+      end
+      
+      
+       
+    end
+    puts sepR
+    
+    list_menu 
+    list_control(doc.methods)
+  end
+  
+    
+    
   # def self.display_method(doc) 
+    # UI.sepL
   #   puts "Title: ".cyan + doc.name.upcase 
   #   puts "Type: ".cyan + doc.type.upcase
   #   puts "\nDescription:".cyan 
@@ -166,7 +191,7 @@ class UI
     print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   
-  def self.search_menu 
+  def self.list_menu 
     puts "To ".cyan + "View An Item ".yellow + "From This List (Enter ID Number eg.".cyan + "'1'".yellow + ")".cyan
     puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
     print randQ
@@ -205,9 +230,9 @@ class UI
     main_control
   end
   
-  def self.search_list_error(matches) 
-    print redH("\n Enter a number between 1 and #{collection.count} or m for main ")
-    search_control(matches)
+  def self.list_error(matches) 
+    print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
+    list_control(matches)
   end
   
   def self.display_class_error(doc) 

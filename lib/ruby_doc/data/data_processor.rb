@@ -78,13 +78,11 @@ class Processor
     Scraper.load_class_doc(doc) if doc.type == "Class" || doc.type == "Module"
     Scraper.load_method_doc(doc) if doc.type == "Method"
     
-    UI.sepL
     UI.display_class(doc) if doc.type == "Class" || doc.type == "Module"
     UI.display_method(doc) if doc.type == "Method"
   end
 #================================SEARCH=============================== 
   def self.search(name)
-    UI.sepL
     matches = $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
     
     UI.search_error if matches.empty?

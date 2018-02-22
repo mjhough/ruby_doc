@@ -79,7 +79,7 @@ class Scraper < UI
     
     # assign 
     method.doc = doc
-  end
+  end 
 #===================================================================# 
                                                              #HELPERS
 #==================================================================== 
@@ -98,7 +98,7 @@ class Scraper < UI
   def self.class_method_uniq(doc, method)
     doc.methods.none?{|m| m == method }
   end
-#--------------------------------------------------------------------  
+#-------------------------------------------------------------------- 
   def self.prefix 
     "https://ruby-doc.org/core-2.4.3/"
   end
