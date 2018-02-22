@@ -72,13 +72,29 @@ class Scraper < UI
 #-------------------------------------------------------------------- 
     # documentation
     selector = "#"+method.url.gsub(/.+#method.{3}/, "")+"-method"
-    container = html.search(selector)[0]
     
-    doc = "" 
-    container.search("p, pre, h2").each {|p| doc << p.text + "\n\n" } 
+    if html.search("#{selector}").first["class"].include?("method-alias")
+      
+      conn = html.search("#{selector}").first.search("a")[1]["href"] 
+      rebuild = "#"+ conn.gsub(/.+#method.{3}/, "")+"-method" 
+      
+      container = html.search(rebuild)[0] 
     
-    # assign 
-    method.doc = doc
+      doc = "" 
+      doc << html.search("#{selector} div.aliases").first.text + "\n\n" 
+      container.search("p, pre, h2").each {|p| doc << p.text + "\n\n" }  
+      
+      # assign 
+      method.doc = doc
+    else
+      container = html.search(selector)[0]
+    
+      doc = "" 
+      container.search("p, pre, h2").each {|p| doc << p.text + "\n\n" } 
+      
+      # assign 
+      method.doc = doc
+    end 
   end 
 #===================================================================# 
                                                              #HELPERS
