@@ -15,12 +15,5 @@ require_relative '../lib/ruby_doc/data/data_processor'
 #====================DataBase===================
 $DocDB = []
 #====================Testing====================
-Scraper.coming_soon
-# Scraper.load_classes
-# Scraper.load_methods
-# abort
-# Meth.all.each{|m|puts m.name}
-# Pry.start
-# abort
-# Scraper.load_methods
+# Scraper.changelog
 #===============================================

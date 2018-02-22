@@ -1,8 +1,5 @@
 class Scraper < UI 
-  
-  #See "HELPERS"(line62) for additional methods
-                      # CONNECT BOTH SCRAPERS
-#===========================Load Classes============================= 
+#===========================Load Classes================================= 
   def self.load_classes 
     @counter = 0 #For Loading anim
     loading_message#
@@ -21,7 +18,7 @@ class Scraper < UI
       $DocDB << doc if doc_uniq(url)
     end  
   end 
-#===========================Load Methods============================= 
+#===========================Load Methods================================= 
   def self.load_methods 
     html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.4.3/"))
     icontainer = html.search("#method-index .entries")
@@ -40,10 +37,10 @@ class Scraper < UI
       loading_animation#
     end
   end 
-#==========================Load Class Doc============================ 
+#==========================Load Class Doc================================ 
   def self.load_class_doc(doc) 
     html = Nokogiri::HTML(open(doc.url))
-#-------------------------------------------------------------------- 
+#------------------------------------------------------------------------ 
     # documentation
     container = html.search("#description")
     
@@ -55,7 +52,7 @@ class Scraper < UI
     # assign 
     doc.short = short
     doc.description = description
-#-------------------------------------------------------------------- 
+#------------------------------------------------------------------------ 
     # methods
     methods = html.search("ul.link-list a")
     
@@ -66,10 +63,10 @@ class Scraper < UI
       doc.methods << method if class_method_uniq(doc, method)
     end
   end
-#=========================Load Method Doc============================ 
+#=========================Load Method Doc================================ 
   def self.load_method_doc(method) 
     html = Nokogiri::HTML(open(method.url))
-#-------------------------------------------------------------------- 
+#------------------------------------------------------------------------ 
     # documentation
     selector = "#"+method.url.gsub(/.+#method.{3}/, "")+"-method"
     
@@ -96,9 +93,9 @@ class Scraper < UI
       method.doc = doc
     end 
   end 
-#===================================================================# 
+#=======================================================================# 
                                                              #HELPERS
-#==================================================================== 
+#======================================================================== 
   def self.class_uniq(url) 
     Klass.all.none?{|klass| klass.url == url}
   end
@@ -114,7 +111,7 @@ class Scraper < UI
   def self.class_method_uniq(doc, method)
     doc.methods.none?{|m| m == method }
   end
-#-------------------------------------------------------------------- 
+#------------------------------------------------------------------------ 
   def self.prefix 
     "https://ruby-doc.org/core-2.4.3/"
   end
@@ -122,18 +119,21 @@ class Scraper < UI
   def self.expand
   "\nTo View Full Documentation Enter 'expand'".yellow
   end
-#==================================================================== 
+#======================================================================== 
   def self.changelog
-    html = Nokogiri::HTML(open("https://raw.githubusercontent.com/AlphaDaniel/ruby_doc/master/changelog.md")) 
-    puts "\n" + html.text
+    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc/blob/master/changelog.md")) 
+    
+    puts html.search("#readme").text.gsub("\n    ", "").gsub("\n\n\n  ", "")
   end
   
   def self.coming_soon
-    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc/blob/master/README.md#coming-soon")) 
+    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc")) 
     
-    html.search("div#readme ul li").each do |li|
-       puts ">> " + li.text
+    list = ""
+    html.search("div#readme ul li").each do |li| 
+       list << ">> ".cyan + li.text + "\n"
     end
+    list
   end
-#==================================================================== 
+#======================================================================== 
 end

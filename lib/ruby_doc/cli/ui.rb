@@ -200,8 +200,13 @@ class UI
     browse_control(identifier, page)
   end
   
-  def self.learn_more
+  def self.learn_more 
+    puts "\nCOMING SOON".cyan
+    puts "=".black*56
+    puts Scraper.coming_soon
+    
     puts "\nCHANGELOG".cyan
+    puts "=".black*56
     puts Scraper.changelog
     
     main_menu
@@ -325,13 +330,13 @@ class UI
   def self.loading_animation 
     loading = ""
     print loading << ". ".cyan if 
-    @counter == 100 || @counter == 200 || @counter == 300 || @counter == 400 || 
-    @counter == 500 || @counter == 600 || @counter == 700 || @counter == 800 || 
-    @counter == 900 || @counter == 1000 || @counter == 1100 || @counter == 1200 || 
-    @counter == 1300 || @counter == 1400 || @counter == 1500 || @counter == 1600 || 
-    @counter == 1700 || @counter == 1800 || @counter == 1900 || @counter == 2000 || 
-    @counter == 2100 || @counter == 2200 || @counter == 2300 || @counter == 2320 || 
-    @counter == 2340 || @counter == 2360 || @counter == 2380 || @counter == 2400
+    @counter == 50 || @counter == 100 || @counter == 150 || @counter == 200 || 
+    @counter == 250 || @counter == 300 || @counter == 350 || @counter == 400 || 
+    @counter == 450 || @counter == 500 || @counter == 550 || @counter == 600 || 
+    @counter == 650 || @counter == 700 || @counter == 750 || @counter == 800 || 
+    @counter == 850 || @counter == 900 || @counter == 950 || @counter == 1000 || 
+    @counter == 1150 || @counter == 1200 || @counter == 1250 || @counter == 1300 || 
+    @counter == 1350 || @counter == 1400 || @counter == 1450 || @counter == 1500 
   end
 #=============Colors/Candy Props=============== 
   def self.prompt 

@@ -25,22 +25,24 @@ Ever get tired of leaving your editor / environment to google a method, or more 
 
 ![image](https://i.imgur.com/NmincSX.gif)
 ### Features:
-✓ Search by Doc title
+✓  Search for Ruby Documentation by Class, Module or Method Name
 
-✓ View related methods
+✓  Browse all Documentation (Paginated Output To Terminal)
 
-✓ Browse all Docs (Paginated Output To Terminal)
+✓  View Descriptions and Syntax
 
-✓ Source Links
+✓  View Source Code
 
-✓ Easy Navigation
+✓  Source Links Provided
 
-✓ Random Dev Quotes (Ok This One Is Just For Fun Lol)
+✓  Easy Navigation
+
+✓  Random Dev Quotes (For fun and motivation)
 
 ### Coming Soon:
-* Search by method name ([See Notes](https://github.com/AlphaDaniel/alpha-ruby_doc/blob/master/Notes.md))
 * Multiple Doc sources
-* Display Syntax
+* Save Favorites
+* Add Notes
 
 ---
 ## INSTALLATION
@@ -78,6 +80,10 @@ Once installed execute
 To exit 
 
     $ exit!
+    
+To Learn More 
+
+    $ ?
     
 ---
 ## Contributing
