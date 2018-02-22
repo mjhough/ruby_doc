@@ -193,9 +193,7 @@ class UI
     
   end
   
-  def self.browse_list(page, identifier)
-    # last_page_menu if identifier == "Last"
-    
+  def self.browse_list(page, identifier) 
     puts sepL
     page.each_with_index do |doc, index|  
       
@@ -207,9 +205,16 @@ class UI
       
       puts li.join(" ")
     end
+    
+    if identifier == "Last"
+      puts sepR
+      puts "End of List".red
+    end
     puts sepR 
     
-    browse_menu 
+    last_page_menu(page) if identifier == "Last"
+    browse_menu(page) if !(identifier == "Last")
+    
     browse_control(identifier, page)
   end
 #===================Menus====================== 
@@ -222,9 +227,8 @@ class UI
     print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   
-  def self.list_menu(matches)  
+  def self.list_menu(matches) 
     puts "To ".cyan + "View ".yellow + "(Enter ".cyan + "#".yellow + ")".cyan + " eg. #{matches.count.to_s} for #{matches[matches.count-2].name}".black
-    
     puts "To return to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
     puts "To".cyan + " Leave".yellow + " (".cyan + "'exit!'".yellow + ")\n".cyan
     print randQ
@@ -243,10 +247,18 @@ class UI
     print randQ
   end
   
-  def self.browse_menu 
-    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
+  def self.browse_menu(page) 
+    puts "To ".cyan + "View ".yellow + "(Enter ".cyan + "#".yellow + ")".cyan + " eg. #{page.count.to_s} for #{page[page.count-1].name}".black
     puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
-    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
+    puts "To".cyan + " Leave".yellow + " (".cyan + "'exit!'".yellow + ")\n".cyan
+    print randQ
+  end
+  
+  def self.last_page_menu(page)
+    puts "To ".cyan + "View ".yellow + "(Enter ".cyan + "#".yellow + ")".cyan + " eg. #{page.count.to_s} for #{page[page.count-1].name}".black
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
+    puts "To".cyan + " Leave".yellow + " (".cyan + "'exit!'".yellow + ")\n".cyan
     print randQ
   end
 #===================Error====================== 
