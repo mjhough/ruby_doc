@@ -71,7 +71,7 @@ class UI
     end 
   end
   
-  def self.browse_control(identifier, page)
+  def self.browse_control(identifier, page) 
     prompt
     input = my_gets
     
@@ -83,34 +83,13 @@ class UI
     when "exit!"
       exit!
     end
-    # else
-    !input.to_i.between?(1,page.count) ? browse_error(input, identifier, page) : Doc.display(page[input.to_i-1])
-  end
-  
-  # def self.next_page(currentPg) 
-  #   case currentPg
-  #   when "Page1" 
-  #     page2
-  #   when "Page2" 
-  #     page3
-  #   when "Page3" 
-  #     page4
-  #   when "Page4" 
-  #     last
-  #   end
-  # end
-  
-  # def self.list_control(doc) 
-  #   prompt
-  #   input = my_gets
     
-  #   if input == "m" 
-  # RubyDoc::CLI.start
-  #   elsif input == "exit!" 
-  #     exit!
-  #   elsif !input.to_i.between?(1,doc.methods.count) ? list_error(doc) : RubyDoc::CLI::UI.meth_shuttle(input, doc)
-  #   end
-  # end
+    if !input.to_i.between?(1,page.count)
+      browse_error(input, identifier, page) 
+    else
+      Doc.display(page[input.to_i-1])
+    end
+  end
 #==================Display===================== 
   def self.search_list(matches) 
     UI.sepL
@@ -297,15 +276,19 @@ class UI
     display_method_control
   end
   
-  # def self.browse_error(input, currentPg, docRange) 
-  #   if currentPg == "Last"
-  #     list_error(docRange)
-  #     browse_control(currentPg, docRange)
-  #   else
-  #     print redH("\n Enter a number between 1 and #{docRange.count} n for next or m for main ")
-  #     browse_control(currentPg, docRange)
-  #   end
-  # end
+  def self.browse_error(input, identifier, page)  
+    if identifier == "Last"
+      list_error(page)
+      browse_control(identifier, page)
+    else
+      browse_list_error(page)
+      browse_control(identifier, page)
+    end
+  end
+  
+  def self.browse_list_error(page)
+    print redH("\n Enter # to view, 'n' for next page 'm' for main or 'exit!' to leave ")
+  end
 #============================================== 
                                         #CANDY
 #===============Quote Scraper================== 
@@ -348,7 +331,7 @@ class UI
   end
 
   def self.redH(str) 
-    str.colorize(color: :white, background: :magneta)
+    str.colorize(color: :white, background: :red)
   end#red highlight
   
   def self.cyanH(str) 
