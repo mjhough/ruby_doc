@@ -73,7 +73,7 @@ class Processor
     uie.viewMenu#
     uie.browseControl("Last", Doc.all[2000..Doc.all.length])#
   end 
-#================================Load Doc============================= 
+#===============================Load Doc============================== 
   def self.load_doc(doc) 
     Scraper.load_class_doc(doc) if doc.type == "Class" || doc.type == "Module"
     Scraper.load_method_doc(doc) if doc.type == "Method"

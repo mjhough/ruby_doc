@@ -3,21 +3,10 @@ class UI
                                     #IMPORTANT
 #=================Properties=================== 
   attr_reader :counter #For Loading Anim
-#=================Shuttles===================== 
-  # def self.main_shuttle(input) 
-  #   case input 
-  #   when "b" 
-  #     DataProcessor.paginate 
-  #   when "exit!"
-  #     exit!
-  #   else
-  #     DataProcessor.super_search(input)
-  #   end
-  # end
-  
-  # def self.meth_shuttle(input, doc) 
-  #   displayMeth(doc.methods[input.to_i-1])
-  # end  
+#===================Input====================== 
+  def self.my_gets 
+    gets.strip.to_s.downcase
+  end
 #==================Control===================== 
   def self.main_control 
     prompt
@@ -122,7 +111,7 @@ class UI
     end
     puts sepR
     
-    list_menu
+    list_menu(matches)
     list_control(matches)
   end
   
@@ -152,7 +141,7 @@ class UI
     end
     puts sepR
     
-    list_menu 
+    list_menu(doc.methods) 
     list_control(doc.methods)
   end
   
@@ -181,24 +170,28 @@ class UI
     puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
     puts "try to find a match in my database for you.".cyan
     sepL#
-    puts "\You can also type".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
+    puts "\You can also enter".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
     print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   
-  def self.list_menu 
-    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter ID Number eg.".cyan + "'1'".yellow + ")".cyan
-    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+  def self.list_menu(matches)  
+    puts "To ".cyan + "View ".yellow + "(Enter ".cyan + "#".yellow + ")".cyan + " eg. #{matches.count.to_s} for #{matches[matches.count-2].name}".black
+    
+    puts "To return to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
+    puts "To".cyan + " Leave".yellow + " (".cyan + "'exit!'".yellow + ")\n".cyan
     print randQ
   end
   
   def self.display_class_menu(doc) 
     puts "To ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
-    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
+    puts "To".cyan + " Leave".yellow + " (".cyan + "'exit!'".yellow + ")\n".cyan
     print randQ
   end
   
   def self.display_method_menu 
-    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")".cyan
+    puts "To".cyan + " Leave".yellow + " (".cyan + "'exit!'".yellow + ")\n".cyan
     print randQ
   end
   
@@ -211,31 +204,36 @@ class UI
 #===================Error====================== 
   def self.main_error 
     sleep(0.1)
-    print redH("\n Input Must Be 1 Word or b Try Again ")
+    print redH("\n Input Must Be 1 Word, 'b' to browse, or 'exit!' to leave ")
     main_control
   end
   
   def self.search_error 
-    puts "NO CIGAR!".red
+    puts "\nNO CIGAR!".red
+    puts "I couldn't find what you're looking for.".black 
     puts "How about trying a Ruby ".black + "Method" + ", ".black + "Class" + " or ".black + "Module" + " name.".black
     puts "=".black*56
     
-    print redH("\n Try A New Word or 'b' To Browse ")
+    puts "\nNOT SURE?".red
+    puts "You can always browse with ".black + "'b'" + " & learn something new.".black + ":)"
+    puts "=".black*56
+    
+    print redH("\n Try a new word, enter 'b' to browse, or 'exit!' to leave ")
     main_control
   end
   
   def self.list_error(matches) 
-    print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
+    print redH("\n Enter a number between 1 and #{matches.count}, 'm' for main or 'exit!' to leave ")
     list_control(matches)
   end
   
   def self.display_class_error(doc) 
-    print redH("\n Please enter '1' or 'm' ")
+    print redH("\n Please enter '1' to view methods, 'm' for main, or 'exit!' to leave ")
     display_class_control(doc)
   end
   
   def self.display_method_error 
-    print redH("\n Please enter 'm' to return to main menu ")
+    print redH("\n Please enter 'm' for main menu or 'exit!' to leave ")
     display_method_control
   end
   
@@ -248,14 +246,6 @@ class UI
   #     browse_control(currentPg, docRange)
   #   end
   # end
-#===================Input====================== 
-  def self.prompt 
-    print " >> ".cyan
-  end
-  
-  def self.my_gets 
-    gets.strip.to_s.downcase
-  end
 #============================================== 
                                         #CANDY
 #===============Quote Scraper================== 
@@ -284,7 +274,11 @@ class UI
     @counter == 2100 || @counter == 2200 || @counter == 2300 || @counter == 2320 || 
     @counter == 2340 || @counter == 2360 || @counter == 2380 || @counter == 2400
   end
-#=================Separators=================== 
+#=============Colors/Candy Props=============== 
+  def self.prompt 
+    print " >> ".cyan
+  end
+  
   def self.sepL 
     puts "=".cyan*28 + "=".white*28
   end
@@ -292,14 +286,14 @@ class UI
   def self.sepR 
     "=".white*28 + "=".cyan*28
   end
-#==================Strings===================== 
-  def self.cyanH(str)
+
+  def self.redH(str) 
+    str.colorize(color: :white, background: :magneta)
+  end#red highlight
+  
+  def self.cyanH(str) 
     str.colorize(color: :white, background: :cyan)
   end#cyan highlight
-  
-  def self.redH(str)
-    str.colorize(color: :white, background: :red)
-  end#red highlight
 
   def self.wrapped(s, width=78) 
 	  lines = []

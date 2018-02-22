@@ -107,12 +107,12 @@ class Scraper < UI
   "\nTo View Full Documentation Enter 'expand'".yellow
   end
 #==================================================================== 
-  def self.parse(des) 
-    des.gsub(/[\n]/, ' ').gsub('  ',' ')
-  end
+  # def self.parse(des) 
+  #   des.gsub(/[\n]/, ' ').gsub('  ',' ')
+  # end
   
-  def self.methUniq(col,name) 
-    col.none?{|meth| meth == name}
-  end
+  # def self.methUniq(col,name) 
+  #   col.none?{|meth| meth == name}
+  # end
 #==================================================================== 
 end
