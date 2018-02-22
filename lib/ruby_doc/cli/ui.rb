@@ -66,6 +66,20 @@ class UI
     end 
   end
   
+  def self.display_method_control 
+    prompt
+    input = my_gets
+    
+    case input
+    when "m" 
+      RubyDoc::CLI.start
+    when "exit!"
+      exit!
+    else 
+      display_method_error
+    end 
+  end
+  
   # def self.browse_control(currentPg, docRange) 
   #   prompt
   #   input = my_gets
@@ -80,20 +94,6 @@ class UI
   #   end
   #   # else
   #   !input.to_i.between?(1,docRange.count) ? browse_error(input, currentPg, docRange) : Doc.display(docRange[input.to_i-1])
-  # end
-  
-  # def self.meth_control 
-  #   prompt
-  #   input = my_gets
-    
-  #   case input
-  #   when "m" 
-  # RubyDoc::CLI.start
-  #   when "exit!"
-  #     exit!
-  #   else 
-  #     methError
-  #   end 
   # end
   
   # def self.list_control(doc) 
@@ -145,13 +145,9 @@ class UI
     doc.methods.each_with_index do |method, index| 
       
       if !method.nil?
-        
         li = ["#{index + 1}.".yellow, method.name.cyan]
         puts li.join(" ")
-        
       end
-      
-      
        
     end
     puts sepR
@@ -162,25 +158,23 @@ class UI
   
     
     
-  # def self.display_method(doc) 
-    # UI.sepL
-  #   puts "Title: ".cyan + doc.name.upcase 
-  #   puts "Type: ".cyan + doc.type.upcase
-  #   puts "\nDescription:".cyan 
-  #   puts doc.doc
-  #   puts "Source: #{doc.url}".red 
-  #   puts sepR
+  def self.display_method(doc) 
+    UI.sepL
+    puts "Title: ".cyan + doc.name.upcase 
+    puts "Type: ".cyan + doc.type.upcase
+    puts "\nDescription:".cyan 
+    puts doc.doc
+    puts "Source: #{doc.url}".red 
+    puts sepR
+     
+    #-----------future fix------------#
+    # description = doc.doc
+    # puts uie.wrapped(description, 55)
+    #-----------future fix------------#
     
-  #   #-----------future fix------------#
-  #   # description = doc.doc
-  #   # puts uie.wrapped(description, 55)
-  #   #-----------future fix------------#
-    
-  #   meth_menu
-  #   meth_control
-    
-  #   RubyDoc::CLI.start if input == "m"
-  # end
+    display_method_menu 
+    display_method_control
+  end
 #===================Menus====================== 
   def self.main_menu 
     puts sepR#
@@ -203,10 +197,10 @@ class UI
     print randQ
   end
   
-  # def self.meth_menu 
-  #   puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
-  #   print randQ
-  # end
+  def self.display_method_menu 
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
+  end
   
   # def self.browse_menu 
   #   puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
@@ -240,10 +234,10 @@ class UI
     display_class_control(doc)
   end
   
-  # def self.meth_error 
-  #   print redH("\n Please enter 'm' to return to main menu ")
-  #   meth_control
-  # end
+  def self.display_method_error 
+    print redH("\n Please enter 'm' to return to main menu ")
+    display_method_control
+  end
   
   # def self.browse_error(input, currentPg, docRange) 
   #   if currentPg == "Last"
