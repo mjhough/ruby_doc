@@ -2,9 +2,7 @@ class Processor
 #===================================================================== 
                                                              #PAGINATE
 #===================================================================== 
-  def self.paginate
-    page1
-  end
+  
   
   # #PageLister 
   # def list(page) 
@@ -30,13 +28,8 @@ class Processor
   # end
 #==============================PaginateAll============================ 
   
-  def self.page1 ;binding.pry
-    UI.sepL
-    list(Doc.all[0..499])#
-    puts UI.sepR
-    
-    UI.browseMenu
-    UI.browseControl("Page1", Doc.all[0..499])
+  def self.page1 
+    UI.browse_list($DocDB[0..499])
   end
 #================================Page 2=============================== 
   def self.page2

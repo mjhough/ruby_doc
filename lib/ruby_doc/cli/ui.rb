@@ -15,7 +15,7 @@ class UI
     if input.split.size > 1 
       main_error
     elsif input == "b"
-      Processor.paginate 
+      paginate 
     elsif input == "exit!"
       exit!
     else
@@ -146,8 +146,6 @@ class UI
     list_menu(doc.methods) 
     list_control(doc.methods)
   end
-  
-    
     
   def self.display_method(doc) 
     UI.sepL
@@ -165,6 +163,28 @@ class UI
     
     display_method_menu 
     display_method_control
+  end
+  
+  def self.paginate 
+    puts sepL
+    Processor.page1
+  end
+  
+  def self.browse_list(page) 
+    page.each_with_index do |doc, index|  
+      
+      if doc.type == "Class" || doc.type == "Module"
+        li = ["#{index + 1}.".yellow, doc.name.light_cyan]
+      else
+        li = ["#{index + 1}.".yellow, doc.name.cyan]
+      end
+      
+      puts li.join(" ")
+    end
+    puts sepR 
+    
+    browseMenu 
+    browseControl("Page1", Doc.all[0..499])
   end
 #===================Menus====================== 
   def self.main_menu 
@@ -197,12 +217,12 @@ class UI
     print randQ
   end
   
-  # def self.browse_menu 
-  #   puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
-  #   puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
-  #   puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
-  #   print randQ
-  # end
+  def self.browse_menu 
+    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
+    puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
+    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
+  end
 #===================Error====================== 
   def self.main_error 
     sleep(0.1)
