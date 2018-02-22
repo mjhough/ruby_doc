@@ -15,13 +15,15 @@ class UI
     if input.split.size > 1 
       main_error
     elsif input == "b"
-      DataProcessor.paginate 
+      Processor.paginate 
     elsif input == "exit!"
       exit!
     else
-      Processor.search(input)
+      matches = Processor.search(input)
+      
+      search_error if matches.empty?
+      search_list(matches) if matches
     end
-    
   end
   
   def self.list_control(matches) 

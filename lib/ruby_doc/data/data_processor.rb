@@ -1,35 +1,36 @@
-class Processor
+class Processor  
 #===================================================================== 
-                                                              #HELPERS
+                                                             #PAGINATE
 #===================================================================== 
-  
-#===================================================================== 
-                                                            #PAGINATOR
-#===================================================================== 
-  #PageLister
-  def list(page) 
-    page.each_with_index{|doc, index| uie.outputD(doc, index)}
-  end
-  
-  def self.list(page) 
-    page.each_with_index{|doc, index| uie.outputD(doc, index)}
-  end
-  
-  #PageShuttle
-  def self.nextPage(currentPg) 
-    case currentPg
-    when "Page1" 
-      page2
-    when "Page2" 
-      page3
-    when "Page3" 
-      page4
-    when "Page4" 
-      last
-    end
-  end
-#==============================PaginateAll============================ 
   def self.paginate
+    page1
+  end
+  
+  # #PageLister 
+  # def list(page) 
+  #   page.each_with_index{|doc, index| uie.outputD(doc, index)}
+  # end
+  
+  # def self.list(page) 
+  #   page.each_with_index{|doc, index| uie.outputD(doc, index)}
+  # end
+  
+  # #PageShuttle
+  # def self.nextPage(currentPg) 
+  #   case currentPg
+  #   when "Page1" 
+  #     page2
+  #   when "Page2" 
+  #     page3
+  #   when "Page3" 
+  #     page4
+  #   when "Page4" 
+  #     last
+  #   end
+  # end
+#==============================PaginateAll============================ 
+  
+  def self.page1 ;binding.pry
     UI.sepL
     list(Doc.all[0..499])#
     puts UI.sepR
@@ -84,9 +85,6 @@ class Processor
 #================================SEARCH=============================== 
   def self.search(name)
     matches = $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
-    
-    UI.search_error if matches.empty?
-    UI.search_list(matches) if matches
   end
 #=====================================================================
 end
