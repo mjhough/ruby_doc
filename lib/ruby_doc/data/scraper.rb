@@ -1,4 +1,4 @@
-class Scraper < UI
+class Scraper < UI 
   
   #See "HELPERS"(line62) for additional methods
                       # CONNECT BOTH SCRAPERS
@@ -7,30 +7,32 @@ class Scraper < UI
     @counter = 0 #For Loading anim
     loading_message#
     
-    html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.5.0/"))
-    container = html.search("#class-index div.entries")
+    html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.4.3/"))
+    icontainer = html.search("#class-index .entries")
     
-    container.search("a").each do |doc| 
-      name = doc.text
-      url = prefix + doc.attribute("href").value
+    icontainer.search("p").each do |li| 
+      name = li.search("a").text
+      url = prefix + li.search("a")[0]["href"]
+      type = li["class"].capitalize
       
       # assigns - Klass :names, :urls
-      doc = Klass.new("Class", name, url) if class_uniq(name)
+      doc = Klass.new("Class", name, url) if class_uniq(url)
       # keeps copy in DocDB
-      $DocDB << doc if doc_uniq(name)
-    end
+      $DocDB << doc if doc_uniq(url)
+    end  
   end 
 #===========================Load Methods============================= 
   def self.load_methods 
-    html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.5.0/"))
-    container = html.search("#method-index div.entries")
+    html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.4.3/"))
+    icontainer = html.search("#method-index .entries")
     
-    container.search("a").each do |doc| 
-      name = doc.text
-      url = prefix + doc.attribute("href").value
+    icontainer.search("a").each do |li|
+      name = li.text
+      url = li["href"]
+      type = "Method"
       
       # assigns - Method :names, :urls
-      doc = Meth.new("Method", name, url) if method_uniq(name) 
+      doc = Meth.new("Method", name, url) if method_uniq(url) 
       # keeps copy in DocDB
       $DocDB << doc if doc_uniq(name)
       
@@ -82,19 +84,19 @@ class Scraper < UI
                                                              #HELPERS
 #==================================================================== 
   def self.prefix 
-    "https://ruby-doc.org/core-2.5.0/"
+    "https://ruby-doc.org/core-2.4.3/"
   end
   
-  def self.doc_uniq(name) 
-    $DocDB.none?{|doc| doc.name == name}
+  def self.class_uniq(url) 
+    Klass.all.none?{|klass| klass.url == url}
   end
   
-  def self.class_uniq(name) 
-    Klass.all.none?{|klass| klass.name == name}
+  def self.doc_uniq(url) 
+    $DocDB.none?{|doc| doc.url == url}
   end
   
-  def self.method_uniq(name) 
-    Meth.all.none?{|method| method.name == name}
+  def self.method_uniq(url) 
+    Meth.all.none?{|method| method.url == url}
   end
   
   def self.expand

@@ -7,7 +7,7 @@ class Meth
   def self.all; @@all; end 
 #============================================================
   # count 1839
-  def initialize(type, name, url) 
+  def initialize(type="n/a", name, url) 
     self.type = type
     self.name = name
     self.url = url
