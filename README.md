@@ -25,12 +25,17 @@ Ever get tired of leaving your editor / environment to google a method, or more 
 
 ![image](https://i.imgur.com/NmincSX.gif)
 ### Features:
-* Search by Doc title
-* View related methods
-* Browse all Docs (Paginated Output To Terminal)
-* Source Links
-* Easy Navigation
-* Random Dev Quotes (Ok This One Is Just For Fun Lol)
+✓ Search by Doc title
+
+✓ View related methods
+
+✓ Browse all Docs (Paginated Output To Terminal)
+
+✓ Source Links
+
+✓ Easy Navigation
+
+✓ Random Dev Quotes (Ok This One Is Just For Fun Lol)
 
 ### Coming Soon:
 * Search by method name ([See Notes](https://github.com/AlphaDaniel/alpha-ruby_doc/blob/master/Notes.md))

@@ -1,6 +1,4 @@
 class UI 
-#=============================================# 
-                                    #IMPORTANT
 #=================Properties=================== 
   attr_reader :counter #For Loading Anim
 #===================Input====================== 
@@ -14,11 +12,13 @@ class UI
     
     if input.split.size > 1 
       main_error
-    elsif input == "b"
+    elsif input == "b" 
       paginate("start") 
-    elsif input == "exit!"
+    elsif input == "exit!" 
       exit!
-    else
+    elsif input == "?" 
+      learn_more
+    else 
       matches = Processor.search(input)
       
       search_error if matches.empty?
@@ -104,6 +104,8 @@ class UI
       
       puts li.join(" ")
     end
+    puts sepR
+    puts "Classes and Modules are".cyan + " Highlighted".light_cyan
     puts sepR
     
     list_menu(matches)
@@ -197,6 +199,14 @@ class UI
     
     browse_control(identifier, page)
   end
+  
+  def self.learn_more
+    puts "\nCHANGELOG".cyan
+    puts Scraper.changelog
+    
+    main_menu
+    main_control
+  end
 #===================Menus====================== 
   def self.main_menu 
     puts sepR#
@@ -204,6 +214,8 @@ class UI
     puts "try to find a match in my database for you.".cyan
     sepL#
     puts "\You can also enter".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
+    puts "=".black*56
+    puts "Enter '?' to Learn More about Alpha Ruby-Doc".black
     print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   

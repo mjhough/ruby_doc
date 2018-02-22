@@ -123,12 +123,17 @@ class Scraper < UI
   "\nTo View Full Documentation Enter 'expand'".yellow
   end
 #==================================================================== 
-  # def self.parse(des) 
-  #   des.gsub(/[\n]/, ' ').gsub('  ',' ')
-  # end
+  def self.changelog
+    html = Nokogiri::HTML(open("https://raw.githubusercontent.com/AlphaDaniel/ruby_doc/master/changelog.md")) 
+    puts "\n" + html.text
+  end
   
-  # def self.methUniq(col,name) 
-  #   col.none?{|meth| meth == name}
-  # end
+  def self.coming_soon
+    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc/blob/master/README.md#coming-soon")) 
+    
+    html.search("div#readme ul li").each do |li|
+       puts ">> " + li.text
+    end
+  end
 #==================================================================== 
 end

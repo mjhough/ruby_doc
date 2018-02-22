@@ -15,7 +15,7 @@ require_relative '../lib/ruby_doc/data/data_processor'
 #====================DataBase===================
 $DocDB = []
 #====================Testing====================
-# Scraper.load_method_doc("https://ruby-doc.org/core-2.4.3/Array.html#method-i-to_s")
+Scraper.coming_soon
 # Scraper.load_classes
 # Scraper.load_methods
 # abort
