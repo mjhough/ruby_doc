@@ -17,11 +17,15 @@ class Processor
   end
 #===============================Load Doc============================== 
   def self.load_doc(doc) 
-    Scraper.load_class_doc(doc) if doc.type == "Class" || doc.type == "Module"
-    Scraper.load_method_doc(doc) if doc.type == "Method"
-    
-    UI.display_class(doc) if doc.type == "Class" || doc.type == "Module"
-    UI.display_method(doc) if doc.type == "Method"
+    if !doc.nil?
+      Scraper.load_class_doc(doc) if doc.type == "Class" || doc.type == "Module"
+      Scraper.load_method_doc(doc) if doc.type == "Method"
+      
+      UI.display_class(doc) if doc.type == "Class" || doc.type == "Module"
+      UI.display_method(doc) if doc.type == "Method"
+    else 
+      UI.nil_error
+    end
   end
 #================================SEARCH=============================== 
   def self.search(name)

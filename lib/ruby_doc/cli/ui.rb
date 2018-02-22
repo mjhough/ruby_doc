@@ -34,11 +34,12 @@ class UI
       RubyDoc::CLI.start
     elsif input == "exit!"
       exit!
-    elsif !input.to_i.between?(1,matches.count)
+    elsif !input.to_i.between?(1,matches.count) 
       list_error(matches)
     else 
       Processor.load_doc(matches[input.to_i-1])
-    end   
+    end 
+    list_control(matches)
   end
   
   def self.display_class_control(doc) 
@@ -76,18 +77,18 @@ class UI
     input = my_gets
     
     case input
-    when "n"
+    when "n" 
       paginate(identifier) 
-    when "m"
+    when "m" 
       RubyDoc::CLI.start 
-    when "exit!"
+    when "exit!" 
       exit!
     end
     
-    if !input.to_i.between?(1,page.count)
+    if !input.to_i.between?(1,page.count) 
       browse_error(input, identifier, page) 
-    else
-      Doc.display(page[input.to_i-1])
+    else 
+      Processor.load_doc(page[input.to_i-1])
     end
   end
 #==================Display===================== 
@@ -160,7 +161,7 @@ class UI
   def self.paginate(identifier) 
     
     case identifier
-    when "start"
+    when "start" 
       Processor.page1
     when "Page1" 
       Processor.page2
@@ -262,8 +263,11 @@ class UI
   end
   
   def self.list_error(matches) 
-    print redH("\n Enter a number between 1 and #{matches.count}, 'm' for main or 'exit!' to leave ")
-    list_control(matches)
+    print redH("\n Enter selection number, 'm' for main or 'exit!' to leave ")
+  end
+  
+  def self.nil_error
+    print redH("\n Enter selection number, 'm' for main or 'exit!' to leave ")
   end
   
   def self.display_class_error(doc) 
