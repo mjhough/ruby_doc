@@ -15,14 +15,6 @@ class UI
   #   end
   # end
   
-  # def self.main 
-  #   RubyDoc::CLI.start
-  # end
-    
-  # def self.search_shuttle(input, matches) 
-  #   input == "m" ? greeting : DataProcessor.doc_data(matches[input.to_i-1])
-  # end
-  
   # def self.meth_shuttle(input, doc) 
   #   displayMeth(doc.methods[input.to_i-1])
   # end  
@@ -44,8 +36,34 @@ class UI
   end
   
   def self.search_control(matches) 
+    prompt
+    input = my_gets
     
+    if input == "m" 
+      RubyDoc::CLI.start
+    elsif input == "exit!"
+      exit!
+    elsif !input.to_i.between?(1,matches.count)
+      search_list_error(matches)
+    else 
+      Processor.load_doc(matches[input.to_i-1])
+    end   
+  end
+  
+  def self.display_class_control(doc) 
+    prompt
+    input = my_gets
     
+    case input
+    when "1" 
+      method_list
+    when "m" 
+      RubyDoc::CLI.start
+    when "exit!" 
+      exit!
+    else 
+      display_class_error(doc)
+    end 
   end
   
   # def self.browse_control(currentPg, docRange) 
@@ -56,27 +74,12 @@ class UI
   #   when "n"
   #     DataExtras.nextPage(currentPg) 
   #   when "m"
-  #     main 
+  # RubyDoc::CLI.start 
   #   when "exit!"
   #     exit!
   #   end
   #   # else
   #   !input.to_i.between?(1,docRange.count) ? browse_error(input, currentPg, docRange) : Doc.display(docRange[input.to_i-1])
-  # end
-  
-  # def self.choice_control(matches) 
-  #   prompt
-  #   input = my_gets
-    
-  #   if input == "m" 
-  #     main
-  #   elsif input == "exit!"
-  #     exit!
-  #   elsif !input.to_i.between?(1,matches.count)
-  #     choice_error(matches)
-  #   else 
-  #     search_shuttle(input, matches)
-  #   end   
   # end
   
   # def self.meth_control 
@@ -85,35 +88,11 @@ class UI
     
   #   case input
   #   when "m" 
-  #     main
+  # RubyDoc::CLI.start
   #   when "exit!"
   #     exit!
   #   else 
   #     methError
-  #   end 
-  # end
-  
-  # def self.doc_control(doc) 
-  #   prompt
-  #   input = my_gets
-    
-  #   case input
-  #   when "1" 
-  #     puts sepR
-  #     doc.methods.each_with_index do |doc, index| 
-  #       display_list(doc, index) unless doc.nil?
-  #     end
-  #     puts sepR
-      
-  #     view_menu
-  #     choice_control(doc.methods)
-      
-  #   when "m" 
-  #     main
-  #   when "exit!" 
-  #       exit!
-  #   else 
-  #     doc_error(doc)
   #   end 
   # end
   
@@ -122,14 +101,14 @@ class UI
   #   input = my_gets
     
   #   if input == "m" 
-  #     main
+  # RubyDoc::CLI.start
   #   elsif input == "exit!" 
   #     exit!
   #   elsif !input.to_i.between?(1,doc.methods.count) ? list_error(doc) : RubyDoc::CLI::UI.meth_shuttle(input, doc)
   #   end
   # end
 #==================Display===================== 
-  def self.display_list(matches) 
+  def self.search_list(matches) 
     matches.each_with_index do |doc, index| 
       
       if doc.type == "Class" || doc.type == "Module"
@@ -140,20 +119,24 @@ class UI
       
       puts li.join(" ")
     end
+    puts sepR
+    
+    search_menu
+    search_control(matches)
   end
   
-  # def self.display_class(doc) 
-  #   puts "TITLE: ".cyan + doc.name.upcase 
-  #   puts "TYPE: ".cyan + doc.type.upcase
-  #   puts "\nDESCRIPTION:".cyan 
-  #   puts doc.doc
-  #   puts "Methods: ".cyan + "#{doc.methods.count}".yellow
-  #   puts "Source: #{doc.url}".red 
-  #   puts sepR
+  def self.display_class(doc) 
+    puts "TITLE: ".cyan + doc.name.upcase 
+    puts "TYPE: ".cyan + doc.type.upcase
+    puts "\nDESCRIPTION:".cyan 
+    puts doc.description
+    puts "Methods: ".cyan + "#{doc.methods.count}".yellow
+    puts "Source: #{doc.url}".red 
+    puts sepR
     
-  #   doc_menu(doc)
-  #   doc_control(doc)
-  # end
+    display_class_menu(doc)
+    display_class_control(doc)
+  end
   
   # def self.display_method(doc) 
   #   puts "Title: ".cyan + doc.name.upcase 
@@ -173,21 +156,44 @@ class UI
     
   #   RubyDoc::CLI.start if input == "m"
   # end
+#===================Menus====================== 
+  def self.main_menu 
+    puts sepR#
+    puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
+    puts "try to find a match in my database for you.".cyan
+    sepL#
+    puts "\You can also type".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
+    print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
+  end
+  
+  def self.search_menu 
+    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter ID Number eg.".cyan + "'1'".yellow + ")".cyan
+    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
+  end
+  
+  def self.display_class_menu(doc) 
+    puts "To ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
+    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+    print randQ
+  end
+  
+  # def self.meth_menu 
+  #   puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+  #   print randQ
+  # end
+  
+  # def self.browse_menu 
+  #   puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
+  #   puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
+  #   puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
+  #   print randQ
+  # end
 #===================Error====================== 
   def self.main_error 
     sleep(0.1)
     print redH("\n Input Must Be 1 Word or b Try Again ")
     main_control
-  end
-  
-  def self.browse_error(input, currentPg, docRange) 
-    if currentPg == "Last"
-      choice_error(docRange)
-      browse_control(currentPg, docRange)
-    else
-      print redH("\n Enter a number between 1 and #{docRange.count} n for next or m for main ")
-      browse_control(currentPg, docRange)
-    end
   end
   
   def self.search_error 
@@ -199,58 +205,30 @@ class UI
     main_control
   end
   
-  # def self.choice_error(matches) 
-  #   print redH("\n Enter a number between 1 and #{matches.count} or m for main ")
-  #   choice_control(matches)
+  def self.search_list_error(matches) 
+    print redH("\n Enter a number between 1 and #{collection.count} or m for main ")
+    search_control(matches)
+  end
+  
+  def self.display_class_error(doc) 
+    print redH("\n Please enter '1' or 'm' ")
+    display_class_control(doc)
+  end
+  
+  # def self.meth_error 
+  #   print redH("\n Please enter 'm' to return to main menu ")
+  #   meth_control
   # end
   
-  def self.doc_error(doc) 
-    print redH("\n Please enter '1' or 'm' ")
-    doc_control(doc)
-  end
-  
-  def self.meth_error 
-    print redH("\n Please enter 'm' to return to main menu ")
-    meth_control
-  end
-  
-  def self.list_error(colection) 
-    print redH("\n Enter a number between 1 and #{collection.count} or m for main ")
-    list_control(doc)
-  end
-#===================Menus====================== 
-  def self.main_menu 
-    puts sepR#
-    puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
-    puts "try to find a match in my database for you.".cyan
-    sepL#
-    puts "\You can also type".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
-    print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
-  end
-  
-  def self.browse_menu 
-    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter Doc Number eg.".cyan + "'1'".yellow + ")".cyan
-    puts "To ".cyan + "Browse Next Page ".yellow + "(Enter ".cyan + "'n'".yellow + ")".cyan
-    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
-    print randQ
-  end
-  
-  def self.view_menu 
-    puts "To ".cyan + "View An Item ".yellow + "From This List (Enter ID Number eg.".cyan + "'1'".yellow + ")".cyan
-    puts "\nBack to".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
-    print randQ
-  end
-
-  def self.doc_menu(doc) 
-    puts "To ".cyan + "View Methods ".yellow + "For".cyan + " #{doc.name}".yellow + " (Enter ".cyan + "'1'".yellow + ")".cyan
-    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
-    print randQ
-  end
-  
-  def self.meth_menu 
-    puts "To Return To".cyan + " Main Menu".yellow + " (Enter ".cyan + "'m'".yellow + ")\n".cyan
-    print randQ
-  end
+  # def self.browse_error(input, currentPg, docRange) 
+  #   if currentPg == "Last"
+  #     list_error(docRange)
+  #     browse_control(currentPg, docRange)
+  #   else
+  #     print redH("\n Enter a number between 1 and #{docRange.count} n for next or m for main ")
+  #     browse_control(currentPg, docRange)
+  #   end
+  # end
 #===================Input====================== 
   def self.prompt 
     print " >> ".cyan

@@ -73,27 +73,22 @@ class Processor
     uie.viewMenu#
     uie.browseControl("Last", Doc.all[2000..Doc.all.length])#
   end 
-#==============================Display Doc============================ 
-  def self.doc_data(doc) 
-    Scraper.load_class_doc(doc) if doc.type == "Class"
+#================================Load Doc============================= 
+  def self.load_doc(doc) 
+    Scraper.load_class_doc(doc) if doc.type == "Class" || doc.type == "Module"
     Scraper.load_method_doc(doc) if doc.type == "Method"
     
     UI.sepL
-    UI.display_class(doc) if doc.type == "Class"
+    UI.display_class(doc) if doc.type == "Class" || doc.type == "Module"
     UI.display_method(doc) if doc.type == "Method"
   end
-#=============================SUPER SEARCH============================ 
+#================================SEARCH=============================== 
   def self.search(name)
     UI.sepL
     matches = $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
     
     UI.search_error if matches.empty?
-    UI.display_list(matches) if matches
-    
-    puts UI.sepR
-    
-    UI.view_menu
-    UI.choice_control(matches)
+    UI.search_list(matches) if matches
   end
 #=====================================================================
 end

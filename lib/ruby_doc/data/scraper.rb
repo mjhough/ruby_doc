@@ -16,7 +16,7 @@ class Scraper < UI
       type = li["class"].capitalize
       
       # assigns - Klass :names, :urls
-      doc = Klass.new("Class", name, url) if class_uniq(url)
+      doc = Klass.new(type, name, url) if class_uniq(url)
       # keeps copy in DocDB
       $DocDB << doc if doc_uniq(url)
     end  
@@ -28,7 +28,7 @@ class Scraper < UI
     
     icontainer.search("a").each do |li|
       name = li.text
-      url = li["href"]
+      url = prefix + li["href"]
       type = "Method"
       
       # assigns - Method :names, :urls
@@ -41,29 +41,29 @@ class Scraper < UI
     end
   end 
 #==========================Load Class Doc============================ 
-  def self.load_class_doc(klass) 
-    html = Nokogiri::HTML(open(klass.url))
+  def self.load_class_doc(doc) 
+    html = Nokogiri::HTML(open(doc.url))
 #-------------------------------------------------------------------- 
     # documentation
     container = html.search("#description")
     
     short = container.search("p")[0].text + expand
     
-    doc = "" 
-    container.search("p, pre, h2").each {|p| doc << p.text + "\n\n"} 
+    description = "" 
+    container.search("p, pre, h2").each {|p| description << p.text + "\n\n"} 
     
     # assign 
-    klass.short = short
-    klass.doc = doc 
+    doc.short = short
+    doc.description = description
 #-------------------------------------------------------------------- 
     # methods
     methods = html.search("ul.link-list a")
     
     methods.each do |m| 
-      url = klass.url + m["href"] 
-      method = Meth.find_by(url)
+      url = doc.url + m["href"] 
+      method = Meth.find_by(url) 
       
-      klass.methods << method if class_method_uniq(klass, method)
+      doc.methods << method if class_method_uniq(doc, method)
     end
   end
 #=========================Load Method Doc============================ 
@@ -80,31 +80,31 @@ class Scraper < UI
     # assign 
     method.doc = doc
   end
-#==================================================================== 
+#===================================================================# 
                                                              #HELPERS
 #==================================================================== 
-  def self.prefix 
-    "https://ruby-doc.org/core-2.4.3/"
-  end
-  
   def self.class_uniq(url) 
     Klass.all.none?{|klass| klass.url == url}
-  end
-  
-  def self.doc_uniq(url) 
-    $DocDB.none?{|doc| doc.url == url}
   end
   
   def self.method_uniq(url) 
     Meth.all.none?{|method| method.url == url}
   end
   
-  def self.expand
-  "\nTo View Full Documentation Enter 'expand'".yellow
+  def self.doc_uniq(url) 
+    $DocDB.none?{|doc| doc.url == url}
   end
   
-  def self.class_method_uniq(klass, method)
-    klass.methods.none?{|m| m == method }
+  def self.class_method_uniq(doc, method)
+    doc.methods.none?{|m| m == method }
+  end
+#--------------------------------------------------------------------  
+  def self.prefix 
+    "https://ruby-doc.org/core-2.4.3/"
+  end
+  
+  def self.expand
+  "\nTo View Full Documentation Enter 'expand'".yellow
   end
 #==================================================================== 
   def self.parse(des) 
