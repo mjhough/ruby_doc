@@ -1,4 +1,4 @@
-class DataProcessor
+class Processor
 #===================================================================== 
                                                               #HELPERS
 #===================================================================== 
@@ -83,11 +83,13 @@ class DataProcessor
     UI.display_method(doc) if doc.type == "Method"
   end
 #=============================SUPER SEARCH============================ 
-  def self.super_search(name)
+  def self.search(name)
     UI.sepL
     matches = $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
     
-    UI.search_control(matches)
+    UI.search_error if matches.empty?
+    UI.display_list(matches) if matches
+    
     puts UI.sepR
     
     UI.view_menu

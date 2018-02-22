@@ -1,123 +1,178 @@
 class UI 
-#============================================== 
+#=============================================# 
                                     #IMPORTANT
-#=================properties=================== 
+#=================Properties=================== 
   attr_reader :counter #For Loading Anim
 #=================Shuttles===================== 
-  def self.main 
-    RubyDoc::CLI.start
-  end
+  # def self.main_shuttle(input) 
+  #   case input 
+  #   when "b" 
+  #     DataProcessor.paginate 
+  #   when "exit!"
+  #     exit!
+  #   else
+  #     DataProcessor.super_search(input)
+  #   end
+  # end
   
-  def self.main_shuttle(input) 
-    case input 
-    when "b" 
-      DataProcessor.paginate 
-    when "exit!"
-      exit!
-    else
-      DataProcessor.super_search(input)
-    end
-  end
+  # def self.main 
+  #   RubyDoc::CLI.start
+  # end
     
-  def self.search_shuttle(input, matches) 
-    input == "m" ? greeting : DataProcessor.doc_data(matches[input.to_i-1])
-  end
+  # def self.search_shuttle(input, matches) 
+  #   input == "m" ? greeting : DataProcessor.doc_data(matches[input.to_i-1])
+  # end
   
-  def self.meth_shuttle(input, doc)  ;binding.pry
-    displayMeth(doc.methods[input.to_i-1])
-  end  
-#==================control===================== 
+  # def self.meth_shuttle(input, doc) 
+  #   displayMeth(doc.methods[input.to_i-1])
+  # end  
+#==================Control===================== 
   def self.main_control 
     prompt
     input = my_gets
-    input.split.size > 1 ? main_error : main_shuttle(input)  
-  end
-  
-  def self.browse_control(currentPg, docRange) 
-    prompt
-    input = my_gets
     
-    case input
-    when "n"
-      DataExtras.nextPage(currentPg) 
-    when "m"
-      main 
-    when "exit!"
+    if input.split.size > 1 
+      main_error
+    elsif input == "b"
+      DataProcessor.paginate 
+    elsif input == "exit!"
       exit!
+    else
+      Processor.search(input)
     end
-    # else
-    !input.to_i.between?(1,docRange.count) ? browse_error(input, currentPg, docRange) : Doc.display(docRange[input.to_i-1])
+    
   end
   
   def self.search_control(matches) 
-    search_error if matches.empty?
-    matches.each_with_index{|doc, index| display_list(doc, index)}
+    
+    
   end
   
-  def self.choice_control(matches) 
-    prompt
-    input = my_gets
+  # def self.browse_control(currentPg, docRange) 
+  #   prompt
+  #   input = my_gets
     
-    if input == "m" 
-      main
-    elsif input == "exit!"
-      exit!
-    elsif !input.to_i.between?(1,matches.count)
-      choice_error(matches)
-    else 
-      search_shuttle(input, matches)
-    end   
-  end
+  #   case input
+  #   when "n"
+  #     DataExtras.nextPage(currentPg) 
+  #   when "m"
+  #     main 
+  #   when "exit!"
+  #     exit!
+  #   end
+  #   # else
+  #   !input.to_i.between?(1,docRange.count) ? browse_error(input, currentPg, docRange) : Doc.display(docRange[input.to_i-1])
+  # end
   
-  def self.meth_control 
-    prompt
-    input = my_gets
+  # def self.choice_control(matches) 
+  #   prompt
+  #   input = my_gets
     
-    case input
-    when "m" 
-      main
-    when "exit!"
-      exit!
-    else 
-      methError
-    end 
-  end
+  #   if input == "m" 
+  #     main
+  #   elsif input == "exit!"
+  #     exit!
+  #   elsif !input.to_i.between?(1,matches.count)
+  #     choice_error(matches)
+  #   else 
+  #     search_shuttle(input, matches)
+  #   end   
+  # end
   
-  def self.doc_control(doc) 
-    prompt
-    input = my_gets
+  # def self.meth_control 
+  #   prompt
+  #   input = my_gets
     
-    case input
-    when "1" 
-      puts sepR
-      doc.methods.each_with_index do |doc, index| 
-        display_list(doc, index) unless doc.nil?
+  #   case input
+  #   when "m" 
+  #     main
+  #   when "exit!"
+  #     exit!
+  #   else 
+  #     methError
+  #   end 
+  # end
+  
+  # def self.doc_control(doc) 
+  #   prompt
+  #   input = my_gets
+    
+  #   case input
+  #   when "1" 
+  #     puts sepR
+  #     doc.methods.each_with_index do |doc, index| 
+  #       display_list(doc, index) unless doc.nil?
+  #     end
+  #     puts sepR
+      
+  #     view_menu
+  #     choice_control(doc.methods)
+      
+  #   when "m" 
+  #     main
+  #   when "exit!" 
+  #       exit!
+  #   else 
+  #     doc_error(doc)
+  #   end 
+  # end
+  
+  # def self.list_control(doc) 
+  #   prompt
+  #   input = my_gets
+    
+  #   if input == "m" 
+  #     main
+  #   elsif input == "exit!" 
+  #     exit!
+  #   elsif !input.to_i.between?(1,doc.methods.count) ? list_error(doc) : RubyDoc::CLI::UI.meth_shuttle(input, doc)
+  #   end
+  # end
+#==================Display===================== 
+  def self.display_list(matches) 
+    matches.each_with_index do |doc, index| 
+      
+      if doc.type == "Class" || doc.type == "Module"
+        li = ["#{index + 1}.".yellow, doc.name.light_cyan]
+      else
+        li = ["#{index + 1}.".yellow, doc.name.cyan]
       end
-      puts sepR
       
-      view_menu
-      choice_control(doc.methods)
-      
-    when "m" 
-      main
-    when "exit!" 
-        exit!
-    else 
-      doc_error(doc)
-    end 
-  end
-  
-  def self.list_control(doc) 
-    prompt
-    input = my_gets
-    
-    if input == "m" 
-      main
-    elsif input == "exit!" 
-      exit!
-    elsif !input.to_i.between?(1,doc.methods.count) ? list_error(doc) : RubyDoc::CLI::UI.meth_shuttle(input, doc)
+      puts li.join(" ")
     end
   end
+  
+  # def self.display_class(doc) 
+  #   puts "TITLE: ".cyan + doc.name.upcase 
+  #   puts "TYPE: ".cyan + doc.type.upcase
+  #   puts "\nDESCRIPTION:".cyan 
+  #   puts doc.doc
+  #   puts "Methods: ".cyan + "#{doc.methods.count}".yellow
+  #   puts "Source: #{doc.url}".red 
+  #   puts sepR
+    
+  #   doc_menu(doc)
+  #   doc_control(doc)
+  # end
+  
+  # def self.display_method(doc) 
+  #   puts "Title: ".cyan + doc.name.upcase 
+  #   puts "Type: ".cyan + doc.type.upcase
+  #   puts "\nDescription:".cyan 
+  #   puts doc.doc
+  #   puts "Source: #{doc.url}".red 
+  #   puts sepR
+    
+  #   #-----------future fix------------#
+  #   # description = doc.doc
+  #   # puts uie.wrapped(description, 55)
+  #   #-----------future fix------------#
+    
+  #   meth_menu
+  #   meth_control
+    
+  #   RubyDoc::CLI.start if input == "m"
+  # end
 #===================Error====================== 
   def self.main_error 
     sleep(0.1)
@@ -203,45 +258,6 @@ class UI
   
   def self.my_gets 
     gets.strip.to_s.downcase
-  end
-#==================Display===================== 
-  def self.display_list(doc, index)
-    li = ["#{index + 1}.".yellow, doc.name.light_cyan] if doc.type == "Class"
-    li = ["#{index + 1}.".yellow, doc.name.cyan] if doc.type == "Method"
-    
-    puts li.join(" ")
-  end
-  
-  def self.display_class(doc) 
-    puts "TITLE: ".cyan + doc.name.upcase 
-    puts "TYPE: ".cyan + doc.type.upcase
-    puts "\nDESCRIPTION:".cyan 
-    puts doc.doc
-    puts "Methods: ".cyan + "#{doc.methods.count}".yellow
-    puts "Source: #{doc.url}".red 
-    puts sepR
-    
-    doc_menu(doc)
-    doc_control(doc)
-  end
-  
-  def self.display_method(doc) 
-    puts "Title: ".cyan + doc.name.upcase 
-    puts "Type: ".cyan + doc.type.upcase
-    puts "\nDescription:".cyan 
-    puts doc.doc
-    puts "Source: #{doc.url}".red 
-    puts sepR
-    
-    #-----------future fix------------#
-    # description = doc.doc
-    # puts uie.wrapped(description, 55)
-    #-----------future fix------------#
-    
-    meth_menu
-    meth_control
-    
-    RubyDoc::CLI.start if input == "m"
   end
 #============================================== 
                                         #CANDY
