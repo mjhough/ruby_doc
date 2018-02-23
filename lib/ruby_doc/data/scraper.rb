@@ -1,5 +1,5 @@
 class Scraper < UI 
-#===========================Load Classes================================= 
+#===========================LOAD CLASSES================================= 
   def self.load_classes 
     @counter = 0 #For Loading anim
     loading_message#
@@ -9,7 +9,7 @@ class Scraper < UI
     
     icontainer.search("p").each do |li| 
       name = li.search("a").text
-      url = prefix + li.search("a")[0]["href"]
+      url = UI.rdo_prefix + li.search("a")[0]["href"]
       type = li["class"].capitalize
       
       # assigns - Klass :names, :urls
@@ -18,14 +18,14 @@ class Scraper < UI
       $DocDB << doc if doc_uniq(url)
     end  
   end 
-#===========================Load Methods================================= 
+#===========================LOAD METHODS================================= 
   def self.load_methods 
     html = Nokogiri::HTML(open("https://ruby-doc.org/core-2.4.3/"))
     icontainer = html.search("#method-index .entries")
     
     icontainer.search("a").each do |li|
       name = li.text
-      url = prefix + li["href"]
+      url = UI.rdo_prefix + li["href"]
       type = "Method"
       
       # assigns - Method :names, :urls
@@ -37,23 +37,21 @@ class Scraper < UI
       loading_animation#
     end
   end 
-#==========================Load Class Doc================================ 
+#==========================LOAD CLASS DOC================================ 
   def self.load_class_doc(doc) 
     html = Nokogiri::HTML(open(doc.url))
-#------------------------------------------------------------------------ 
-    # documentation
+#--------------------------documentation--------------------------------- 
     container = html.search("#description")
     
-    short = container.search("p")[0].text + expand
+    short = container.search("p")[0].text + UI.view_full
     
-    description = "" 
-    container.search("p, pre, h2").each {|p| description << p.text + "\n\n"} 
+    text = "" 
+    container.search("p, pre, h2").each {|p| text << p.text + "\n\n"} 
     
     # assign 
     doc.short = short
-    doc.description = description
-#------------------------------------------------------------------------ 
-    # methods
+    doc.documentation = text
+#-----------------------------methods------------------------------------ 
     methods = html.search("ul.link-list a")
     
     methods.each do |m| 
@@ -63,13 +61,13 @@ class Scraper < UI
       doc.methods << method if class_method_uniq(doc, method)
     end
   end
-#=========================Load Method Doc================================ 
-  def self.load_method_doc(method) 
-    html = Nokogiri::HTML(open(method.url))
-#------------------------------------------------------------------------ 
-    # documentation
-    selector = "#"+method.url.gsub(/.+#method.{3}/, "")+"-method"
+#=========================LOAD METHOD DOC================================ 
+  def self.load_method_doc(doc) 
+    html = Nokogiri::HTML(open(doc.url))
+#--------------------------documentation--------------------------------- 
+    selector = "#"+doc.url.gsub(/.+#method.{3}/, "")+"-method"
     
+    # if method is alias (linked to another method)
     if html.search("#{selector}").first["class"].include?("method-alias")
       
       conn = html.search("#{selector}").first.search("a")[1]["href"] 
@@ -77,25 +75,24 @@ class Scraper < UI
       
       container = html.search(rebuild)[0] 
     
-      doc = "" 
-      doc << html.search("#{selector} div.aliases").first.text + "\n\n" 
-      container.search("p, pre, h2").each {|p| doc << p.text + "\n\n" }  
+      text = "" 
+      text << html.search("#{selector} div.aliases").first.text + "\n\n" 
+      container.search("p, pre, h2").each {|p| text << p.text + "\n\n" }  
       
       # assign 
-      method.doc = doc
+      doc.documentation = text
+    # default
     else
       container = html.search(selector)[0]
     
-      doc = "" 
-      container.search("p, pre, h2").each {|p| doc << p.text + "\n\n" } 
+      text = "" 
+      container.search("p, pre, h2").each {|p| text << p.text + "\n\n" } 
       
       # assign 
-      method.doc = doc
+      doc.documentation = text
     end 
   end 
-#=======================================================================# 
-                                                             #HELPERS
-#======================================================================== 
+#=============================HELPERS==================================== 
   def self.class_uniq(url) 
     Klass.all.none?{|klass| klass.url == url}
   end
@@ -110,30 +107,22 @@ class Scraper < UI
   
   def self.class_method_uniq(doc, method)
     doc.methods.none?{|m| m == method }
-  end
-#------------------------------------------------------------------------ 
-  def self.prefix 
-    "https://ruby-doc.org/core-2.4.3/"
-  end
-  
-  def self.expand
-  "\nTo View Full Documentation Enter 'expand'".yellow
-  end
+  end 
 #======================================================================== 
-  def self.changelog
-    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc/blob/master/changelog.md")) 
-    
-    puts html.search("#readme").text.gsub("\n    ", "").gsub("\n\n\n  ", "")
-  end
-  
   def self.coming_soon
-    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc")) 
+    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc/blob/master/README.md")) 
     
     list = ""
     html.search("div#readme ul li").each do |li| 
        list << ">> ".cyan + li.text + "\n"
     end
     list
+  end
+  
+  def self.changelog 
+    html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc/blob/master/changelog.md"))  
+    
+    html.search("#readme").text.gsub("\n    ", "").gsub("\n\n\n  ", "") + "\n\n"
   end
 #======================================================================== 
 end

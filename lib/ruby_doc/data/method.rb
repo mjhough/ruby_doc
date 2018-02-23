@@ -1,6 +1,6 @@
 class Meth
 #============================================================           
-  attr_accessor :type, :name, :url, :doc
+  attr_accessor :type, :name, :url, :documentation
 #------------------------------------------------------------  
   @@all = []
   def self.all; @@all; end 

@@ -1,19 +1,19 @@
 # ALPHA RUBY DOC
 
-![](http://forthebadge.com/images/badges/made-with-ruby.svg)
-![](http://forthebadge.com/images/badges/powered-by-electricity.svg)
-![](http://forthebadge.com/images/badges/pretty-risque.svg)
+![lang](http://forthebadge.com/images/badges/made-with-ruby.svg) 
+![fun](http://forthebadge.com/images/badges/powered-by-electricity.svg) 
+![fun](http://forthebadge.com/images/badges/pretty-risque.svg)
 
-[![Gem Version](https://badge.fury.io/rb/ruby_doc.svg)](https://badge.fury.io/rb/ruby_doc)
-[![Gem](https://img.shields.io/gem/dt/ruby_doc.svg)](https://rubygems.org/gems/ruby_doc)
-[![Changelog](https://img.shields.io/badge/change-log-blue.svg)](https://github.com/AlphaDaniel/alpha-ruby_doc/blob/master/changelog.md)
+[![Gem Version](https://img.shields.io/gem/v/ruby_doc.svg?&label=latest%20version&?&colorB=3FB911)](https://rubygems.org/gems/ruby_doc)
+[![Downloads](http://ruby-gem-downloads-badge.herokuapp.com/ruby_doc/?type=total&color=brightgreen)](https://rubygems.org/gems/ruby_doc)
 [![GitHub last commit](https://img.shields.io/github/last-commit/AlphaDaniel/alpha-ruby_doc.svg)](https://github.com/AlphaDaniel/alpha-ruby_doc/commits/master)
-[![](https://img.shields.io/badge/A-C-red.svg)](http://a1phacoding.com/)
+[![Changelog](https://img.shields.io/badge/change-log-blue.svg)](https://github.com/AlphaDaniel/alpha-ruby_doc/blob/master/changelog.md)
+[![Site](https://img.shields.io/badge/Alpha-Coding-blue.svg?&colorB=0F80C0&?&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw%2FeHBhY2tldCBiZWdpbj0i77u%2FIiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8%2BIDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4OUY5MDgyNzE4RjQxMUU4QjBCREE1NUVCQkYxMDJFMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4OUY5MDgyODE4RjQxMUU4QjBCREE1NUVCQkYxMDJFMiI%2BIDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg5RjkwODI1MThGNDExRThCMEJEQTU1RUJCRjEwMkUyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg5RjkwODI2MThGNDExRThCMEJEQTU1RUJCRjEwMkUyIi8%2BIDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY%2BIDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8%2BLUvNgAAAAkRJREFUeNocUFtP02AY7td%2BbVfoGFvHzmxjgzEOc0ETb0BvQCFMgfhzvPAQNPwSEm%2BJiTEBEhQvxDsUOQSyMoSxso2Vtmv7de3qp%2B%2FFk%2FfiyXMCoUg4Gk0kUtn00NDau9cHh8dvVt%2B7Tof39uuaYtlOQ6riZ3h0ggqHIwEh1BcIsiwTHBgYTCSqUj0UifC8j4a0CwDDsMg0EDLB3EKJ6%2B0LCIKnh%2Ff5fE3pcndnW2%2FrNMOEI7HceBFZmKafHv%2BGPV4%2F62Ep2tPLewkKbn7%2BdHEuEv%2FPdpyphzNewJuIR2mDHM3nUqlkUOj3%2B%2F33p4r3CgVMgpDCOJLLPV2YG5%2BcrNfrlfIZXH310nEcXddlVfv29Uuz2finZzsYGYo8Odjf3Nm9vhAtsw1xCWRZXaxEgoOf%2BxzHZTMZRVUASZ5Xzre3tm5bius62IeifcGjsnh1c%2BsCcrH0TPD3tzXVw3oUrT09PfN2dU2W78TymWkalAWAcqcCSBuW1ek4zdplRRQ1Q7%2BRpOdLK%2FmJQiQ%2BGIzG2qpG4kCQAkqrURHLDOFqqlqTpNOTE0AQeCbbtmVNjSXTC8svIM6k3MldlyiMhR8Ux%2FMjqXQ282F9HUJ6aXklGhZasrz365DDkt0O6iDD1NXF%2BVmG5apX1x83NnieJwgXWR3HcTOp5HAyjvfBxSDOWHr0OB6Nmggh2%2BF4H0lSXar9p9YIBEMcyxTH8s3WLbQMIxYfnJ19gveq3jRqij4zvzQgBE6PDve%2B%2F%2BjhPMPZNMuwtOv%2BFWAADfsWB%2FHBnC4AAAAASUVORK5CYII%3D)](http://a1phacoding.com/)
 
 ---
 ## A CLI Gem That Scrapes Ruby Documentation
 
-![image](https://images.huffingtonpost.com/2013-08-23-tumblr_m08celcrnT1r3isxuo1_500.gif)
+<!--![image](https://images.huffingtonpost.com/2013-08-23-tumblr_m08celcrnT1r3isxuo1_500.gif)-->
 
 Ever get tired of leaving your editor / environment to google a method, or more in depth info on a class or module? This gem aims to make Ruby referencing quick and more importantly, **LOCAL!**
 
@@ -23,23 +23,31 @@ Ever get tired of leaving your editor / environment to google a method, or more 
 ## A Look Inside
 [![forthebadge](http://forthebadge.com/images/badges/thats-how-they-get-you.svg)](http://forthebadge.com)
 
-![image](https://i.imgur.com/NmincSX.gif)
+![image](https://i.imgur.com/qAW4sNY.gif)
+
+---
 ### Features:
-✓  Search for Ruby Documentation by Class, Module or Method Name
+✅ Search for Ruby Documentation by Class, Module or Method Name
 
-✓  Browse all Documentation (Paginated Output To Terminal)
+✅ Browse all Documentation (Paginated Output To Terminal)
 
-✓  View Descriptions and Syntax
+✅ View Descriptions and Syntax
 
-✓  View Source Code
+✅ View Source Code
 
-✓  Source Links Provided
+✅ Source Links Provided
 
-✓  Easy Navigation
+✅ Easy Navigation
 
-✓  Random Dev Quotes (For fun and motivation)
+✅ Random Dev Quotes (For fun and motivation) 
 
-### Coming Soon:
+
+---
+
+[![contributions welcome](https://img.shields.io/badge/Contributions%20/%20Feedback%20/%20Requests-welcome-blue.svg?style=flat)](https://github.com/AlphaDaniel/ruby_doc/issues)
+
+---
+### To do list:
 * Multiple Doc sources
 * Save Favorites
 * Add Notes
@@ -58,16 +66,16 @@ Ever get tired of leaving your editor / environment to google a method, or more 
 Add this line to your application's Gemfile
 
 ```ruby
-gem 'ruby_doc'
+ gem 'ruby_doc'
 ```
 
 And then execute
 
-    $ bundle
+     $ bundle
 
 #### For Yourself:
 
-    $ gem install ruby_doc
+     $ gem install ruby_doc
 
 
 ---
@@ -75,15 +83,15 @@ And then execute
 
 Once installed execute
 
-    $ ruby_doc
+     $ ruby_doc
     
 To exit 
 
-    $ exit!
+     $ exit!
     
-To Learn More 
+To Learn More (From Main Menu)
 
-    $ ?
+     $ ?
     
 ---
 ## Contributing
