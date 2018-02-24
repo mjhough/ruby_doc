@@ -215,6 +215,7 @@ class UI
   end
 #-----------------learn more------------------- 
   def self.learn_more 
+    # test clear here / try all navigational combinations
     puts "\n" + sepB
     puts "COMING SOON".cyan
     puts sepB
@@ -282,14 +283,15 @@ class UI
   end
   
   def self.search_error 
-    puts "\nNO CIGAR!".red
+    puts sepB
+    puts "NO CIGAR!".red
     puts "I couldn't find what you're looking for.".black 
     puts "How about trying a Ruby ".black + "Method" + ", ".black + "Class" + " or ".black + "Module" + " name.".black
-    sepB
+    puts sepB
     
-    puts "\nNOT SURE?".red
+    puts "NOT SURE?".red
     puts "You can always browse with ".black + "'b'" + " & learn something new.".black + ":)"
-    sepB
+    puts sepB
     
     print redH("\n Try a new word, enter 'b' to browse, or 'exit!' to leave ")
     main_control
@@ -299,7 +301,7 @@ class UI
     print redH("\n Enter selection number, 'm' for main or 'exit!' to leave ")
   end
   
-  def self.nil_error
+  def self.nil_error 
     print redH("\n Enter selection number, 'm' for main or 'exit!' to leave ")
   end
   
