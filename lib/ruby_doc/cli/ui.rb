@@ -331,8 +331,9 @@ class UI
   end
 #============================================== 
                                         #CANDY
-#===============Quote Scraper================== 
-  def self.randQ
+#================== Quotes===================== 
+  def self.randQ 
+    puts sepB
     html = Nokogiri::HTML(open("https://fortrabbit.github.io/quotes/"))
     container = html.search(".row.gutter-l.wrap")
     
