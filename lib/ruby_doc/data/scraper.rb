@@ -29,7 +29,7 @@ class Scraper < UI
       type = "Method"
       
       # assigns - Method :names, :urls
-      doc = Meth.new("Method", name, url) if method_uniq(url) 
+      doc = Meth.new("Method", name, url) if method_uniq(name) 
       # keeps copy in DocDB
       $DocDB << doc if doc_uniq(name)
       
@@ -81,7 +81,6 @@ class Scraper < UI
       
       # assign 
       doc.documentation = text
-    # default
     else
       container = html.search(selector)[0]
     
@@ -97,12 +96,12 @@ class Scraper < UI
     Klass.all.none?{|klass| klass.url == url}
   end
   
-  def self.method_uniq(url) 
-    Meth.all.none?{|method| method.url == url}
+  def self.method_uniq(name)  
+    Meth.all.none?{|method| method.name == name}
   end
   
-  def self.doc_uniq(url) 
-    $DocDB.none?{|doc| doc.url == url}
+  def self.doc_uniq(name) 
+    $DocDB.none?{|doc| doc.name == name}
   end
   
   def self.class_method_uniq(doc, method)

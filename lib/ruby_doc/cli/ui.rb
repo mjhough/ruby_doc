@@ -24,7 +24,7 @@ class UI
       clear
       learn_more
     else 
-      matches = Processor.search(input)
+      matches = Processor.search(input) 
       
       search_error if matches.empty?
       search_list(matches) if matches

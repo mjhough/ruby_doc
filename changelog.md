@@ -1,3 +1,9 @@
+v2.0.3 (2018-02-24)
+------------------
+
+* Patch - Fixed repeat methods
+* User X - Made default doc view short with option to view full by request. Felt was a cleaner look and helps avoid extra scrolling if user chooses wrong doc index #. 
+
 v2.0.2 (2018-02-23)
 ------------------
 

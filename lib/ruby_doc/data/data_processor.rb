@@ -29,7 +29,7 @@ class Processor
   end
 #================================SEARCH=============================== 
   def self.search(name)
-    matches = $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
+    $DocDB.find_all{|doc| doc.name.downcase.include?(name)}
   end
 #=====================================================================
 end
