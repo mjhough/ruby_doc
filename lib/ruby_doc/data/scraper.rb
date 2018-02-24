@@ -43,7 +43,7 @@ class Scraper < UI
 #--------------------------documentation--------------------------------- 
     container = html.search("#description")
     
-    short = container.search("p")[0].text + UI.view_full
+    short = container.search("p")[0].text + "\n"
     
     text = "" 
     container.search("p, pre, h2").each {|p| text << p.text + "\n\n"} 
@@ -108,8 +108,8 @@ class Scraper < UI
   def self.class_method_uniq(doc, method)
     doc.methods.none?{|m| m == method }
   end 
-#======================================================================== 
-  def self.coming_soon
+#===========================LEARN MORE=================================== 
+  def self.coming_soon 
     html = Nokogiri::HTML(open("https://github.com/AlphaDaniel/ruby_doc/blob/master/README.md")) 
     
     list = ""

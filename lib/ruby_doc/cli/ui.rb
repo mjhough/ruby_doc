@@ -5,6 +5,10 @@ class UI
   def self.my_gets 
     gets.strip.to_s.downcase
   end
+  
+  def self.clear 
+    system "clear" or system "cls"
+  end
 #==================Control===================== 
   def self.main_control 
     prompt
@@ -17,6 +21,7 @@ class UI
     elsif input == "exit!" 
       exit!
     elsif input == "?" 
+      clear
       learn_more
     else 
       matches = Processor.search(input)
@@ -31,6 +36,8 @@ class UI
     input = my_gets
     
     case input
+    when "full"
+      display_class(doc, "full")
     when "1" 
       method_list(doc)
     when "m" 
@@ -106,12 +113,20 @@ class UI
   end
 #==================Display===================== 
 #-------------------docs----------------------- 
-  def self.display_class(doc) 
+  def self.display_class(doc, view="short") 
     UI.sepL
     puts "TITLE: ".cyan + doc.name.upcase 
     puts "TYPE: ".cyan + doc.type.upcase
     puts "\nDESCRIPTION:".cyan 
-    puts doc.short
+    
+    if view == "short"
+      puts wrapped(doc.short, width=60) 
+      puts view_full
+    else
+      clear
+      puts doc.documentation
+    end
+    
     puts "Methods: ".cyan + "#{doc.methods.count}".yellow
     puts "Source: #{doc.url}".red 
     puts sepR
@@ -119,10 +134,6 @@ class UI
     display_class_menu(doc)
     display_class_control(doc)
   end
-  
-  def self.view_full
-  "\nTo View Full Documentation Enter 'full'\n".cyan
-  end # put back in strings
   
   def self.display_method(doc) 
     UI.sepL
@@ -373,8 +384,12 @@ class UI
     "https://ruby-doc.org/core-2.4.3/"
   end
   
-  # view_full here
-  
+  def self.view_full 
+    puts sepB
+    puts "To View Full Documentation Enter".cyan + " full".yellow
+    puts sepB
+  end 
+    
   # currently not being used
   def self.wrapped(s, width=78) 
 	  lines = []
