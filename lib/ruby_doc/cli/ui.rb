@@ -36,7 +36,7 @@ class UI
     input = my_gets
     
     case input
-    when "full"
+    when "full" 
       display_class(doc, "full")
     when "1" 
       method_list(doc)
@@ -120,10 +120,10 @@ class UI
     puts "\nDESCRIPTION:".cyan 
     
     if view == "short"
-      puts wrapped(doc.short, width=60) 
+      puts wrapped(doc.short) 
       puts view_full
-    else
-      clear
+      
+    elsif view == "full"
       puts doc.documentation
     end
     
@@ -391,7 +391,7 @@ class UI
   end 
     
   # currently not being used
-  def self.wrapped(s, width=78) 
+  def self.wrapped(s, width=60) 
 	  lines = []
 	  line = ""
 	 
