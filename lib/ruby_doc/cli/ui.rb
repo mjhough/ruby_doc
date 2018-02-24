@@ -215,8 +215,9 @@ class UI
   end
 #-----------------learn more------------------- 
   def self.learn_more 
-    # test clear here / try all navigational combinations
     puts "\n" + sepB
+    puts wrapped("Alot in store for this section. For now more so a placeholder but feel free to see what's on the way, and what's been done below.").black
+    puts sepB
     puts "COMING SOON".cyan
     puts sepB
     puts "\n" + Scraper.coming_soon + "\n"
@@ -226,18 +227,18 @@ class UI
     puts sepB
     puts "\n" + Scraper.changelog
     
-    main_menu
+    main_menu("learn")
     main_control
   end
 #===================Menus====================== 
-  def self.main_menu 
+  def self.main_menu(from="default") 
     puts sepR#
     puts "Enter a ".cyan + "word ".yellow + "associated with the Ruby Language & I will ".cyan
     puts "try to find a match in my database for you.".cyan
     sepL#
     puts "\You can also enter".cyan + " 'b'".yellow + " to browse instead.".cyan + " Happy Hunting!".cyan
     sepB
-    puts "Enter '?' to Learn More about Alpha Ruby-Doc".black
+    puts "Enter '?' to Learn More about Alpha Ruby-Doc".black unless from == "learn"
     print cyanH("\n If You're Searching... Single Word Inputs Only Please ")
   end
   
