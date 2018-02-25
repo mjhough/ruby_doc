@@ -5,10 +5,6 @@ class UI
   def self.my_gets 
     gets.strip.to_s.downcase
   end
-  
-  def self.clear 
-    system "clear" or system "cls"
-  end
 #==================Control===================== 
   def self.main_control 
     prompt
