@@ -5,6 +5,10 @@ class UI
   def self.my_gets 
     gets.strip.to_s.downcase
   end
+  
+  def self.clear 
+    system "clear" or system "cls"
+  end
 #==================Control===================== 
   def self.main_control 
     prompt
@@ -35,6 +39,7 @@ class UI
     when "full" 
       display_class(doc, "full")
     when "1" 
+      clear # using helper method on line 9
       method_list(doc)
     when "m" 
       RubyDoc::CLI.start
